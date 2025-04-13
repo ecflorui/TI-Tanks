@@ -23,6 +23,8 @@ struct Tank {
         int32_t x, y; //position 
         int32_t vx, vy; //velocities
         int32_t angle; //direction of tank
+        uint32_t width;
+        uint32_t height;
 
         uint8_t health; //0 to n health of player
         uint32_t shotCooldown; //wait time
@@ -38,7 +40,7 @@ struct Tank {
     public:
         Tank(int32_t startX, int32_t startY, int32_t startAngle,
          const uint16_t* sprite, const uint16_t* blank,
-          uint8_t num, uint8_t hp);
+          uint8_t num, uint8_t hp, uint32_t width, uint32_t height);
 
         void Draw();
         void Erase();
@@ -59,7 +61,7 @@ struct Tank {
         int32_t GetY() const;
         int32_t GetAngle() const;
         uint8_t GetHealth() const;
-        uint8_t GetColorID() const;
+        uint8_t GetPlayer() const;
         bool IsAlive() const;
 
         void SetAlive(bool state);
