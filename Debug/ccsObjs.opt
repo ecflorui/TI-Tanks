@@ -12,6 +12,7 @@
 "./TExaS.o"
 "./Timer.o"
 "./tank.o"
+"./tools.o"
 "./images/pipedreams/PipeSound.o"
 "./ticlang/startup_mspm0g3507_ticlang.o"
 "../mspm0g3507.cmd"

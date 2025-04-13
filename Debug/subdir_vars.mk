@@ -19,7 +19,8 @@ C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/SlidePot.cpp \
 ../Switch.cpp \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/TExaS.cpp \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Timer.cpp \
-../tank.cpp 
+../tank.cpp \
+../tools.cpp 
 
 CMD_SRCS += \
 ../mspm0g3507.cmd 
@@ -38,7 +39,8 @@ OBJS += \
 ./Switch.o \
 ./TExaS.o \
 ./Timer.o \
-./tank.o 
+./tank.o \
+./tools.o 
 
 CPP_DEPS += \
 ./Clock.d \
@@ -54,7 +56,8 @@ CPP_DEPS += \
 ./Switch.d \
 ./TExaS.d \
 ./Timer.d \
-./tank.d 
+./tank.d \
+./tools.d 
 
 OBJS__QUOTED += \
 "Clock.o" \
@@ -70,7 +73,8 @@ OBJS__QUOTED += \
 "Switch.o" \
 "TExaS.o" \
 "Timer.o" \
-"tank.o" 
+"tank.o" \
+"tools.o" 
 
 CPP_DEPS__QUOTED += \
 "Clock.d" \
@@ -86,7 +90,8 @@ CPP_DEPS__QUOTED += \
 "Switch.d" \
 "TExaS.d" \
 "Timer.d" \
-"tank.d" 
+"tank.d" \
+"tools.d" 
 
 CPP_SRCS__QUOTED += \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Clock.cpp" \
@@ -102,6 +107,7 @@ CPP_SRCS__QUOTED += \
 "../Switch.cpp" \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/TExaS.cpp" \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Timer.cpp" \
-"../tank.cpp" 
+"../tank.cpp" \
+"../tools.cpp" 
 
 

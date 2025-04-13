@@ -1,4 +1,5 @@
 #include "tank.h"
+#include "tools.h"
 
 #include <cstdint>
 #include <stdio.h>
@@ -15,6 +16,7 @@
 #include "LED.h"
 #include "Switch.h"
 #include "Sound.h"
+#include <math.h>
 #include "images/images.h"
 
 Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
@@ -74,8 +76,46 @@ void Tank::SetVelocity(int32_t vx, int32_t vy) {
     this->vy = vy;
 }
 
+
+void Tank::rotateSprite(float degrees) {
+    const int W = 12;
+    const int H = 18;
+    const float cx = W / 2.0f;
+    const float cy = H / 2.0f;
+
+    float theta = degrees * (3.14159265f / 180.0f); // convert to radians
+    float cosT = cosf(theta);
+    float sinT = sinf(theta);
+
+    for (int y = 0; y < H; y++) {
+        for (int x = 0; x < W; x++) {
+            // translate destination pixel to origin-centered coords
+            float dx = x - cx;
+            float dy = y - cy;
+
+            // inverse rotate to find source pixel
+            float srcX =  cosT * dx + sinT * dy + cx;
+            float srcY = -sinT * dx + cosT * dy + cy;
+
+            int srcXi = (int)(srcX + 0.5f);
+            int srcYi = (int)(srcY + 0.5f);
+
+            uint16_t color = ST7735_BLACK; // background/fill color
+
+            if (srcXi >= 0 && srcXi < W && srcYi >= 0 && srcYi < H) {
+                color = spriteImage[srcYi * W + srcXi]; // nearest neighbor
+            }
+
+            rotatedTank[y * W + x] = color;
+        }
+    }
+}
+
 void Tank::Rotate(int32_t changeAngle) { //i need to change this later, understand Valvanos lab lecture for this
     angle = (angle + changeAngle) % 360;
+    if (angle < 0) angle += 360;
+
+    rotateSprite((float)angle);
     needUpdate = true;
 }
 

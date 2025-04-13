@@ -29,6 +29,7 @@ struct Tank {
         uint8_t health; //0 to n health of player
         uint32_t shotCooldown; //wait time
         uint32_t dashCooldown;//wait time
+    
 
         uint8_t playerNum;
         bool needUpdate; //flag to update screen
@@ -36,6 +37,7 @@ struct Tank {
         bool alive; //dead or alive
         const uint16_t* spriteImage;
         const uint16_t* blankImage;
+        uint16_t rotatedTank[12 * 18]; 
 
     public:
         Tank(int32_t startX, int32_t startY, int32_t startAngle,
@@ -51,6 +53,7 @@ struct Tank {
         void Dash();
         void SetVelocity(int32_t vx, int32_t vy);
         void Rotate(int32_t angleChange);
+        void rotateSprite(float degrees);
 
         void TakeDamage();
         bool CanShoot();
