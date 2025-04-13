@@ -87,7 +87,7 @@ int main(void){ // main1
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
-  ST7735_InitPrintf();
+  ST7735_InitPrintf(INITR_BLACKTAB);
   ST7735_FillScreen(0x0000);            // set screen to black
   for(int myPhrase=0; myPhrase<= 2; myPhrase++){
     for(int myL=0; myL<= 3; myL++){
@@ -121,7 +121,7 @@ int main2(void){ // main2
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
-  ST7735_InitPrintf();
+  ST7735_InitPrintf(INITR_BLACKTAB);
     //note: if you colors are weird, see different options for
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
   ST7735_FillScreen(ST7735_BLACK);
@@ -197,7 +197,7 @@ int main5(void){ // final main
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
-  ST7735_InitPrintf();
+  ST7735_InitPrintf(INITR_BLACKTAB);
     //note: if you colors are weird, see different options for
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
   ST7735_FillScreen(ST7735_BLACK);
