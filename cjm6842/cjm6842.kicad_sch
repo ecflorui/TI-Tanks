@@ -887,187 +887,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ECE319K:HeadphoneJack"
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 1.27 5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify right)
-				)
-			)
-			(property "Value" "AudioJack"
-				(at 1.27 3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify right)
-				)
-			)
-			(property "Footprint" "ECE319K:Jack_3.5mm_CUI_SJ1-3523N_Horizontal"
-				(at -2.54 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at -0.254 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Speaker"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "headphone sound"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "HeadphoneJack_0_0"
-				(rectangle
-					(start -2.54 1.27)
-					(end 1.016 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -2.54 -8.89)
-					(end 1.016 -13.97)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 1.27) (xy 3.556 3.81) (xy 3.556 -6.35) (xy 1.016 -3.81)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 -8.89) (xy 3.556 -6.35) (xy 3.556 -16.51) (xy 1.016 -13.97)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "HeadphoneJack_0_1"
-				(polyline
-					(pts
-						(xy -2.54 -6.35) (xy -1.27 -6.35) (xy -1.27 -3.81) (xy -1.27 -8.89)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "HeadphoneJack_1_1"
-				(pin input line
-					(at -7.62 -1.27 0)
-					(length 5.12)
-					(name "tip"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "T"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -6.35 0)
-					(length 5.12)
-					(name "sleeve"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "S"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -11.43 0)
-					(length 5.12)
-					(name "ring"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "R"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "ECE319K:HiLetGo_ST7735R"
 			(pin_names
 				(offset 1.016)
@@ -8295,7 +8114,7 @@
 			)
 		)
 	)
-	(global_label "PB17"
+	(global_label "PA24"
 		(shape input)
 		(at 183.515 35.56 180)
 		(fields_autoplaced yes)
@@ -8307,7 +8126,7 @@
 		)
 		(uuid "276100ea-5995-4a6d-889b-3cbebc3a3d05")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 175.5708 35.56 0)
+			(at 175.7522 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8625,7 +8444,7 @@
 			)
 		)
 	)
-	(global_label "PA24"
+	(global_label "PB17"
 		(shape input)
 		(at 74.93 125.73 180)
 		(fields_autoplaced yes)
@@ -8637,7 +8456,7 @@
 		)
 		(uuid "6566d2aa-9308-429c-8684-2f67d8a468ea")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 70.2721 125.73 0)
+			(at 70.1632 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13896,78 +13715,6 @@
 			(project "cjm6842"
 				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
 					(reference "#PWR015")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ECE319K:HeadphoneJack")
-		(at 172.72 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ee961f2f-9a8b-420a-80ad-7173778668da")
-		(property "Reference" "J1"
-			(at 177.8 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "AudioJack"
-			(at 177.8 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "ECE319K:Jack_3.5mm_CUI_SJ1-3523N_Horizontal"
-			(at 170.18 161.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 172.466 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 172.72 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "R"
-			(uuid "ef4f51a5-f5c8-4272-89fe-7730369bde1b")
-		)
-		(pin "S"
-			(uuid "7eda18da-01ef-4c96-a10d-f9b656dd45f7")
-		)
-		(pin "T"
-			(uuid "aad78ddf-3511-4dbf-a370-929a39df7817")
-		)
-		(instances
-			(project "Starter"
-				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
-					(reference "J1")
 					(unit 1)
 				)
 			)
