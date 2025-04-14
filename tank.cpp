@@ -28,6 +28,7 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     vx = 0; 
     vy = 0; 
     spriteImage = sprite;
+    rotatedTank = sprite;
     blankImage = blank;
     playerNum = num;
     health = hp;
@@ -40,7 +41,7 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
 }
 
 void Tank::Draw() {
-    ST7735_DrawBitmap(x, y, spriteImage, width, height);
+    ST7735_DrawBitmap(x, y, rotatedTank, width, height);
     needUpdate = false;
 }
 
