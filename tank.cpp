@@ -28,7 +28,6 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     vx = 0; 
     vy = 0; 
     spriteImage = sprite;
-    rotatedTank = sprite;
     blankImage = blank;
     playerNum = num;
     health = hp;
@@ -38,6 +37,12 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     needUpdate = true;
     this->width = width;
     this->height = height;
+
+    for (int i = 0; i < width * height; i++) {
+    rotatedTank[i] = sprite[i];
+}
+
+    Rotate(0);
 }
 
 void Tank::Draw() {
@@ -79,8 +84,8 @@ void Tank::SetVelocity(int32_t vx, int32_t vy) {
 
 
 void Tank::rotateSprite(float degrees) {
-    const int W = 12;
-    const int H = 18;
+    const int W = 20;
+    const int H = 20;
     const float cx = W / 2.0f;
     const float cy = H / 2.0f;
 
@@ -101,7 +106,7 @@ void Tank::rotateSprite(float degrees) {
             int srcXi = (int)(srcX + 0.5f);
             int srcYi = (int)(srcY + 0.5f);
 
-            uint16_t color = ST7735_BLACK; // background/fill color
+            uint16_t color = 0x3467; // background/fill color
 
             if (srcXi >= 0 && srcXi < W && srcYi >= 0 && srcYi < H) {
                 color = spriteImage[srcYi * W + srcXi]; // nearest neighbor
@@ -146,6 +151,8 @@ void Tank::TickCooldowns() { //function to decrease using some TimerISR
 
 int32_t Tank::GetX() const { return x; }
 int32_t Tank::GetY() const { return y; }
+int32_t Tank::GetVX() const { return vx; }
+int32_t Tank::GetVY() const { return vy; }
 int32_t Tank::GetAngle() const { return angle; }
 uint8_t Tank::GetHealth() const { return health; }
 uint8_t Tank::GetPlayer() const { return playerNum; }
@@ -154,4 +161,8 @@ bool Tank::IsAlive() const { return alive; }
 void Tank::SetAlive(bool state) {
     alive = state;
     needUpdate = true;
+}
+
+void Tank::SetAngle(float deg) {
+    angle = deg;
 }

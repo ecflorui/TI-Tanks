@@ -37,7 +37,7 @@ struct Tank {
         bool alive; //dead or alive
         const uint16_t* spriteImage;
         const uint16_t* blankImage;
-        uint16_t rotatedTank[12 * 18]; 
+        uint16_t rotatedTank[20 * 20];
 
     public:
         Tank(int32_t startX, int32_t startY, int32_t startAngle,
@@ -65,9 +65,12 @@ struct Tank {
         int32_t GetAngle() const;
         uint8_t GetHealth() const;
         uint8_t GetPlayer() const;
+        int32_t GetVX() const;
+        int32_t GetVY() const;
         bool IsAlive() const;
 
         void SetAlive(bool state);
+        void SetAngle(float);
 };
 
 #endif 

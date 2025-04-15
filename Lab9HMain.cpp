@@ -19,9 +19,12 @@
 #include "Switch.h"
 #include "Sound.h"
 #include "images/images.h"
+#include "tank.h"
+#include <math.h>
 extern "C" void __disable_irq(void);
 extern "C" void __enable_irq(void);
 extern "C" void TIMG12_IRQHandler(void);
+using namespace std;
 // ****note to ECE319K students****
 // the data sheet says the ADC does not work when clock is 80 MHz
 // however, the ADC seems to work on my boards at 80 MHz
@@ -30,6 +33,18 @@ void PLL_Init(void){ // set phase lock loop (PLL)
   // Clock_Init40MHz(); // run this line for 40MHz
   Clock_Init80MHz(0);   // run this line for 80MHz
 }
+
+SlidePot player1SP(0,0);
+SlidePot player2SP(0,0);
+
+Tank p1 = Tank(50, 100, 0,
+           BlueTank, blank,
+           1, 3, 20, 20);
+
+
+Tank p2 = Tank(100, 100, 0,
+           RedTank, blank,
+           1, 3, 12, 18);
 
 uint32_t M=1;
 uint32_t Random32(void){
@@ -49,6 +64,15 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
 // game engine goes here
     // 1) sample slide pot
+
+    uint32_t newData1 = player1SP.In();
+
+    const int threshold = 50; // tweak this as needed
+
+int currentDistance = player1SP.Distance();
+if (abs((int)newData1 - (int)currentDistance) > threshold) {
+    player1SP.Save(newData1);
+}
     // 2) read input switches
     // 3) move sprites
     // 4) start sounds
@@ -82,75 +106,60 @@ const char *Phrases[3][4]={
   {Language_English,Language_Spanish,Language_Portuguese,Language_French}
 };
 // use main1 to observe special characters
-int main(void){ // main1
-    char l;
-  __disable_irq();
-  PLL_Init(); // set bus speed
-  LaunchPad_Init();
-  ST7735_InitPrintf(INITR_BLACKTAB);
-  ST7735_FillScreen(0x0000);            // set screen to black
-  for(int myPhrase=0; myPhrase<= 2; myPhrase++){
-    for(int myL=0; myL<= 3; myL++){
-         ST7735_OutString((char *)Phrases[LANGUAGE][myL]);
-      ST7735_OutChar(' ');
-         ST7735_OutString((char *)Phrases[myPhrase][myL]);
-      ST7735_OutChar(13);
-    }
-  }
-  Clock_Delay1ms(3000);
-  ST7735_FillScreen(0x0000);       // set screen to black
-  l = 128;
-  while(1){
-    Clock_Delay1ms(2000);
-    for(int j=0; j < 3; j++){
-      for(int i=0;i<16;i++){
-        ST7735_SetCursor(7*j+0,i);
-        ST7735_OutUDec(l);
-        ST7735_OutChar(' ');
-        ST7735_OutChar(' ');
-        ST7735_SetCursor(7*j+4,i);
-        ST7735_OutChar(l);
-        l++;
-      }
-    }
-  }
+int main1(void){ // main1
+  return 1;
 }
 
 // use main2 to observe graphics
-int main2(void){ // main2
+int main(void){ // main2
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
+  player1SP.Init();
   ST7735_InitPrintf(INITR_BLACKTAB);
     //note: if you colors are weird, see different options for
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
-  ST7735_FillScreen(ST7735_BLACK);
-  ST7735_DrawBitmap(22, 159, PlayerShip0, 18,8); // player ship bottom
-  ST7735_DrawBitmap(53, 151, Bunker0, 18,5);
-  ST7735_DrawBitmap(42, 159, PlayerShip1, 18,8); // player ship bottom
-  ST7735_DrawBitmap(62, 159, PlayerShip2, 18,8); // player ship bottom
-  ST7735_DrawBitmap(82, 159, PlayerShip3, 18,8); // player ship bottom
-  ST7735_DrawBitmap(0, 9, SmallEnemy10pointA, 16,10);
-  ST7735_DrawBitmap(20,9, SmallEnemy10pointB, 16,10);
-  ST7735_DrawBitmap(40, 9, SmallEnemy20pointA, 16,10);
-  ST7735_DrawBitmap(60, 9, SmallEnemy20pointB, 16,10);
-  ST7735_DrawBitmap(80, 9, SmallEnemy30pointA, 16,10);
+  ST7735_FillScreen(0x3467);
+  TimerG12_IntArm(2666667,1);
+    __enable_irq();
 
-  for(uint32_t t=500;t>0;t=t-5){
-    SmallFont_OutVertical(t,104,6); // top left
-    Clock_Delay1ms(50);              // delay 50 msec
+
+  p1.Draw();
+
+  
+  // while (1) {
+  //   p2.Rotate(1);
+  //   p2.Draw();
+  //   if (((p2.GetX()) > 120) || ((p2.GetY()) > 180) || ((p2.GetX()) < 0) || ((p2.GetY()) < 0)) {
+  //     p2.SetVelocity(-1, -1);
+  //   }
+  //   p2.Move();
+  //   Clock_Delay1ms(10);
+  // }
+  int32_t lastDist = player1SP.Distance(); // initial position
+
+while(1) {
+  player1SP.Sync();
+  int32_t currentDist = player1SP.Distance();
+  int32_t delta = currentDist - lastDist;
+
+  // Only rotate if movement is above threshold
+  const int rotationThreshold = 15;
+  const int rotationStep = 20; // degrees per change
+
+  if (abs(delta) > rotationThreshold) {
+    if (delta > 0) {
+      p1.Rotate(rotationStep);  // CW
+    } else {
+      p1.Rotate(-rotationStep); // CCW
+    }
+    lastDist = currentDist; // update after applying rotation
   }
-  ST7735_FillScreen(0x0000);   // set screen to black
-  ST7735_SetCursor(1, 1);
-  ST7735_OutString((char *)"GAME OVER");
-  ST7735_SetCursor(1, 2);
-  ST7735_OutString((char *)"Nice try,");
-  ST7735_SetCursor(1, 3);
-  ST7735_OutString((char *)"Earthling!");
-  ST7735_SetCursor(2, 4);
-  ST7735_OutUDec(1234);
-  while(1){
+
+  if (p1.NeedsRedraw()) {
+    p1.Draw();
   }
+}
 }
 
 // use main3 to test switches and LEDs
