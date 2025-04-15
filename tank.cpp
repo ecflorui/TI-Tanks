@@ -35,6 +35,8 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     dashCooldown = 0;
     alive = true;
     needUpdate = true;
+
+
     this->width = width;
     this->height = height;
 
@@ -125,6 +127,14 @@ void Tank::Rotate(int32_t changeAngle) { //i need to change this later, understa
     needUpdate = true;
 }
 
+void Tank::rotateIncrement(int32_t delta) {
+    if (delta > 0) {
+      Rotate(rotationStep);  // CW
+    } else {
+      Rotate(-rotationStep); // CCW
+    }
+}
+
 void Tank::TakeDamage() {
     if (health > 0) {
         health--;
@@ -156,6 +166,8 @@ int32_t Tank::GetVY() const { return vy; }
 int32_t Tank::GetAngle() const { return angle; }
 uint8_t Tank::GetHealth() const { return health; }
 uint8_t Tank::GetPlayer() const { return playerNum; }
+uint32_t Tank::GetThreshold() {return threshold;}
+
 bool Tank::IsAlive() const { return alive; }
 
 void Tank::SetAlive(bool state) {

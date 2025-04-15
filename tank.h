@@ -27,8 +27,8 @@ struct Tank {
         uint32_t height;
 
         uint8_t health; //0 to n health of player
-        uint32_t shotCooldown; //wait time
-        uint32_t dashCooldown;//wait time
+        uint32_t shotCooldown; 
+        uint32_t dashCooldown;
     
 
         uint8_t playerNum;
@@ -38,6 +38,11 @@ struct Tank {
         const uint16_t* spriteImage;
         const uint16_t* blankImage;
         uint16_t rotatedTank[20 * 20];
+        
+        //tweakables
+        uint32_t threshold = 50; //threshold for min accepted data change for slidepot (probably a better idea to put this in SlidePot.cpp but its not that serious)
+        const int32_t rotationStep = 15; //angle step due to detected change
+    
 
     public:
         Tank(int32_t startX, int32_t startY, int32_t startAngle,
@@ -54,6 +59,7 @@ struct Tank {
         void SetVelocity(int32_t vx, int32_t vy);
         void Rotate(int32_t angleChange);
         void rotateSprite(float degrees);
+        void rotateIncrement(int32_t delta);
 
         void TakeDamage();
         bool CanShoot();
@@ -71,6 +77,7 @@ struct Tank {
 
         void SetAlive(bool state);
         void SetAngle(float);
+        uint32_t GetThreshold();
 };
 
 #endif 

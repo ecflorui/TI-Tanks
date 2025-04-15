@@ -55,7 +55,7 @@ uint32_t Random(uint32_t n){
   return (Random32()>>16)%n;
 }
 
-SlidePot Sensor(1500,0); // copy calibration from Lab 7
+//SlidePot Sensor(1500,0); // copy calibration from Lab 7
 
 // games  engine runs at 30Hz
 void TIMG12_IRQHandler(void){uint32_t pos,msg;
@@ -67,10 +67,8 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
 
     uint32_t newData1 = player1SP.In();
 
-    const int threshold = 50; // tweak this as needed
-
 int currentDistance = player1SP.Distance();
-if (abs((int)newData1 - (int)currentDistance) > threshold) {
+if (abs((int)newData1 - (int)currentDistance) > p1.GetThreshold()) {
     player1SP.Save(newData1);
 }
     // 2) read input switches
@@ -126,54 +124,32 @@ int main(void){ // main2
 
   p1.Draw();
 
-  
-  // while (1) {
-  //   p2.Rotate(1);
-  //   p2.Draw();
-  //   if (((p2.GetX()) > 120) || ((p2.GetY()) > 180) || ((p2.GetX()) < 0) || ((p2.GetY()) < 0)) {
-  //     p2.SetVelocity(-1, -1);
-  //   }
-  //   p2.Move();
-  //   Clock_Delay1ms(10);
-  // }
-  int32_t lastDist = player1SP.Distance(); // initial position
 
 while(1) {
   player1SP.Sync();
-  int32_t currentDist = player1SP.Distance();
-  int32_t delta = currentDist - lastDist;
-
-  // Only rotate if movement is above threshold
-  const int rotationThreshold = 15;
-  const int rotationStep = 20; // degrees per change
-
-  if (abs(delta) > rotationThreshold) {
-    if (delta > 0) {
-      p1.Rotate(rotationStep);  // CW
-    } else {
-      p1.Rotate(-rotationStep); // CCW
-    }
-    lastDist = currentDist; // update after applying rotation
-  }
-
+  
+  int32_t delta = player1SP.Distance() - player1SP.lastDistance();
+  p1.rotateIncrement(delta);
+  
   if (p1.NeedsRedraw()) {
     p1.Draw();
   }
 }
 }
 
-// use main3 to test switches and LEDs
-int main3(void){ // main3
-  __disable_irq();
-  PLL_Init(); // set bus speed
-  LaunchPad_Init();
-  Switch_Init(); // initialize switches
-  LED_Init(); // initialize LED
-  while(1){
-    // write code to test switches and LEDs
+// // use main3 to test switches and LEDs
+// int main3(void){ // main3
+//   __disable_irq();
+//   PLL_Init(); // set bus speed
+//   LaunchPad_Init();
+//   Switch_Init(); // initialize switches
+//   LED_Init(); // initialize LED
+//   while(1){
+//     // write code to test switches and LEDs
 
-  }
-}
+//   }
+// }
+
 // use main4 to test sound outputs
 int main4(void){ uint32_t last=0,now;
   __disable_irq();
@@ -210,7 +186,7 @@ int main5(void){ // final main
     //note: if you colors are weird, see different options for
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
   ST7735_FillScreen(ST7735_BLACK);
-  Sensor.Init(); // PB18 = ADC1 channel 5, slidepot
+  //Sensor.Init(); // PB18 = ADC1 channel 5, slidepot
   Switch_Init(); // initialize switches
   LED_Init();    // initialize LED
   Sound_Init();  // initialize sound
