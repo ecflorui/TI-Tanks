@@ -34,6 +34,8 @@ void PLL_Init(void){ // set phase lock loop (PLL)
   Clock_Init80MHz(0);   // run this line for 80MHz
 }
 
+uint32_t time = 0;
+
 SlidePot player1SP(0,0);
 SlidePot player2SP(0,0);
 
@@ -63,18 +65,30 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
 // game engine goes here
+
     // 1) sample slide pot
 
-    uint32_t newData1 = player1SP.In();
 
-int currentDistance = player1SP.Distance();
-if (abs((int)newData1 - (int)currentDistance) > p1.GetThreshold()) {
+    uint32_t newData1 = player1SP.In();
     player1SP.Save(newData1);
-}
+
     // 2) read input switches
+  if ((time % 2) == 0) {
+      if (Switch_In()) {
+        p1.TriVelocity(2);
+        p1.Move();
+  }
+  }
+
+  //p1.SetVelocity(5,0);
+
     // 3) move sprites
+
+    //move
+
     // 4) start sounds
     // 5) set semaphore
+    time++;
     // NO LCD OUTPUT IN INTERRUPT SERVICE ROUTINES
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
   }
@@ -119,22 +133,32 @@ int main(void){ // main2
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
   ST7735_FillScreen(0x3467);
   TimerG12_IntArm(2666667,1);
+  Switch_Init();
     __enable_irq();
 
 
   p1.Draw();
 
 
-while(1) {
-  player1SP.Sync();
+while (1) {
+  // Check if the SlidePot has new data (non-blocking)
+  bool newSlidepotData = player1SP.Sync();
   
-  int32_t delta = player1SP.Distance() - player1SP.lastDistance();
-  p1.rotateIncrement(delta);
-  
-  if (p1.NeedsRedraw()) {
-    p1.Draw();
+  // Handle rotation if new slidepot data is available
+  if (newSlidepotData) {
+    int32_t delta = player1SP.Distance() - player1SP.lastDistance();
+    if (delta != 0) {
+      p1.rotateIncrement(delta);
+    }
   }
+
+  
+  // Only draw when ISR signals it's time
+    if (p1.NeedsRedraw()) {
+      p1.Draw();
+    }
 }
+
 }
 
 // // use main3 to test switches and LEDs

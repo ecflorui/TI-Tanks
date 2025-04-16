@@ -40,7 +40,7 @@ struct Tank {
         uint16_t rotatedTank[20 * 20];
         
         //tweakables
-        uint32_t threshold = 50; //threshold for min accepted data change for slidepot (probably a better idea to put this in SlidePot.cpp but its not that serious)
+        uint32_t threshold = 100; //threshold for min accepted data change for slidepot (probably a better idea to put this in SlidePot.cpp but its not that serious)
         const int32_t rotationStep = 15; //angle step due to detected change
     
 
@@ -60,6 +60,7 @@ struct Tank {
         void Rotate(int32_t angleChange);
         void rotateSprite(float degrees);
         void rotateIncrement(int32_t delta);
+        void TriVelocity(int32_t magnitude);
 
         void TakeDamage();
         bool CanShoot();

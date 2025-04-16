@@ -135,6 +135,12 @@ void Tank::rotateIncrement(int32_t delta) {
     }
 }
 
+void Tank::TriVelocity(int32_t magnitude) {
+    float radians = (angle * (3.14159265f / 180.0f)) + (3.14159265358979323846/2);
+    vx = (int32_t)(cosf(radians) * magnitude);
+    vy = (int32_t)(-sinf(radians) * magnitude); 
+}
+
 void Tank::TakeDamage() {
     if (health > 0) {
         health--;
