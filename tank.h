@@ -37,7 +37,7 @@ struct Tank {
         bool alive; //dead or alive
         const uint16_t* spriteImage;
         const uint16_t* blankImage;
-        uint16_t rotatedTank[20 * 20];
+        uint16_t rotatedTank[19 * 14];
         
         //tweakables
         uint32_t threshold = 100; //threshold for min accepted data change for slidepot (probably a better idea to put this in SlidePot.cpp but its not that serious)
@@ -82,4 +82,3 @@ struct Tank {
 };
 
 #endif 
-

@@ -40,6 +40,7 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     this->width = width;
     this->height = height;
 
+
     for (int i = 0; i < width * height; i++) {
     rotatedTank[i] = sprite[i];
 }
@@ -53,7 +54,7 @@ void Tank::Draw() {
 }
 
 void Tank::Erase() {
-    ST7735_DrawBitmap(x, y, blankImage, width, height);
+    ST7735_FillRect(x, y - height, width, height, 0x3467);
 }
 
 void Tank::MarkForRedraw() {
@@ -65,6 +66,7 @@ bool Tank::NeedsRedraw() {
 }
 
 void Tank::Move() {
+    Erase();
     x += vx;
     y += vy;
     needUpdate = true;
@@ -86,8 +88,8 @@ void Tank::SetVelocity(int32_t vx, int32_t vy) {
 
 
 void Tank::rotateSprite(float degrees) {
-    const int W = 20;
-    const int H = 20;
+    const int W = width;
+    const int H = height;
     const float cx = W / 2.0f;
     const float cy = H / 2.0f;
 
@@ -136,7 +138,7 @@ void Tank::rotateIncrement(int32_t delta) {
 }
 
 void Tank::TriVelocity(int32_t magnitude) {
-    float radians = (angle * (3.14159265f / 180.0f)) + (3.14159265358979323846/2);
+    float radians = (angle * (3.14159265f / 180.0f));
     vx = (int32_t)(cosf(radians) * magnitude);
     vy = (int32_t)(-sinf(radians) * magnitude); 
 }

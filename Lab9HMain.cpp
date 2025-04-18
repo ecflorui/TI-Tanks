@@ -40,8 +40,8 @@ SlidePot player1SP(0,0);
 SlidePot player2SP(0,0);
 
 Tank p1 = Tank(50, 100, 0,
-           BlueTank, blank,
-           1, 3, 20, 20);
+           MiniRed, blank,
+           1, 3, 19, 14);
 
 
 Tank p2 = Tank(100, 100, 0,
