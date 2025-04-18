@@ -26,10 +26,11 @@
 
 class Bullet {
 private:
-  int32_t x, y;
-  int32_t vx, vy;
+  float x, y;
+  float vx, vy;
   bool active;
   int32_t time; //we want the bullets to dissapear
+
 
 public:
   Bullet();

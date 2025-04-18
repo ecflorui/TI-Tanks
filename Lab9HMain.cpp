@@ -24,7 +24,8 @@
 #include "bullet.h"
 
 #define MAX_BULLETS 10
-Bullet bullets[MAX_BULLETS]; //10 bullets avaliable for each player. if it's a dead, bullet it won't move. if alive, it'll move.
+Bullet bullets1[MAX_BULLETS]; //10 bullets avaliable for each player. if it's a dead, bullet it won't move. if alive, it'll move.
+Bullet bullets2[MAX_BULLETS];
 
 extern "C" void __disable_irq(void);
 extern "C" void __enable_irq(void);
@@ -42,6 +43,8 @@ void PLL_Init(void){ // set phase lock loop (PLL)
 
 uint32_t time = 0; //used to go slower than the 30 Hz in the G12 ISR
 
+bool bulletFlag = false;
+
 //our tanks are 19 by 14 dimension
 
 SlidePot player1SP(0,0); //initializing slidepots for the two players
@@ -53,8 +56,8 @@ Tank p1 = Tank(50, 100, 0, //Tank 1
 
 
 Tank p2 = Tank(100, 100, 0, //Tank 2
-           RedTank,
-           1, 3, 12, 18);
+           MiniBlue,
+           1, 3, 19, 14);
 
 uint32_t M=1;
 uint32_t Random32(void){
@@ -79,31 +82,30 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     uint32_t newData1 = player1SP.In();
     player1SP.Save(newData1);
 
+    uint32_t newData2 = player2SP.In();
+    player2SP.Save(newData2);
+
     // 2) read input switches
 
 
   //movement
 
   if ((time % 2) == 0) {
-      if (Switch_In()) {
+      if (Switch_In1()) {
         p1.TriVelocity(2);
         p1.Move();
   }
   }
 
+   if ((time % 2) == 0) {
+      if (Switch_In2()) {
+        p2.TriVelocity(2);
+        p2.Move();
+  }
+  }
 //bullets
 
-if ((time % 2) == 0) {
-  if (P1SHOOT()) {
-    p1.Shoot(bullets, MAX_BULLETS);
-
-  }
-}
-
-  p1.TickCooldowns(); //we have a global bullets array
-    for (int i = 0; i < MAX_BULLETS; i++) {
-    bullets[i].Move();
-}
+bulletFlag = true;
 
 
     // 3) move sprites
@@ -150,7 +152,8 @@ int main(void){
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
-  player1SP.Init(); //initalizes SlidePot stuff
+  player1SP.Init(2); //initalizes SlidePot stuff
+  player2SP.Init(1); //initalizes SlidePot stuff
   ST7735_InitPrintf(INITR_BLACKTAB);
   LED_Init();    // initialize LED
   Sound_Init();  // initialize sound
@@ -163,17 +166,53 @@ int main(void){
 
   ST7735_FillScreen(0x3467);
   p1.Draw();
+  p2.Draw();
 
 
 while (1) {
   // Check if the SlidePot has new data. This new Sync allows for universal Sync, but will only redraw if need be
-  bool newSlidepotData = player1SP.Sync();
+  bool newSlidepotData1 = player1SP.Sync();
+  bool newSlidepotData2 = player2SP.Sync();
+
+  if (bulletFlag) {
+  if ((time % 2) == 0) {
+  if (P1SHOOT()) {
+    p1.Shoot(bullets1, MAX_BULLETS);
+
+  }
+}
+
+  p1.TickCooldowns(); //we have a global bullets array
+    for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets1[i].Move();
+}
+
+if ((time % 2) == 0) {
+  if (P2SHOOT()) {
+    p2.Shoot(bullets2, MAX_BULLETS);
+
+  }
+}
+
+  p2.TickCooldowns(); //we have a global bullets array
+    for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets2[i].Move();
+}
+  bulletFlag = false;
+}
   
   // Handle rotation if new slidepot data is available
-  if (newSlidepotData) {
+  if (newSlidepotData1) {
     int32_t delta = player1SP.Distance() - player1SP.lastDistance();
     if (delta != 0) {
       p1.rotateIncrement(delta);
+    }
+  }
+
+  if (newSlidepotData2) {
+    int32_t delta = player2SP.Distance() - player2SP.lastDistance();
+    if (delta != 0) {
+      p2.rotateIncrement(delta);
     }
   }
 
@@ -182,6 +221,10 @@ while (1) {
   // Only draw when ISR signals it's time
     if (p1.NeedsRedraw()) {
       p1.Draw();
+    }
+
+    if (p2.NeedsRedraw()) {
+      p2.Draw();
     }
 }
 
@@ -199,7 +242,7 @@ int main4(void){ uint32_t last=0,now;
   TExaS_Init(ADC0,6,0); // ADC1 channel 6 is PB20, TExaS scope
   __enable_irq();
   while(1){
-    now = Switch_In(); // one of your buttons
+    now = Switch_In1(); // one of your buttons
     if((last == 0)&&(now == 1)){
       Sound_Shoot(); // call one of your sounds
     }
