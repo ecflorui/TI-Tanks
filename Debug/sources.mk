@@ -126,6 +126,6 @@ GEN_OPTS__QUOTED :=
 SUBDIRS := \
 . \
 images/SpaceInvaders/pipedreams \
-images/TI-Sprites \
+images/TI-Sprites/Alternative\ Versions\ (unused) \
 ticlang \
 

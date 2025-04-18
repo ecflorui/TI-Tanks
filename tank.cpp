@@ -20,7 +20,7 @@
 #include "images/images.h"
 
 Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
-           const uint16_t* sprite, const uint16_t* blank,
+           const uint16_t* sprite, 
            uint8_t num, uint8_t hp, uint32_t width, uint32_t height) {
     x = startX;
     y = startY; 
@@ -28,7 +28,6 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     vx = 0; 
     vy = 0; 
     spriteImage = sprite;
-    blankImage = blank;
     playerNum = num;
     health = hp;
     shotCooldown = 0;
@@ -66,10 +65,10 @@ bool Tank::NeedsRedraw() {
 }
 
 void Tank::Move() {
-    Erase();
-    x += vx;
+    Erase(); //get rid of old stuff
+    x += vx; //make new stuff
     y += vy;
-    needUpdate = true;
+    needUpdate = true; 
 }
 
 void Tank::Dash() {

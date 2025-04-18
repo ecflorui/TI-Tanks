@@ -1,8 +1,8 @@
 // Lab9HMain.cpp
 // Runs on MSPM0G3507
 // Lab 9 ECE319H
-// Your name
-// Last Modified: 12/26/2024
+// Krish Singh and Connor McDonald
+// TI-Tanks
 
 #include <stdio.h>
 #include <stdint.h>
@@ -21,10 +21,12 @@
 #include "images/images.h"
 #include "tank.h"
 #include <math.h>
+
 extern "C" void __disable_irq(void);
 extern "C" void __enable_irq(void);
 extern "C" void TIMG12_IRQHandler(void);
 using namespace std;
+
 // ****note to ECE319K students****
 // the data sheet says the ADC does not work when clock is 80 MHz
 // however, the ADC seems to work on my boards at 80 MHz
@@ -34,18 +36,20 @@ void PLL_Init(void){ // set phase lock loop (PLL)
   Clock_Init80MHz(0);   // run this line for 80MHz
 }
 
-uint32_t time = 0;
+uint32_t time = 0; //used to go slower than the 30 Hz in the G12 ISR
 
-SlidePot player1SP(0,0);
-SlidePot player2SP(0,0);
+//our tanks are 19 by 14 dimension
 
-Tank p1 = Tank(50, 100, 0,
-           MiniRed, blank,
+SlidePot player1SP(0,0); //initializing slidepots for the two players
+SlidePot player2SP(0,0); //no input for SP Constructor b/c we only care about raw data, not distance
+
+Tank p1 = Tank(50, 100, 0, //Tank 1
+           MiniRed,
            1, 3, 19, 14);
 
 
-Tank p2 = Tank(100, 100, 0,
-           RedTank, blank,
+Tank p2 = Tank(100, 100, 0, //Tank 2
+           RedTank,
            1, 3, 12, 18);
 
 uint32_t M=1;
@@ -57,7 +61,6 @@ uint32_t Random(uint32_t n){
   return (Random32()>>16)%n;
 }
 
-//SlidePot Sensor(1500,0); // copy calibration from Lab 7
 
 // games  engine runs at 30Hz
 void TIMG12_IRQHandler(void){uint32_t pos,msg;
@@ -73,6 +76,7 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     player1SP.Save(newData1);
 
     // 2) read input switches
+
   if ((time % 2) == 0) {
       if (Switch_In()) {
         p1.TriVelocity(2);
@@ -117,31 +121,30 @@ const char *Phrases[3][4]={
   {Goodbye_English,Goodbye_Spanish,Goodbye_Portuguese,Goodbye_French},
   {Language_English,Language_Spanish,Language_Portuguese,Language_French}
 };
-// use main1 to observe special characters
-int main1(void){ // main1
-  return 1;
-}
 
-// use main2 to observe graphics
-int main(void){ // main2
+
+
+int main(void){ 
   __disable_irq();
   PLL_Init(); // set bus speed
   LaunchPad_Init();
-  player1SP.Init();
+  player1SP.Init(); //initalizes SlidePot stuff
   ST7735_InitPrintf(INITR_BLACKTAB);
+  LED_Init();    // initialize LED
+  Sound_Init();  // initialize sound
+  TExaS_Init(0,0,&TExaS_LaunchPadLogicPB27PB26);
     //note: if you colors are weird, see different options for
     // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
-  ST7735_FillScreen(0x3467);
   TimerG12_IntArm(2666667,1);
   Switch_Init();
-    __enable_irq();
+  __enable_irq();
 
-
+  ST7735_FillScreen(0x3467);
   p1.Draw();
 
 
 while (1) {
-  // Check if the SlidePot has new data (non-blocking)
+  // Check if the SlidePot has new data. This new Sync allows for universal Sync, but will only redraw if need be
   bool newSlidepotData = player1SP.Sync();
   
   // Handle rotation if new slidepot data is available
@@ -152,7 +155,6 @@ while (1) {
     }
   }
 
-  
   // Only draw when ISR signals it's time
     if (p1.NeedsRedraw()) {
       p1.Draw();
@@ -161,18 +163,6 @@ while (1) {
 
 }
 
-// // use main3 to test switches and LEDs
-// int main3(void){ // main3
-//   __disable_irq();
-//   PLL_Init(); // set bus speed
-//   LaunchPad_Init();
-//   Switch_Init(); // initialize switches
-//   LED_Init(); // initialize LED
-//   while(1){
-//     // write code to test switches and LEDs
-
-//   }
-// }
 
 // use main4 to test sound outputs
 int main4(void){ uint32_t last=0,now;
@@ -202,28 +192,3 @@ int main4(void){ uint32_t last=0,now;
   }
 }
 // ALL ST7735 OUTPUT MUST OCCUR IN MAIN
-int main5(void){ // final main
-  __disable_irq();
-  PLL_Init(); // set bus speed
-  LaunchPad_Init();
-  ST7735_InitPrintf(INITR_BLACKTAB);
-    //note: if you colors are weird, see different options for
-    // ST7735_InitR(INITR_REDTAB); inside ST7735_InitPrintf()
-  ST7735_FillScreen(ST7735_BLACK);
-  //Sensor.Init(); // PB18 = ADC1 channel 5, slidepot
-  Switch_Init(); // initialize switches
-  LED_Init();    // initialize LED
-  Sound_Init();  // initialize sound
-  TExaS_Init(0,0,&TExaS_LaunchPadLogicPB27PB26); // PB27 and PB26
-    // initialize interrupts on TimerG12 at 30 Hz
-  
-  // initialize all data structures
-  __enable_irq();
-
-  while(1){
-    // wait for semaphore
-       // clear semaphore
-       // update ST7735R
-    // check for end game or level switch
-  }
-}

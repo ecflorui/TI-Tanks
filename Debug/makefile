@@ -41,11 +41,11 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include images/SpaceInvaders/pipedreams/subdir_vars.mk
--include images/TI-Sprites/subdir_vars.mk
+-include images/TI-Sprites/Alternative\ Versions\ (unused)/subdir_vars.mk
 -include ticlang/subdir_vars.mk
 -include subdir_rules.mk
 -include images/SpaceInvaders/pipedreams/subdir_rules.mk
--include images/TI-Sprites/subdir_rules.mk
+-include images/TI-Sprites/Alternative\ Versions\ (unused)/subdir_rules.mk
 -include ticlang/subdir_rules.mk
 -include objects.mk
 
