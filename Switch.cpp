@@ -21,3 +21,11 @@ uint32_t Switch_In(void){
   data = data & (1 << 27);
   return data; // return 0; //replace this your code
 }
+
+uint32_t P1SHOOT(void){
+    // write this
+  uint32_t data = GPIOA->DIN31_0;
+  data = data & (1 << 28);
+  return data; // return 0; //replace this your code
+}
+

@@ -17,6 +17,9 @@
 #include "Switch.h"
 #include "Sound.h"
 #include "images/images.h"
+#include "bullet.h"
+
+
 
 struct Tank {
     private:
@@ -78,6 +81,8 @@ struct Tank {
         void SetAlive(bool state);
         void SetAngle(float);
         uint32_t GetThreshold();
+        void Shoot(Bullet bullets[], int maxBullets);
+
 };
 
 #endif 

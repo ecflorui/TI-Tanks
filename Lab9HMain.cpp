@@ -21,6 +21,10 @@
 #include "images/images.h"
 #include "tank.h"
 #include <math.h>
+#include "bullet.h"
+
+#define MAX_BULLETS 10
+Bullet bullets[MAX_BULLETS]; //10 bullets avaliable for each player. if it's a dead, bullet it won't move. if alive, it'll move.
 
 extern "C" void __disable_irq(void);
 extern "C" void __enable_irq(void);
@@ -77,6 +81,9 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
 
     // 2) read input switches
 
+
+  //movement
+
   if ((time % 2) == 0) {
       if (Switch_In()) {
         p1.TriVelocity(2);
@@ -84,7 +91,20 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
   }
   }
 
-  //p1.SetVelocity(5,0);
+//bullets
+
+if ((time % 2) == 0) {
+  if (P1SHOOT()) {
+    p1.Shoot(bullets, MAX_BULLETS);
+
+  }
+}
+
+  p1.TickCooldowns(); //we have a global bullets array
+    for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets[i].Move();
+}
+
 
     // 3) move sprites
 
@@ -95,8 +115,10 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     time++;
     // NO LCD OUTPUT IN INTERRUPT SERVICE ROUTINES
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
+
   }
-}
+
+  }
 uint8_t TExaS_LaunchPadLogicPB27PB26(void){
   return (0x80|((GPIOB->DOUT31_0>>26)&0x03));
 }
@@ -154,6 +176,8 @@ while (1) {
       p1.rotateIncrement(delta);
     }
   }
+
+
 
   // Only draw when ISR signals it's time
     if (p1.NeedsRedraw()) {

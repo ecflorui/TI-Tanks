@@ -34,7 +34,7 @@ tank.o: ../tank.cpp ../tank.h \
  ../../inc/ST7735.h ../../inc/Clock.h ../../inc/LaunchPad.h \
  ../../inc/TExaS.h ../../inc/Timer.h ../../inc/SlidePot.h \
  ../../inc/DAC5.h ../SmallFont.h ../LED.h ../Switch.h ../Sound.h \
- ../images/images.h ../tools.h
+ ../images/images.h ../bullet.h ../tools.h
 ../tank.h:
 C:/ti/mspm0_sdk_2_02_00_05/source/ti/devices/msp/msp.h:
 C:/ti/mspm0_sdk_2_02_00_05/source/ti/devices/DeviceFamily.h:
@@ -78,4 +78,5 @@ C:/ti/mspm0_sdk_2_02_00_05/source/ti/devices/msp/peripherals/m0p/sysctl/hw_sysct
 ../Switch.h:
 ../Sound.h:
 ../images/images.h:
+../bullet.h:
 ../tools.h:
