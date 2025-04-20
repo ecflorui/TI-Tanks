@@ -25,6 +25,11 @@ struct Tank {
     private:
         int32_t x, y; //position 
         int32_t vx, vy; //velocities
+
+        //for internal use
+        float fx, fy;     // float position
+        float fvx, fvy;   // float velocity
+        
         int32_t angle; //direction of tank
         uint32_t width;
         uint32_t height;

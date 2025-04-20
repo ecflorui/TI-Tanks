@@ -126,3 +126,8 @@ int32_t clamper(int pos, int min, int max) {
     return pos;
 }
 
+float clamp(float pos, float min, float max) {
+    if (pos < min) return min;
+    if (pos > max) return max;
+    return pos;
+}

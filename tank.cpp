@@ -40,6 +40,12 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     this->width = width;
     this->height = height;
 
+    //for internal use
+    fx = (float)startX;
+    fy = (float)startY;
+    fvx = 0;
+    fvy = 0;
+
 
     for (int i = 0; i < width * height; i++) {
     rotatedTank[i] = sprite[i];
@@ -66,14 +72,21 @@ bool Tank::NeedsRedraw() {
 }
 
 void Tank::Move() {
+    fx += fvx;
+    fy += fvy;
 
-    int next_x = clamper(x + vx, -2, 114);
-    int next_y = clamper(y + vy, 10, 162);
+    // Clamp
+    fx = clamp(fx, 0.0f, 114.0f);
+    fy = clamp(fy, 6.0f, 162.0f);
 
-    Erase(); //get rid of old stuff
+    // Convert to integer for rendering on the actual screen yk
+    int next_x = (int)(fx + 0.5f);
+    int next_y = (int)(fy + 0.5f);
+
+    Erase(); // remove old bitmap
     x = next_x;
     y = next_y;
-    needUpdate = true; 
+    needUpdate = true;
 }
 
 void Tank::Dash() {
@@ -142,9 +155,20 @@ void Tank::rotateIncrement(int32_t delta) {
 }
 
 void Tank::TriVelocity(int32_t magnitude) {
-    float radians = (angle * (3.14159265f / 180.0f));
-    vx = (int32_t)(cosf(radians) * magnitude);
-    vy = (int32_t)(-sinf(radians) * magnitude); 
+    float radians = angle * (3.14159265f / 180.0f);
+    
+    float dx = cosf(radians);
+    float dy = -sinf(radians);
+
+    // Normalize (optional if you're using unit circle but safe)
+    float len = sqrtf(dx*dx + dy*dy);
+    if (len != 0) {
+        dx /= len;
+        dy /= len;
+    }
+
+    fvx = dx * magnitude;
+    fvy = dy * magnitude;
 }
 
 void Tank::TakeDamage() {
