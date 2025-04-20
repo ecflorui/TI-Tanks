@@ -27,6 +27,7 @@ void queryTank(void);
 void bulletUpdate();
 void rotateUpdate();
 void displayUpdate();
+int32_t clamper(int pos, int min, int max);
 
 uint32_t Random32(void);
 uint32_t Random(uint32_t n);

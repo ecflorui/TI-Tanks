@@ -66,9 +66,13 @@ bool Tank::NeedsRedraw() {
 }
 
 void Tank::Move() {
+
+    int next_x = clamper(x + vx, -2, 114);
+    int next_y = clamper(y + vy, 10, 162);
+
     Erase(); //get rid of old stuff
-    x += vx; //make new stuff
-    y += vy;
+    x = next_x;
+    y = next_y;
     needUpdate = true; 
 }
 

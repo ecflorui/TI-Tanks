@@ -120,4 +120,9 @@ uint32_t Random(uint32_t n){
   return (Random32()>>16)%n;
 }
 
+int32_t clamper(int pos, int min, int max) {
+    if (pos < min) return min;
+    if (pos > max) return max;
+    return pos;
+}
 
