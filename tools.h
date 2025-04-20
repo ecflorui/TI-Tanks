@@ -30,6 +30,7 @@ void displayUpdate();
 int32_t clamper(int pos, int min, int max);
 float clamp(float pos, float min, float max);
 bool isCollision();
+void DrawHealth(const Tank& player1, const Tank& player2); //for testing
 
 uint32_t Random32(void);
 uint32_t Random(uint32_t n);

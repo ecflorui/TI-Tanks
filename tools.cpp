@@ -18,6 +18,8 @@
 #include "bullet.h"
 #include "tools.h"
 
+using namespace std;
+
 #define MAX_BULLETS 10
 extern uint32_t time;
 extern Bullet bullets1[];
@@ -135,4 +137,25 @@ float clamp(float pos, float min, float max) {
 bool isCollision() {
     return !(p1.GetX() + 14 <= p2.GetX() || p1.GetX() >= p2.GetX() + 14 ||
              p1.GetY() + 13 <= p2.GetY() || p1.GetY() >= p2.GetY() + 13);
+}
+
+void DrawHealth(const Tank& player1, const Tank& player2) {
+    static int8_t lastHealth1 = -1;
+    static int8_t lastHealth2 = -1;
+
+    if (player1.GetHealth() != lastHealth1) {
+        lastHealth1 = player1.GetHealth();
+        ST7735_FillRect(0, 0, 40, 8, ST7735_BLACK); // Clear just this text area
+        char buf[8];
+        sprintf(buf, "P1:%d", lastHealth1);
+        ST7735_DrawString(0, 0, buf, ST7735_WHITE);
+    }
+
+    if (player2.GetHealth() != lastHealth2) {
+        lastHealth2 = player2.GetHealth();
+        ST7735_FillRect(60, 0, 40, 8, ST7735_BLACK); // Clear just this text area
+        char buf[8];
+        sprintf(buf, "P2:%d", lastHealth2);
+        ST7735_DrawString(10, 0, buf, ST7735_WHITE); // (col, row)
+    }
 }

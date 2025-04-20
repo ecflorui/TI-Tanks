@@ -151,6 +151,8 @@ while (1) {
   rotateUpdate();
   bulletUpdate();
   displayUpdate();
+
+  DrawHealth(p1, p2); // draw new health
 }
 }
 
