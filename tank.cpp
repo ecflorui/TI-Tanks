@@ -72,6 +72,9 @@ bool Tank::NeedsRedraw() {
 }
 
 void Tank::Move() {
+    float old_fx = fx;
+    float old_fy = fy;
+
     fx += fvx;
     fy += fvy;
 
@@ -79,15 +82,26 @@ void Tank::Move() {
     fx = clamp(fx, 0.0f, 114.0f);
     fy = clamp(fy, 6.0f, 162.0f);
 
-    // Convert to integer for rendering on the actual screen yk
+    // Convert to integer
     int next_x = (int)(fx + 0.5f);
     int next_y = (int)(fy + 0.5f);
 
-    Erase(); // remove old bitmap
+    // Check collision with *new* position
     x = next_x;
     y = next_y;
+    if (isCollision()) {
+        // Revert both float and int after colliding
+        fx = old_fx;
+        fy = old_fy;
+        x = (int)(fx + 0.5f);
+        y = (int)(fy + 0.5f);
+        return;
+    }
+
+    Erase();
     needUpdate = true;
 }
+
 
 void Tank::Dash() {
     if (CanDash()) {

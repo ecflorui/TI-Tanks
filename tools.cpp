@@ -43,7 +43,7 @@ void tankMovement(uint32_t time, uint32_t playerNum, Tank &t) {
     if (time % 2) {
         (playerNum == 1) ? (buttonSample = Switch_In1()) : (buttonSample = Switch_In2());
         if (buttonSample) {
-        t.TriVelocity(2);
+        t.TriVelocity(1);
         t.Move();
      }
     }
@@ -130,4 +130,9 @@ float clamp(float pos, float min, float max) {
     if (pos < min) return min;
     if (pos > max) return max;
     return pos;
+}
+
+bool isCollision() {
+    return !(p1.GetX() + 14 <= p2.GetX() || p1.GetX() >= p2.GetX() + 14 ||
+             p1.GetY() + 13 <= p2.GetY() || p1.GetY() >= p2.GetY() + 13);
 }
