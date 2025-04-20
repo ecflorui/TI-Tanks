@@ -20,6 +20,7 @@
 
 
 class Tank;
+class Bullet;
 
 void SlidePotSampler(SlidePot &s);
 void tankMovement(uint32_t time, uint32_t playerNum, Tank &t);

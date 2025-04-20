@@ -51,6 +51,7 @@ void Bullet::Move() {
   }
 }
 
+
 void Bullet::Draw() {
   ST7735_FillRect(static_cast<int>(x), static_cast<int>(y), 2, 2, ST7735_YELLOW);
 }
@@ -65,5 +66,28 @@ bool Bullet::IsActive() const {
 }
 
 void Bullet::Deactivate() {
+   if (active) Erase();   
   active = false;
+}
+
+float Bullet::getx() {
+  return x;
+  }
+float Bullet::gety() {
+  return y;
+  }
+
+void Bullet::check(Tank& t) {
+      if (!IsActive()) return;
+
+    int32_t left = t.GetX();
+    int32_t right = t.GetX() + 19;
+    int32_t top = t.GetY() - 14;
+    int32_t bottom = t.GetY();
+
+    // Simple AABB (Axis-Aligned Bounding Box) check
+    if (x >= left && x <= right && y >= top && y <= bottom) {
+        t.TakeDamage();
+        Deactivate();
+    }
 }

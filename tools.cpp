@@ -60,9 +60,10 @@ void queryTank() {
     }
 }
 
+
 void bulletUpdate() {
     if (bulletFlag1) {
-        p1.Shoot(bullets1, MAX_BULLETS);\
+        p1.Shoot(bullets1, MAX_BULLETS);
         bulletFlag1 = false;
     }
     if (bulletFlag2) {
@@ -74,18 +75,19 @@ void bulletUpdate() {
     if (TG12Flag) {
         p1.TickCooldowns(); //we have a global bullets array
     for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets1[i].check(p2);
     bullets1[i].Move();
     }
 
     p2.TickCooldowns(); //we have a global bullets array
     for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets2[i].check(p1);
     bullets2[i].Move();
     }
 
     TG12Flag = false;
     }
 }
-
 void rotateUpdate() {
   // Check if the SlidePot has new data. This new Sync allows for universal Sync, but will only redraw if need be
   bool newSlidepotData1 = player1SP.Sync();
@@ -109,8 +111,10 @@ void rotateUpdate() {
 
 void displayUpdate() {
      // Only draw when ISR signals it's time
-    if (p1.NeedsRedraw())  p1.Draw();
-    if (p2.NeedsRedraw()) p2.Draw();
+    if (p1.NeedsRedraw())  
+    p1.Draw();
+    if (p2.NeedsRedraw()) 
+    p2.Draw();
 }
 
 uint32_t Random32(void){
@@ -159,3 +163,4 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
         ST7735_DrawString(10, 0, buf, ST7735_WHITE); // (col, row)
     }
 }
+

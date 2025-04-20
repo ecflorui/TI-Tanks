@@ -30,6 +30,7 @@ private:
   float vx, vy;
   bool active;
   int32_t time; //we want the bullets to dissapear
+  bool wasDrawn = false;
 
 
 public:
@@ -40,6 +41,9 @@ public:
   void Erase();
   bool IsActive() const;
   void Deactivate();
+  float getx();
+  float gety();
+  void check(Tank&);
 };
 
 #endif 
