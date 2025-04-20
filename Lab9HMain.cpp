@@ -22,6 +22,7 @@
 #include "tank.h"
 #include <math.h>
 #include "bullet.h"
+#include "tools.h" //here's where all helper functions are located
 
 #define MAX_BULLETS 10
 Bullet bullets1[MAX_BULLETS]; //10 bullets avaliable for each player. if it's a dead, bullet it won't move. if alive, it'll move.
@@ -32,18 +33,16 @@ extern "C" void __enable_irq(void);
 extern "C" void TIMG12_IRQHandler(void);
 using namespace std;
 
-// ****note to ECE319K students****
-// the data sheet says the ADC does not work when clock is 80 MHz
-// however, the ADC seems to work on my boards at 80 MHz
-// I suggest you try 80MHz, but if it doesn't work, switch to 40MHz
+
 void PLL_Init(void){ // set phase lock loop (PLL)
   // Clock_Init40MHz(); // run this line for 40MHz
   Clock_Init80MHz(0);   // run this line for 80MHz
 }
 
 uint32_t time = 0; //used to go slower than the 30 Hz in the G12 ISR
-
-bool bulletFlag = false;
+bool bulletFlag1 = false; //flag for bullet updates
+bool bulletFlag2 = false; //flag for bullet updates
+bool TG12Flag = false;
 
 //our tanks are 19 by 14 dimension
 
@@ -53,20 +52,13 @@ SlidePot player2SP(0,0); //no input for SP Constructor b/c we only care about ra
 Tank p1 = Tank(50, 100, 0, //Tank 1
            MiniRed,
            1, 3, 19, 14);
-
-
 Tank p2 = Tank(100, 100, 0, //Tank 2
            MiniBlue,
            1, 3, 19, 14);
 
-uint32_t M=1;
-uint32_t Random32(void){
-  M = 1664525*M+1013904223;
-  return M;
-}
-uint32_t Random(uint32_t n){
-  return (Random32()>>16)%n;
-}
+
+
+//game engine helper functions are located in tools.h and tools.cpp
 
 
 // games  engine runs at 30Hz
@@ -74,47 +66,33 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
   if((TIMG12->CPU_INT.IIDX) == 1){ // this will acknowledge
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
-// game engine goes here
+
+    // primary game engine
 
     // 1) sample slide pot
 
-
-    uint32_t newData1 = player1SP.In();
-    player1SP.Save(newData1);
-
-    uint32_t newData2 = player2SP.In();
-    player2SP.Save(newData2);
+    SlidePotSampler(player1SP);
+    SlidePotSampler(player2SP);
 
     // 2) read input switches
 
 
-  //movement
+    //movement
 
-  if ((time % 2) == 0) {
-      if (Switch_In1()) {
-        p1.TriVelocity(2);
-        p1.Move();
-  }
-  }
+    tankMovement(time, 1, p1);
+    tankMovement(time, 2, p2);
 
-   if ((time % 2) == 0) {
-      if (Switch_In2()) {
-        p2.TriVelocity(2);
-        p2.Move();
-  }
-  }
-//bullets
+  
+    //bullets 
 
-bulletFlag = true;
-
-
-    // 3) move sprites
+    queryTank();
 
     //move
 
-    // 4) start sounds
-    // 5) set semaphore
+    // 3) start sounds
+    // 4) set semaphore
     time++;
+    TG12Flag = true;
     // NO LCD OUTPUT IN INTERRUPT SERVICE ROUTINES
     GPIOB->DOUTTGL31_0 = GREEN; // toggle PB27 (minimally intrusive debugging)
 
@@ -170,64 +148,10 @@ int main(void){
 
 
 while (1) {
-  // Check if the SlidePot has new data. This new Sync allows for universal Sync, but will only redraw if need be
-  bool newSlidepotData1 = player1SP.Sync();
-  bool newSlidepotData2 = player2SP.Sync();
-
-  if (bulletFlag) {
-  if ((time % 2) == 0) {
-  if (P1SHOOT()) {
-    p1.Shoot(bullets1, MAX_BULLETS);
-
-  }
+  rotateUpdate();
+  bulletUpdate();
+  displayUpdate();
 }
-
-  p1.TickCooldowns(); //we have a global bullets array
-    for (int i = 0; i < MAX_BULLETS; i++) {
-    bullets1[i].Move();
-}
-
-if ((time % 2) == 0) {
-  if (P2SHOOT()) {
-    p2.Shoot(bullets2, MAX_BULLETS);
-
-  }
-}
-
-  p2.TickCooldowns(); //we have a global bullets array
-    for (int i = 0; i < MAX_BULLETS; i++) {
-    bullets2[i].Move();
-}
-  bulletFlag = false;
-}
-  
-  // Handle rotation if new slidepot data is available
-  if (newSlidepotData1) {
-    int32_t delta = player1SP.Distance() - player1SP.lastDistance();
-    if (delta != 0) {
-      p1.rotateIncrement(delta);
-    }
-  }
-
-  if (newSlidepotData2) {
-    int32_t delta = player2SP.Distance() - player2SP.lastDistance();
-    if (delta != 0) {
-      p2.rotateIncrement(delta);
-    }
-  }
-
-
-
-  // Only draw when ISR signals it's time
-    if (p1.NeedsRedraw()) {
-      p1.Draw();
-    }
-
-    if (p2.NeedsRedraw()) {
-      p2.Draw();
-    }
-}
-
 }
 
 
