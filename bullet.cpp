@@ -44,7 +44,7 @@ void Bullet::Move() {
 
   if (time > 296) return;
 
-  if (x < 0 || x > 126 || y < 0 || y > 158 || time <= 0) {
+  if (x < 0 || x > 126 || y < 0 || y > 148 || time <= 0) {
     active = false;
   } else {
     Draw();

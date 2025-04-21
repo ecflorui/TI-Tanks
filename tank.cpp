@@ -79,18 +79,18 @@ void Tank::Move() {
     fy += fvy;
 
     // Clamp
-    fx = clamp(fx, 0.0f, 114.0f);
-    fy = clamp(fy, 6.0f, 162.0f);
+    fx = clamper(fx, -6.0f, 114.0f);
+    fy = clamper(fy, 12.0f, 149.0f);
 
     // Convert to integer
     int next_x = (int)(fx + 0.5f);
     int next_y = (int)(fy + 0.5f);
 
-    // Check collision with *new* position
+    // Check collision with new position
     x = next_x;
     y = next_y;
     if (isCollision()) {
-        // Revert both float and int after colliding
+        // Revert both float and int after colliding cuz we dont want movement
         fx = old_fx;
         fy = old_fy;
         x = (int)(fx + 0.5f);

@@ -51,10 +51,10 @@ SlidePot player2SP(0,0); //no input for SP Constructor b/c we only care about ra
 
 Tank p1 = Tank(50, 100, 0, //Tank 1
            MiniRed,
-           1, 3, 19, 14);
+           1, 5, 19, 14);
 Tank p2 = Tank(100, 100, 0, //Tank 2
            MiniBlue,
-           1, 3, 19, 14);
+           1, 5, 19, 14);
 
 
 

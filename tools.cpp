@@ -132,7 +132,7 @@ int32_t clamper(int pos, int min, int max) {
     return pos;
 }
 
-float clamp(float pos, float min, float max) {
+float clamper(float pos, float min, float max) {
     if (pos < min) return min;
     if (pos > max) return max;
     return pos;
@@ -143,24 +143,54 @@ bool isCollision() {
              p1.GetY() + 13 <= p2.GetY() || p1.GetY() >= p2.GetY() + 13);
 }
 
+// void DrawHealth(const Tank& player1, const Tank& player2) {
+//     static int8_t lastHealth1 = -1;
+//     static int8_t lastHealth2 = -1;
+
+//     if (player1.GetHealth() != lastHealth1) {
+//         lastHealth1 = player1.GetHealth();
+//         ST7735_FillRect(0, 0, 40, 8, ST7735_BLACK); // Clear just this text area
+//         char buf[8];
+//         sprintf(buf, "P1:%d", lastHealth1);
+//         ST7735_DrawString(0, 0, buf, ST7735_WHITE);
+//     }
+
+//     if (player2.GetHealth() != lastHealth2) {
+//         lastHealth2 = player2.GetHealth();
+//         ST7735_FillRect(60, 0, 40, 8, ST7735_BLACK); // Clear just this text area
+//         char buf[8];
+//         sprintf(buf, "P2:%d", lastHealth2);
+//         ST7735_DrawString(10, 0, buf, ST7735_WHITE); // (col, row)
+//     }
+// }
+
 void DrawHealth(const Tank& player1, const Tank& player2) {
-    static int8_t lastHealth1 = -1;
-    static int8_t lastHealth2 = -1;
+  static int8_t lastHealth1 = -1;
+  static int8_t lastHealth2 = -1;
 
-    if (player1.GetHealth() != lastHealth1) {
-        lastHealth1 = player1.GetHealth();
-        ST7735_FillRect(0, 0, 40, 8, ST7735_BLACK); // Clear just this text area
-        char buf[8];
-        sprintf(buf, "P1:%d", lastHealth1);
-        ST7735_DrawString(0, 0, buf, ST7735_WHITE);
+  int8_t hp1 = player1.GetHealth();
+  int8_t hp2 = player2.GetHealth();
+
+  if (hp1 != lastHealth1 || hp2 != lastHealth2) {
+    lastHealth1 = hp1;
+    lastHealth2 = hp2;
+
+    const int y = 150;
+    const int spacing = 10; // space between hearts
+
+    ST7735_FillRect(0, y, 128, 10, ST7735_BLACK);
+
+    // Draw Player 1 hearts (left side)
+    for (int i = 0; i < hp1; i++) {
+      int x = 2 + i * spacing;
+      ST7735_DrawBitmap(x, y + 8, heart2, 8, 8); 
     }
 
-    if (player2.GetHealth() != lastHealth2) {
-        lastHealth2 = player2.GetHealth();
-        ST7735_FillRect(60, 0, 40, 8, ST7735_BLACK); // Clear just this text area
-        char buf[8];
-        sprintf(buf, "P2:%d", lastHealth2);
-        ST7735_DrawString(10, 0, buf, ST7735_WHITE); // (col, row)
+    // Draw Player 2 hearts (right side)
+    for (int i = 0; i < hp2; i++) {
+      int x = 126 - i * spacing - 8; 
+      ST7735_DrawBitmap(x, y + 8, heart3, 8, 8);
     }
+  }
 }
 

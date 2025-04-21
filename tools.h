@@ -29,7 +29,7 @@ void bulletUpdate();
 void rotateUpdate();
 void displayUpdate();
 int32_t clamper(int pos, int min, int max);
-float clamp(float pos, float min, float max);
+float clamper(float pos, float min, float max);
 bool isCollision();
 void DrawHealth(const Tank& player1, const Tank& player2); //for testing
 
