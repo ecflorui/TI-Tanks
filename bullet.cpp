@@ -42,6 +42,9 @@ void Bullet::Move() {
   // 1) erase old
   if (time <= 296) Erase();
 
+  if (time % 90) //dont want to update too quickly, every 3 s
+  DrawWater(); //so that bullets go over 
+
   // 2) HORIZONTAL step + bounce
   x += vx;
   for (int i = 0; i < NUM_WALLS; i++) {

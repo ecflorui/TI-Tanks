@@ -32,11 +32,13 @@ int32_t clamper(int pos, int min, int max);
 float clamper(float pos, float min, float max);
 bool isCollision();
 bool curWallCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
+bool curWaterCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
 void DrawHealth(const Tank& player1, const Tank& player2); 
 
 uint32_t Random32(void);
 uint32_t Random(uint32_t n);
 
 void DrawWalls();
+void DrawWater();
 
 

@@ -147,6 +147,7 @@ int main(void){
   p2.Draw();
 
    DrawWalls();
+   DrawWater();
 
 
 while (1) {

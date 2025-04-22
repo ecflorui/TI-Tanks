@@ -18,6 +18,7 @@
 #include "bullet.h"
 #include "tools.h"
 #include "walls.h"
+#include "water.h"
 
 using namespace std;
 
@@ -49,6 +50,12 @@ Wall walls[] = {
 };
 
 int NUM_WALLS = sizeof(walls)/sizeof(walls[0]);
+
+Water waters[] = {
+  {60, 10, 10, 20},
+};
+
+int NUM_WATERS = sizeof(waters)/sizeof(waters[0]);
 
 
 uint32_t M=1;
@@ -172,6 +179,15 @@ bool curWallCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h) {
   return false;
 }
 
+bool curWaterCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h) {
+  for (int i = 0; i < NUM_WATERS; i++) {
+    Water& water = waters[i];
+    bool overlap = !(x + w <= water.x || x >= water.x + water.width || y + (h+1) <= water.y || y >= water.y +((water.height+1)));
+    if (overlap) return true;
+  }
+  return false;
+}
+
 // void DrawHealth(const Tank& player1, const Tank& player2) {
 //     static int8_t lastHealth1 = -1;
 //     static int8_t lastHealth2 = -1;
@@ -226,5 +242,12 @@ void DrawWalls() {
   for (int i = 0; i < NUM_WALLS; i++) {
     Wall& wall = walls[i];
     ST7735_FillRect(wall.x, wall.y, wall.width, wall.height, ST7735_LIGHTGREY);
+  }
+}
+
+void DrawWater() {
+  for (int i = 0; i < NUM_WATERS; i++) {
+    Water& water = waters[i];
+    ST7735_FillRect(water.x, water.y, water.width, water.height, ST7735_BLUE);
   }
 }

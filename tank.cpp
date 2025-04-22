@@ -89,7 +89,7 @@ void Tank::Move() {
     // Check collision with new position
     x = next_x;
     y = next_y;
-    if (isCollision() || curWallCollision(next_x, next_y - height, width, height)) { //check if theres a collision between a tank or a currently generated wall
+    if (isCollision() || curWallCollision(next_x, next_y - height, width, height) || curWaterCollision(next_x, next_y - height, width, height)) { //check if theres a collision between a tank or a currently generated wall
         // Revert both float and int after colliding cuz we dont want movement
         fx = old_fx;
         fy = old_fy;
