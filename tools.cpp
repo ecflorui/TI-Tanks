@@ -20,6 +20,7 @@
 #include "walls.h"
 #include "water.h"
 
+
 using namespace std;
 
 #define MAX_BULLETS 10
@@ -43,19 +44,19 @@ const int MAX_STAGES   = 5;
 const int WINS_NEEDED  = 3;   
 
 
+
+
+
 //different walls
 Wall walls[] = {
-  {20, 40, 10, 50},
-  {60, 100, 30, 10},
 };
 
-int NUM_WALLS = sizeof(walls)/sizeof(walls[0]);
+int NUM_WALLS = 0;
 
 Water waters[] = {
-  {60, 10, 10, 20},
 };
 
-int NUM_WATERS = sizeof(waters)/sizeof(waters[0]);
+int NUM_WATERS = 0;
 
 
 uint32_t M=1;
@@ -250,4 +251,19 @@ void DrawWater() {
     Water& water = waters[i];
     ST7735_FillRect(water.x, water.y, water.width, water.height, ST7735_BLUE);
   }
+}
+void generateMap1() { //empty
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(5);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(5);
 }

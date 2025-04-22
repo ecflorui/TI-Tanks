@@ -41,4 +41,6 @@ uint32_t Random(uint32_t n);
 void DrawWalls();
 void DrawWater();
 
+void generateMap1();
+
 

@@ -88,6 +88,9 @@ struct Tank {
         uint32_t GetThreshold();
         void Shoot(Bullet bullets[], int maxBullets);
 
+        void SetX(int32_t px);
+        void SetY(int32_t py);
+        void SetHP(uint8_t hp);
 };
 
 #endif 
