@@ -218,8 +218,8 @@ uint8_t Tank::GetHealth() const { return health; }
 uint8_t Tank::GetPlayer() const { return playerNum; }
 uint32_t Tank::GetThreshold() {return threshold;}
 
-void Tank::SetX(int32_t px ) { x = px; }
-void Tank::SetY(int32_t py) { y = py; }
+void Tank::SetX(int32_t px ) { x = px; fx = px; }
+void Tank::SetY(int32_t py) { y = py; fy = py; }
 void Tank::SetHP(uint8_t hp) { health = hp;}
 
 bool Tank::IsAlive() const { return alive; }
