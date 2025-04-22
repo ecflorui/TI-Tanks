@@ -225,6 +225,6 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
 void DrawWalls() {
   for (int i = 0; i < NUM_WALLS; i++) {
     Wall& wall = walls[i];
-    ST7735_FillRect(wall.x, wall.y, wall.width, wall.height, ST7735_WHITE);
+    ST7735_FillRect(wall.x, wall.y, wall.width, wall.height, ST7735_LIGHTGREY);
   }
 }
