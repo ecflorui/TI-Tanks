@@ -20,5 +20,8 @@ uint32_t Switch_In2(void);
 
 uint32_t P2SHOOT(void);
 
+uint32_t special1(void);
+uint32_t special12(void);
+
 
 #endif /* SWITCH_H_ */

@@ -175,22 +175,21 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
     lastHealth1 = hp1;
     lastHealth2 = hp2;
 
-    const int y = 150;
-    const int spacing = 10; // space between hearts
+    const int x = 0;
+    const int spacing = 10;
 
-    ST7735_FillRect(0, y, 128, 10, ST7735_BLACK);
+    ST7735_FillRect(x, 0, 10, 160, ST7735_BLACK);
 
-    // Draw Player 1 hearts (left side)
-    for (int i = 0; i < hp1; i++) {
-      int x = 2 + i * spacing;
-      ST7735_DrawBitmap(x, y + 8, heart2, 8, 8); 
+    for (int i = 0; i < hp2; i++) {
+      int y = 2 + i * spacing;
+      ST7735_DrawBitmap(x + 1, y + 8, heart3, 8, 8);
     }
 
-    // Draw Player 2 hearts (right side)
-    for (int i = 0; i < hp2; i++) {
-      int x = 126 - i * spacing - 8; 
-      ST7735_DrawBitmap(x, y + 8, heart3, 8, 8);
+    for (int i = 0; i < hp1; i++) {
+      int y = 160 - 2 - i * spacing - 8;
+      ST7735_DrawBitmap(x + 1, y + 8, heart2, 8, 8);
     }
   }
 }
+
 

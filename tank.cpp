@@ -79,8 +79,8 @@ void Tank::Move() {
     fy += fvy;
 
     // Clamp
-    fx = clamper(fx, -6.0f, 114.0f);
-    fy = clamper(fy, 12.0f, 149.0f);
+    fx = clamper(fx, 10.0f, 114.0f);
+    fy = clamper(fy, 12.0f, 162.0f);
 
     // Convert to integer
     int next_x = (int)(fx + 0.5f);
