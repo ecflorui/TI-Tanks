@@ -34,7 +34,7 @@ bullet.o: ../bullet.cpp ../../inc/ST7735.h ../tank.h \
  ../../inc/Clock.h ../../inc/LaunchPad.h ../../inc/TExaS.h \
  ../../inc/Timer.h ../../inc/SlidePot.h ../../inc/DAC5.h ../SmallFont.h \
  ../LED.h ../Switch.h ../Sound.h ../images/images.h ../bullet.h \
- ../tools.h
+ ../tools.h ../walls.h
 ../../inc/ST7735.h:
 ../tank.h:
 C:/ti/mspm0_sdk_2_02_00_05/source/ti/devices/msp/msp.h:
@@ -80,3 +80,4 @@ C:/ti/mspm0_sdk_2_02_00_05/source/ti/devices/msp/peripherals/m0p/sysctl/hw_sysct
 ../images/images.h:
 ../bullet.h:
 ../tools.h:
+../walls.h:

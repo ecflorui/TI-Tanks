@@ -17,6 +17,7 @@
 #include <math.h>
 #include "bullet.h"
 #include "tools.h"
+#include "walls.h"
 
 using namespace std;
 
@@ -31,6 +32,23 @@ extern Tank p2;
 extern bool TG12Flag;
 extern SlidePot player1SP;
 extern SlidePot player2SP;
+
+
+//gamestate stuff
+int p1SeriesWins = 0;
+int p2SeriesWins = 0;
+int currentStage   = 0;          
+const int MAX_STAGES   = 5;
+const int WINS_NEEDED  = 3;   
+
+
+//different walls
+Wall walls[] = {
+  {20, 40, 10, 50},
+  {60, 100, 30, 10},
+};
+
+int NUM_WALLS = sizeof(walls)/sizeof(walls[0]);
 
 
 uint32_t M=1;
@@ -76,12 +94,14 @@ void bulletUpdate() {
         p1.TickCooldowns(); //we have a global bullets array
     for (int i = 0; i < MAX_BULLETS; i++) {
     bullets1[i].check(p2);
+    bullets1[i].check(p1);
     bullets1[i].Move();
     }
 
     p2.TickCooldowns(); //we have a global bullets array
     for (int i = 0; i < MAX_BULLETS; i++) {
     bullets2[i].check(p1);
+    bullets1[i].check(p2);
     bullets2[i].Move();
     }
 
@@ -143,6 +163,15 @@ bool isCollision() {
              p1.GetY() + 13 <= p2.GetY() || p1.GetY() >= p2.GetY() + 13);
 }
 
+bool curWallCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h) {
+  for (int i = 0; i < NUM_WALLS; i++) {
+    Wall& wall = walls[i];
+    bool overlap = !(x + w <= wall.x || x >= wall.x + wall.width || y + (h+1) <= wall.y || y >= wall.y +((wall.height+1)));
+    if (overlap) return true;
+  }
+  return false;
+}
+
 // void DrawHealth(const Tank& player1, const Tank& player2) {
 //     static int8_t lastHealth1 = -1;
 //     static int8_t lastHealth2 = -1;
@@ -193,3 +222,9 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
 }
 
 
+void DrawWalls() {
+  for (int i = 0; i < NUM_WALLS; i++) {
+    Wall& wall = walls[i];
+    ST7735_FillRect(wall.x, wall.y, wall.width, wall.height, ST7735_WHITE);
+  }
+}

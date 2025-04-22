@@ -20,8 +20,11 @@
 #include <math.h>
 #include "images/images.h"
 #include "bullet.h"
+#include "walls.h"
+
 
 Bullet::Bullet() : x(0), y(0), vx(0), vy(0), active(false), time(0) {}
+
 
 void Bullet::Init(int32_t startX, int32_t startY, float angle, int32_t speed, int32_t f) {
   float rad = angle * (3.14159265f / 180.0f);
@@ -36,20 +39,49 @@ void Bullet::Init(int32_t startX, int32_t startY, float angle, int32_t speed, in
 void Bullet::Move() {
   if (!active) return;
 
+  // 1) erase old
   if (time <= 296) Erase();
 
+  // 2) HORIZONTAL step + bounce
   x += vx;
-  y += vy;
-  time--;
+  for (int i = 0; i < NUM_WALLS; i++) {
+    const Wall &w = walls[i];
+    bool hit = !(x+2 <= w.x   || x   >= w.x+w.width ||
+                 y+2 <= w.y   || y   >= w.y+w.height);
+    if (hit) {
+      // step back, flip, step forward
+      x -= vx;
+      vx = -vx;
+      x += vx;
+      break;
+    }
+  }
 
+  // 3) VERTICAL step + bounce
+  y += vy;
+  for (int i = 0; i < NUM_WALLS; i++) {
+    const Wall &w = walls[i];
+    bool hit = !(x+2 <= w.x   || x   >= w.x+w.width ||
+                 y+2 <= w.y   || y   >= w.y+w.height);
+    if (hit) {
+      y -= vy;
+      vy = -vy;
+      y += vy;
+      break;
+    }
+  }
+
+  // 4) advance life & maybe draw
+  time--;
   if (time > 296) return;
 
-  if (x < 11 || x > 126 || y < 0 || y > 161 || time <= 0) {
+  if (x < 10 || x > 126 || y < 0 || y > 161 || time <= 0) {
     active = false;
   } else {
     Draw();
   }
 }
+
 
 
 void Bullet::Draw() {
@@ -86,7 +118,7 @@ void Bullet::check(Tank& t) {
     int32_t bottom = t.GetY();
 
     // Simple AABB (Axis-Aligned Bounding Box) check
-    if (x >= left && x <= right && y >= top && y <= bottom) {
+    if ((x >= left && x <= right && y >= top && y <= bottom) && (time < 295))  {
         t.TakeDamage();
         Deactivate();
     }

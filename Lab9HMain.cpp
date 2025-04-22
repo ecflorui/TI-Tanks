@@ -49,10 +49,10 @@ bool TG12Flag = false;
 SlidePot player1SP(0,0); //initializing slidepots for the two players
 SlidePot player2SP(0,0); //no input for SP Constructor b/c we only care about raw data, not distance
 
-Tank p1 = Tank(50, 100, 0, //Tank 1
+Tank p1 = Tank(50, 50, 0, //Tank 1
            MiniRed,
            1, 5, 19, 14);
-Tank p2 = Tank(100, 100, 0, //Tank 2
+Tank p2 = Tank(100, 50, 0, //Tank 2
            MiniBlue,
            1, 5, 19, 14);
 
@@ -145,6 +145,8 @@ int main(void){
   ST7735_FillScreen(0x3467);
   p1.Draw();
   p2.Draw();
+
+   DrawWalls();
 
 
 while (1) {
