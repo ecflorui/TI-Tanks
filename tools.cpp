@@ -72,7 +72,7 @@ void tankMovement(uint32_t time, uint32_t playerNum, Tank &t) {
     if (time % 2) {
         (playerNum == 1) ? (buttonSample = Switch_In1()) : (buttonSample = Switch_In2());
         if (buttonSample) {
-        t.TriVelocity(1);
+        t.TriVelocity();
         t.Move();
      }
     }
@@ -212,32 +212,42 @@ bool curWaterCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h) {
 // }
 
 void DrawHealth(const Tank& player1, const Tank& player2) {
-  static int8_t lastHealth1 = -1;
-  static int8_t lastHealth2 = -1;
+    static int8_t  lastHP1       = -1;
+    static int8_t  lastHP2       = -1;
+    static bool    lastShield1   = false;
+    static bool    lastShield2   = false;
 
-  int8_t hp1 = player1.GetHealth();
-  int8_t hp2 = player2.GetHealth();
+    int8_t  hp1     = player1.GetHealth();
+    int8_t  hp2     = player2.GetHealth();
+    bool    shield1 = player1.puActive && player1.puType == Tank::PU_Shield;
+    bool    shield2 = player2.puActive && player2.puType == Tank::PU_Shield;
 
-  if (hp1 != lastHealth1 || hp2 != lastHealth2) {
-    lastHealth1 = hp1;
-    lastHealth2 = hp2;
 
-    const int x = 0;
-    const int spacing = 10;
+    if (hp1 != lastHP1 || hp2 != lastHP2 || shield1 != lastShield1 || shield2 != lastShield2) {
 
-    ST7735_FillRect(x, 0, 10, 160, ST7735_BLACK);
+        lastHP1      = hp1;
+        lastHP2      = hp2;
+        lastShield1  = shield1; //test to prevent redraws
+        lastShield2  = shield2;
 
-    for (int i = 0; i < hp2; i++) {
-      int y = 2 + i * spacing;
-      ST7735_DrawBitmap(x + 1, y + 8, heart3, 8, 8);
+        const int x       = 0;
+        const int spacing = 10;
+
+        // clear the bar
+        ST7735_FillRect(x, 0, 10, 160, ST7735_BLACK);
+
+        for (int i = 0; i < hp2; ++i) {
+            int y = 2 + i*spacing;
+            ST7735_DrawBitmap(x+1, y+8, shield2 ? heart4 : heart3, 8,8);
+        }
+
+        for (int i = 0; i < hp1; ++i) { 
+          int y = 160 - 2 - i*spacing - 8;
+            ST7735_DrawBitmap(x+1, y+8,shield1 ? heart5 : heart2, 8,8);
+        }
     }
-
-    for (int i = 0; i < hp1; i++) {
-      int y = 160 - 2 - i * spacing - 8;
-      ST7735_DrawBitmap(x + 1, y + 8, heart2, 8, 8);
-    }
-  }
 }
+
 
 
 void DrawWalls() {

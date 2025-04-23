@@ -1,18 +1,18 @@
 ******************************************************************************
             TI ARM Clang Linker PC v4.0.1                      
 ******************************************************************************
->> Linked Wed Apr 23 01:04:21 2025
+>> Linked Wed Apr 23 03:08:49 2025
 
 OUTPUT FILE NAME:   <ECE319K_Lab9H.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005b59
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005fa1
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  FLASH                 00000000   00020000  000072e8  00018d18  R  X
-  SRAM                  20200000   00008000  000011ae  00006e52  RW X
+  FLASH                 00000000   00020000  00007888  00018778  R  X
+  SRAM                  20200000   00008000  000011d6  00006e2a  RW X
   BCR_CONFIG            41c00000   00000080  00000000  00000080  R   
   BSL_CONFIG            41c00100   00000080  00000000  00000080  R   
 
@@ -21,16 +21,16 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    000072e8   000072e8    r-x
+00000000    00000000    00007888   00007888    r-x
   00000000    00000000    000000c0   000000c0    r-- .intvecs
-  000000c0    000000c0    00005f70   00005f70    r-x .text
-  00006030    00006030    000011b0   000011b0    r-- .rodata
-  000071e0    000071e0    00000008   00000008    r-- .init_array
-  000071e8    000071e8    00000100   00000100    r-- .cinit
-20200000    20200000    00000fb1   00000000    rw-
-  20200000    20200000    00000bc5   00000000    rw- .data
-  20200bc8    20200bc8    00000200   00000000    rw- .sysmem
-  20200dc8    20200dc8    000001e9   00000000    rw- .bss
+  000000c0    000000c0    00006410   00006410    r-x .text
+  000064d0    000064d0    000012b0   000012b0    r-- .rodata
+  00007780    00007780    00000008   00000008    r-- .init_array
+  00007788    00007788    00000100   00000100    r-- .cinit
+20200000    20200000    00000fd9   00000000    rw-
+  20200000    20200000    00000bed   00000000    rw- .data
+  20200bf0    20200bf0    00000200   00000000    rw- .sysmem
+  20200df0    20200df0    000001e9   00000000    rw- .bss
 20207e00    20207e00    00000200   00000000    rw-
   20207e00    20207e00    00000200   00000000    rw- .stack
 
@@ -45,388 +45,402 @@ section   page    origin      length       input sections
 
 .binit     0    00000000    00000000     
 
-.text      0    000000c0    00005f70     
+.text      0    000000c0    00006410     
                   000000c0    00000644     libc.a : k_rem_pio2.c.obj (.text.__kernel_rem_pio2)
                   00000704    000002f8     bullet.o (.text._ZN6Bullet4MoveEv)
                   000009fc    00000210     ST7735.o (.text._Z17ST7735_DrawBitmapssPKtss)
-                  00000c0c    000001d4     libc.a : s_cosf.c.obj (.text.cosf)
-                  00000de0    000001c8            : s_sinf.c.obj (.text.sinf)
-                  00000fa8    000001b4     Clock.o (.text._Z15Clock_Init80MHzi)
-                  0000115c    000001a8     ST7735.o (.text._Z15ST7735_DrawCharsscssh)
-                  00001304    00000192     libclang_rt.builtins.a : adddf3.S.obj (.text.adddf3_subdf3)
-                  00001496    00000002     Sound.o (.text.SysTick_Handler)
-                  00001498    0000018c     fsm.o (.text._Z8showMenuv)
-                  00001624    00000178     tank.o (.text._ZN4Tank12rotateSpriteEf)
-                  0000179c    00000154     libc.a : fopen.c.obj (.text._openfile)
-                  000018f0    00000144            : s_floor.c.obj (.text.floor)
-                  00001a34    00000140     fsm.o (.text._Z13showEndScreenv)
-                  00001b74    00000128     TExaS.o (.text._Z8ADC_InitP10ADC12_Regsjj)
-                  00001c9c    00000118     ST7735.o (.text._Z15ST7735_FillRectsssst)
-                  00001db4    00000114     tools.o (.text._Z12bulletUpdatev)
-                  00001ec8    00000114     libc.a : memory.c.obj (.text.aligned_alloc)
-                  00001fdc    00000110     fsm.o (.text._Z11runGameLoopv)
-                  000020ec    00000108     tools.o (.text._Z15initializeRoundh)
-                  000021f4    00000108     tank.o (.text._ZN4Tank4MoveEv)
-                  000022fc    00000100     tools.o (.text._Z12generateMap4h)
-                  000023fc    00000100     tools.o (.text._Z12generateMap7h)
-                  000024fc    000000f8     SPI.o (.text._Z8SPI_Initv)
-                  000025f4    000000f4     tools.o (.text._Z12generateMap3h)
-                  000026e8    000000f4     tools.o (.text._Z12generateMap8h)
-                  000027dc    000000f4     tools.o (.text._Z13generateMap10h)
-                  000028d0    000000f0     tools.o (.text._Z12generateMap9h)
-                  000029c0    000000ec     tools.o (.text._Z10DrawHealthRK4TankS1_)
-                  00002aac    000000ec     libsysbm.a : add_device.c.obj (.text.add_device)
-                  00002b98    000000e8     ST7735.o (.text._Z14ST7735_OutCharc)
-                  00002c80    000000e8     TExaS.o (.text._Z9UART_Initv)
-                  00002d68    000000e8     libc.a : memory.c.obj (.text.free)
-                  00002e50    000000e4     libclang_rt.builtins.a : muldf3.S.obj (.text.__muldf3)
-                  00002f34    000000e0     libc.a : setvbuf.c.obj (.text.setvbuf)
-                  00003014    000000d8            : s_scalbn.c.obj (.text.scalbn)
-                  000030ec    000000d8     libclang_rt.builtins.a : addsf3.S.obj (.text)
-                  000031c4    000000c8     tank.o (.text._ZN4TankC2EiiiPKthhjj)
-                  0000328c    000000c4     tools.o (.text._Z16curWallCollisionjjjj)
-                  00003350    000000c4     tools.o (.text._Z17curWaterCollisionjjjj)
-                  00003414    000000c2     bullet.o (.text._ZN6Bullet5checkER4Tank)
-                  000034d6    00000002     Sound.o (.text._Z10Sound_Initv)
-                  000034d8    000000b4     tools.o (.text._Z12generateMap2h)
-                  0000358c    000000b4     tools.o (.text._Z12generateMap6h)
-                  00003640    000000b0     tools.o (.text._Z12generateMap5h)
-                  000036f0    000000ac     tank.o (.text._ZN4Tank11TriVelocityEi)
-                  0000379c    000000ac     libc.a : s_cosf.c.obj (.text.__kernel_sindf)
-                  00003848    000000ac            : s_sinf.c.obj (.text.__kernel_sindf)
-                  000038f4    000000a8     Timer.o (.text._Z14TimerG7_IntArmtjj)
-                  0000399c    000000a4     tools.o (.text._Z12rotateUpdatev)
-                  00003a40    000000a2     ST7735.o (.text._ZL11commandListPKh)
-                  00003ae2    00000002     libclang_rt.builtins.a : aeabi_div0.c.obj (.text.__aeabi_idiv0)
-                  00003ae4    000000a0     ST7735.o (.text._Z12ST7735_InitR10initRFlags)
-                  00003b84    000000a0     ST7735.o (.text._Z17ST7735_InitPrintf10initRFlags)
-                  00003c24    000000a0     libsysbm.a : open.c.obj (.text.open)
-                  00003cc4    000000a0     libc.a : e_sqrtf.c.obj (.text.sqrtf)
-                  00003d64    0000009c     tools.o (.text._Z11isCollisionv)
-                  00003e00    0000009c     ST7735.o (.text._Z14ST7735_OutUDecj)
-                  00003e9c    0000009c     libc.a : s_cosf.c.obj (.text.__kernel_cosdf)
-                  00003f38    0000009c            : s_sinf.c.obj (.text.__kernel_cosdf)
-                  00003fd4    00000098     tank.o (.text._ZN4Tank5ShootEP6Bulleti)
-                  0000406c    00000094     Timer.o (.text._Z15TimerG12_IntArmjj)
-                  00004100    00000094     Lab9HMain.o (.text.main)
-                  00004194    00000090     SlidePot.o (.text._ZN8SlidePot4InitEj)
-                  00004224    0000008c     libclang_rt.builtins.a : mulsf3.S.obj (.text.__mulsf3)
-                  000042b0    00000088     ST7735.o (.text._ZL13setAddrWindowhhhh)
-                  00004338    00000008     libc.a : aeabi_portable.c.obj (.text.__aeabi_errno_addr)
-                  00004340    00000088            : strcmp-armv6m.S.obj (.text:strcmp)
-                  000043c8    00000084     ST7735.o (.text._Z17ST7735_DrawStringttPcs)
-                  0000444c    00000082     libclang_rt.builtins.a : divsf3.S.obj (.text.__divsf3)
-                  000044ce    00000002     libc.a : _lock.c.obj (.text._nop)
-                  000044d0    00000080     Lab9HMain.o (.text.TIMG12_IRQHandler)
-                  00004550    00000080     bullet.o (.text._ZN6Bullet4InitEiifii)
-                  000045d0    0000007c     LaunchPad.o (.text._Z14LaunchPad_Initv)
-                  0000464c    0000007c     libc.a : fclose.c.obj (.text.__TI_closefile)
-                  000046c8    0000007c            : copy_decompress_lzss.c.obj (.text:decompress:lzss)
-                  00004744    00000074     libclang_rt.builtins.a : comparedf2.c.obj (.text.__gedf2)
-                  000047b8    00000008                            : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
-                  000047c0    00000074                            : truncdfsf2.S.obj (.text.__truncdfsf2)
-                  00004834    0000006c     libsysbm.a : hostlseek.c.obj (.text.HOSTlseek)
-                  000048a0    0000006c                : hostrename.c.obj (.text.HOSTrename)
-                  0000490c    0000006c     tools.o (.text._Z9DrawWallsv)
-                  00004978    0000006c     libc.a : getdevice.c.obj (.text.getdevice)
-                  000049e4    00000068     tools.o (.text._Z9DrawWaterv)
-                  00004a4c    00000068     libclang_rt.builtins.a : comparedf2.c.obj (.text.__ledf2)
-                  00004ab4    00000064     libc.a : memory.c.obj (.text.split)
-                  00004b18    00000062     libclang_rt.builtins.a : aeabi_dcmp.S.obj (.text.__aeabi_dcmp)
-                  00004b7a    00000002     --HOLE-- [fill = 0]
-                  00004b7c    00000062                            : aeabi_fcmp.S.obj (.text.__aeabi_fcmp)
-                  00004bde    00000002     --HOLE-- [fill = 0]
-                  00004be0    00000060     libsysbm.a : hostopen.c.obj (.text.HOSTopen)
-                  00004c40    00000060     SlidePot.o (.text._ZN8SlidePot2InEv)
-                  00004ca0    00000058     libsysbm.a : hostread.c.obj (.text.HOSTread)
-                  00004cf8    00000058                : hostwrite.c.obj (.text.HOSTwrite)
-                  00004d50    00000058     TExaS.o (.text._Z10TExaS_InitP10ADC12_RegsjPFhvE)
-                  00004da8    00000058     tools.o (.text._Z12generateMap1h)
-                  00004e00    00000056     libclang_rt.builtins.a : aeabi_idivmod.S.obj (.text.__aeabi_idivmod)
-                  00004e56    00000002     --HOLE-- [fill = 0]
-                  00004e58    00000054     ST7735.o (.text._Z11fillmessagej)
-                  00004eac    00000054     libc.a : autoinit.c.obj (.text:__TI_auto_init_nobinit)
-                  00004f00    00000052            : fflush.c.obj (.text.__TI_doflush)
-                  00004f52    00000050     tools.o (.text._Z12tankMovementjjR4Tank)
-                  00004fa2    00000050     tank.o (.text._ZN4Tank6RotateEi)
-                  00004ff2    00000002     --HOLE-- [fill = 0]
-                  00004ff4    00000050     libsysbm.a : close.c.obj (.text.close)
-                  00005044    0000004a     libclang_rt.builtins.a : fixdfsi.S.obj (.text.__fixdfsi)
-                  0000508e    00000002     --HOLE-- [fill = 0]
-                  00005090    00000048     libsysbm.a : hostclose.c.obj (.text.HOSTclose)
-                  000050d8    00000048                : hostunlink.c.obj (.text.HOSTunlink)
-                  00005120    00000048     SPI.o (.text._Z14SPI_OutCommandc)
-                  00005168    00000044     tools.o (.text._Z9queryTankv)
-                  000051ac    00000040     TExaS.o (.text.TIMG7_IRQHandler)
-                  000051ec    00000040     SPI.o (.text._Z9SPI_Resetv)
-                  0000522c    00000040     bullet.o (.text._ZN6Bullet4DrawEv)
-                  0000526c    00000040     libclang_rt.builtins.a : aeabi_uidivmod.S.obj (.text.__aeabi_uidivmod)
-                  000052ac    00000040                            : extendsfdf2.S.obj (.text.__extendsfdf2)
-                  000052ec    00000040     libc.a : fopen.c.obj (.text._search_fp)
-                  0000532c    0000003e     tools.o (.text._Z7clamperfff)
-                  0000536a    00000002     --HOLE-- [fill = 0]
-                  0000536c    0000003c     libclang_rt.builtins.a : floatsisf.S.obj (.text.__floatsisf)
-                  000053a8    0000003c                            : comparesf2.S.obj (.text.__gtsf2)
-                  000053e4    0000003a                            : comparesf2.S.obj (.text.__eqsf2)
-                  0000541e    00000002     --HOLE-- [fill = 0]
-                  00005420    0000003a                            : muldsi3.S.obj (.text.__muldsi3)
-                  0000545a    00000002     --HOLE-- [fill = 0]
-                  0000545c    00000038     SPI.o (.text._Z11SPI_OutDatac)
-                  00005494    00000038     Switch.o (.text._Z11Switch_Initv)
-                  000054cc    00000038     LaunchPad.o (.text._Z15ActivatePortA_Bv)
-                  00005504    00000038     tank.o (.text._ZN4Tank10TakeDamageEv)
-                  0000553c    00000038     bullet.o (.text._ZN6Bullet5EraseEv)
-                  00005574    00000038     libclang_rt.builtins.a : fixsfsi.S.obj (.text.__fixsfsi)
-                  000055ac    00000036     tank.o (.text._ZN4Tank15rotateIncrementEi)
-                  000055e2    00000034     ST7735.o (.text._Z12ST7735_writeiPKcj)
-                  00005616    00000002     --HOLE-- [fill = 0]
-                  00005618    00000034     tools.o (.text._Z13displayUpdatev)
-                  0000564c    00000034     Clock.o (.text._Z14Clock_Delay1msj)
-                  00005680    00000034     ST7735.o (.text._Z16ST7735_SetCursorjj)
-                  000056b4    00000034     LED.o (.text._Z8LED_Initv)
-                  000056e8    00000034     libc.a : fopen.c.obj (.text.__TI_cleanup)
-                  0000571c    00000034     libsysbm.a : trgmsg.c.obj (.text.__TI_readmsg)
-                  00005750    00000034                : trgmsg.c.obj (.text.__TI_writemsg)
-                  00005784    00000034     libc.a : exit.c.obj (.text.exit)
-                  000057b8    00000034            : getdevice.c.obj (.text.finddevice)
-                  000057ec    00000034            : fopen.c.obj (.text.freopen)
-                  00005820    00000032     ST7735.o (.text._Z15ST7735_Color565hhh)
-                  00005852    00000032     tank.o (.text._ZN4Tank13TickCooldownsEv)
-                  00005884    00000032     tank.o (.text._ZN4Tank4DrawEv)
-                  000058b6    00000002     --HOLE-- [fill = 0]
-                  000058b8    00000030     ST7735.o (.text._ZL10commonInitPKh)
-                  000058e8    00000030     SlidePot.o (.text._ZN8SlidePot4SaveEj)
-                  00005918    00000030     Lab9HMain.o (.text.__cxx_global_var_init.4)
-                  00005948    00000030     Lab9HMain.o (.text.__cxx_global_var_init.5)
-                  00005978    00000030     libc.a : fopen.c.obj (.text.fopen)
-                  000059a8    0000002e     SlidePot.o (.text._ZN8SlidePot4SyncEv)
-                  000059d6    00000002     --HOLE-- [fill = 0]
-                  000059d8    0000002c     ST7735.o (.text._Z17ST7735_FillScreent)
-                  00005a04    0000002c     tank.o (.text._ZN4Tank5EraseEv)
-                  00005a30    0000002c     Lab9HMain.o (.text.__cxx_global_var_init.1)
-                  00005a5c    0000002c     Lab9HMain.o (.text.__cxx_global_var_init)
-                  00005a88    0000002c     libclang_rt.builtins.a : floatsidf.S.obj (.text.__floatsidf)
-                  00005ab4    0000002c     libsysbm.a : unlink.c.obj (.text.unlink)
-                  00005ae0    00000028     TExaS.o (.text._Z9ADC_StartP10ADC12_Regs)
-                  00005b08    00000028     libc.a : memory.c.obj (.text.free_list_insert)
-                  00005b30    00000028     libsysbm.a : write.c.obj (.text.write)
-                  00005b58    00000028     libc.a : boot_cortex_m.c.obj (.text:_c_int00_noargs)
-                  00005b80    00000026     ST7735.o (.text._Z16ST7735_OutStringPc)
-                  00005ba6    00000026     bullet.o (.text._ZN6Bullet10DeactivateEv)
-                  00005bcc    0000001e     ST7735.o (.text._ZL9pushColort)
-                  00005bea    0000001e     tank.o (.text._ZN4Tank4SetXEi)
-                  00005c08    0000001e     tank.o (.text._ZN4Tank4SetYEi)
-                  00005c26    00000002     --HOLE-- [fill = 0]
-                  00005c28    0000001c     startup_mspm0g3507_ticlang.o (.text.Default_Handler)
-                  00005c44    0000001c     startup_mspm0g3507_ticlang.o (.text.HardFault_Handler)
-                  00005c60    0000001c     Lab9HMain.o (.text._GLOBAL__sub_I_Lab9HMain.cpp)
-                  00005c7c    0000001c     Switch.o (.text._Z10Switch_In1v)
-                  00005c98    0000001c     Switch.o (.text._Z10Switch_In2v)
-                  00005cb4    0000001c     ST7735.o (.text._Z11ST7735_openPKcji)
-                  00005cd0    0000001c     Switch.o (.text._Z7P1SHOOTv)
-                  00005cec    0000001c     Switch.o (.text._Z7P2SHOOTv)
-                  00005d08    0000001c     Switch.o (.text._Z8special1v)
-                  00005d24    0000001c     Switch.o (.text._Z8special2v)
-                  00005d40    0000001c     tank.o (.text._ZN4Tank8SetAliveEb)
-                  00005d5c    0000001c     libc.a : memory.c.obj (.text.free_list_remove)
-                  00005d78    0000001a     tools.o (.text._Z15SlidePotSamplerR8SlidePot)
-                  00005d92    0000001a     bullet.o (.text._ZN6BulletC2Ev)
-                  00005dac    0000001a     SlidePot.o (.text._ZN8SlidePotC2Ejj)
-                  00005dc6    00000016     libc.a : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_0)
-                  00005ddc    00000010     libclang_rt.builtins.a : adddf3.S.obj (.tramp.__aeabi_dadd.1)
-                  00005dec    00000016     ST7735.o (.text._Z11ST7735_readiPcj)
-                  00005e02    00000016     libc.a : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset)
-                  00005e18    00000014     tank.o (.text._ZN4Tank5SetHPEh)
-                  00005e2c    00000014     Lab9HMain.o (.text.__cxx_global_var_init.2)
-                  00005e40    00000014     Lab9HMain.o (.text.__cxx_global_var_init.3)
-                  00005e54    00000012     tank.o (.text._ZN4Tank11NeedsRedrawEv)
-                  00005e66    00000012     libc.a : memcpy16.S.obj (.text:TI_memcpy_small)
-                  00005e78    00000012            : copy_decompress_none.c.obj (.text:decompress:none)
-                  00005e8a    00000010            : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_2)
-                  00005e9a    00000010     Clock.o (.text._Z11Clock_Delayj)
-                  00005eaa    00000002     --HOLE-- [fill = 0]
-                  00005eac    00000010     Lab9HMain.o (.text._Z28TExaS_LaunchPadLogicPB27PB26v)
-                  00005ebc    00000010     tank.o (.text._ZN4Tank8CanShootEv)
-                  00005ecc    00000010     bullet.o (.text._ZNK6Bullet8IsActiveEv)
-                  00005edc    0000000e     libc.a : memory.c.obj (.text.OUTLINED_FUNCTION_0)
-                  00005eea    0000000e     ST7735.o (.text._Z12ST7735_lseekili)
-                  00005ef8    0000000e     tank.o (.text._ZNK4Tank9GetHealthEv)
-                  00005f06    0000000e     libsysbm.a : hostrename.c.obj (.text.strcpy)
-                  00005f14    0000000e                : hostrename.c.obj (.text.strlen)
-                  00005f22    0000000e     libc.a : memset16.S.obj (.text:TI_memset_small)
-                  00005f30    0000000c     Clock.o (.text._Z10Clock_Freqv)
-                  00005f3c    0000000c     ST7735.o (.text._Z13ST7735_renamePKcS0_)
-                  00005f48    0000000c     SlidePot.o (.text._ZN8SlidePot12lastDistanceEv)
-                  00005f54    0000000c     SlidePot.o (.text._ZN8SlidePot8DistanceEv)
-                  00005f60    0000000c     tank.o (.text._ZNK4Tank4GetXEv)
-                  00005f6c    0000000c     tank.o (.text._ZNK4Tank4GetYEv)
-                  00005f78    0000000c     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memclr)
-                  00005f84    0000000c     libc.a : memory.c.obj (.text.malloc)
-                  00005f90    0000000a            : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_1)
-                  00005f9a    0000000a            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_3)
-                  00005fa4    0000000a            : s_sinf.c.obj (.text.OUTLINED_FUNCTION_3)
-                  00005fae    0000000a     ST7735.o (.text._Z12ST7735_closei)
-                  00005fb8    0000000a     ST7735.o (.text._Z13ST7735_unlinkPKc)
-                  00005fc2    0000000a     Lab9HMain.o (.text._Z8PLL_Initv)
-                  00005fcc    00000008     libsysbm.a : remove.c.obj (.text.remove)
-                  00005fd4    00000006     libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_0)
-                  00005fda    00000002     --HOLE-- [fill = 0]
-                  00005fdc    00000010     libclang_rt.builtins.a : muldf3.S.obj (.tramp.__aeabi_dmul.1)
-                  00005fec    00000006     libc.a : s_sinf.c.obj (.text.OUTLINED_FUNCTION_0)
-                  00005ff2    00000006            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_1)
-                  00005ff8    00000006            : s_sinf.c.obj (.text.OUTLINED_FUNCTION_1)
-                  00005ffe    00000004            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_2)
-                  00006002    00000002     --HOLE-- [fill = 0]
-                  00006004    00000010     libclang_rt.builtins.a : extendsfdf2.S.obj (.tramp.__aeabi_f2d.1)
-                  00006014    00000004     libc.a : s_sinf.c.obj (.text.OUTLINED_FUNCTION_2)
-                  00006018    00000004     startup_mspm0g3507_ticlang.o (.text.Reset_Handler)
-                  0000601c    00000004     libc.a : pre_init.c.obj (.text._system_pre_init)
-                  00006020    00000004            : exit.c.obj (.text:abort)
-                  00006024    0000000c     --HOLE-- [fill = 0]
+                  00000c0c    000001d4     tools.o (.text._Z10DrawHealthRK4TankS1_)
+                  00000de0    000001d4     libc.a : s_cosf.c.obj (.text.cosf)
+                  00000fb4    000001c8            : s_sinf.c.obj (.text.sinf)
+                  0000117c    000001b4     Clock.o (.text._Z15Clock_Init80MHzi)
+                  00001330    000001a8     ST7735.o (.text._Z15ST7735_DrawCharsscssh)
+                  000014d8    00000192     libclang_rt.builtins.a : adddf3.S.obj (.text.adddf3_subdf3)
+                  0000166a    00000002     Sound.o (.text.SysTick_Handler)
+                  0000166c    0000018c     fsm.o (.text._Z8showMenuv)
+                  000017f8    00000178     tank.o (.text._ZN4Tank12rotateSpriteEf)
+                  00001970    00000154     libc.a : fopen.c.obj (.text._openfile)
+                  00001ac4    00000144            : s_floor.c.obj (.text.floor)
+                  00001c08    00000140     fsm.o (.text._Z13showEndScreenv)
+                  00001d48    00000140     tank.o (.text._ZN4Tank4MoveEv)
+                  00001e88    00000128     TExaS.o (.text._Z8ADC_InitP10ADC12_Regsjj)
+                  00001fb0    00000124     Lab9HMain.o (.text.TIMG12_IRQHandler)
+                  000020d4    0000011c     tank.o (.text._ZN4Tank9TickPowerEj)
+                  000021f0    00000118     ST7735.o (.text._Z15ST7735_FillRectsssst)
+                  00002308    00000114     tools.o (.text._Z12bulletUpdatev)
+                  0000241c    00000114     libc.a : memory.c.obj (.text.aligned_alloc)
+                  00002530    00000110     fsm.o (.text._Z11runGameLoopv)
+                  00002640    00000108     tools.o (.text._Z15initializeRoundh)
+                  00002748    00000100     tools.o (.text._Z12generateMap4h)
+                  00002848    00000100     tools.o (.text._Z12generateMap7h)
+                  00002948    000000f8     SPI.o (.text._Z8SPI_Initv)
+                  00002a40    000000f4     tools.o (.text._Z12generateMap3h)
+                  00002b34    000000f4     tools.o (.text._Z12generateMap8h)
+                  00002c28    000000f4     tools.o (.text._Z13generateMap10h)
+                  00002d1c    000000f0     tools.o (.text._Z12generateMap9h)
+                  00002e0c    000000f0     tank.o (.text._ZN4TankC2EiiiPKthhjj)
+                  00002efc    000000ec     tank.o (.text._ZN4Tank5ShootEP6Bulleti)
+                  00002fe8    000000ec     libsysbm.a : add_device.c.obj (.text.add_device)
+                  000030d4    000000e8     ST7735.o (.text._Z14ST7735_OutCharc)
+                  000031bc    000000e8     TExaS.o (.text._Z9UART_Initv)
+                  000032a4    000000e8     libc.a : memory.c.obj (.text.free)
+                  0000338c    000000e4     libclang_rt.builtins.a : muldf3.S.obj (.text.__muldf3)
+                  00003470    000000e0     libc.a : setvbuf.c.obj (.text.setvbuf)
+                  00003550    000000d8            : s_scalbn.c.obj (.text.scalbn)
+                  00003628    000000d8     libclang_rt.builtins.a : addsf3.S.obj (.text)
+                  00003700    000000c4     tools.o (.text._Z16curWallCollisionjjjj)
+                  000037c4    000000c4     tools.o (.text._Z17curWaterCollisionjjjj)
+                  00003888    000000c2     bullet.o (.text._ZN6Bullet5checkER4Tank)
+                  0000394a    00000002     Sound.o (.text._Z10Sound_Initv)
+                  0000394c    000000b4     tools.o (.text._Z12generateMap2h)
+                  00003a00    000000b4     tools.o (.text._Z12generateMap6h)
+                  00003ab4    000000b4     tank.o (.text._ZN4Tank11TriVelocityEv)
+                  00003b68    000000b0     tools.o (.text._Z12generateMap5h)
+                  00003c18    000000ac     libc.a : s_cosf.c.obj (.text.__kernel_sindf)
+                  00003cc4    000000ac            : s_sinf.c.obj (.text.__kernel_sindf)
+                  00003d70    000000a8     Timer.o (.text._Z14TimerG7_IntArmtjj)
+                  00003e18    000000a4     tools.o (.text._Z12rotateUpdatev)
+                  00003ebc    000000a2     ST7735.o (.text._ZL11commandListPKh)
+                  00003f5e    00000002     libclang_rt.builtins.a : aeabi_div0.c.obj (.text.__aeabi_idiv0)
+                  00003f60    000000a0     ST7735.o (.text._Z12ST7735_InitR10initRFlags)
+                  00004000    000000a0     ST7735.o (.text._Z17ST7735_InitPrintf10initRFlags)
+                  000040a0    000000a0     libsysbm.a : open.c.obj (.text.open)
+                  00004140    000000a0     libc.a : e_sqrtf.c.obj (.text.sqrtf)
+                  000041e0    0000009c     tools.o (.text._Z11isCollisionv)
+                  0000427c    0000009c     ST7735.o (.text._Z14ST7735_OutUDecj)
+                  00004318    0000009c     libc.a : s_cosf.c.obj (.text.__kernel_cosdf)
+                  000043b4    0000009c            : s_sinf.c.obj (.text.__kernel_cosdf)
+                  00004450    00000094     Timer.o (.text._Z15TimerG12_IntArmjj)
+                  000044e4    00000094     Lab9HMain.o (.text.main)
+                  00004578    00000090     SlidePot.o (.text._ZN8SlidePot4InitEj)
+                  00004608    0000008c     tank.o (.text._ZN4Tank16TryActivatePowerEj)
+                  00004694    0000008c     libclang_rt.builtins.a : mulsf3.S.obj (.text.__mulsf3)
+                  00004720    00000088     ST7735.o (.text._ZL13setAddrWindowhhhh)
+                  000047a8    00000008     libc.a : aeabi_portable.c.obj (.text.__aeabi_errno_addr)
+                  000047b0    00000088            : strcmp-armv6m.S.obj (.text:strcmp)
+                  00004838    00000084     ST7735.o (.text._Z17ST7735_DrawStringttPcs)
+                  000048bc    00000082     libclang_rt.builtins.a : divsf3.S.obj (.text.__divsf3)
+                  0000493e    00000002     libc.a : _lock.c.obj (.text._nop)
+                  00004940    00000080     bullet.o (.text._ZN6Bullet4InitEiifii)
+                  000049c0    0000007c     LaunchPad.o (.text._Z14LaunchPad_Initv)
+                  00004a3c    0000007c     libc.a : fclose.c.obj (.text.__TI_closefile)
+                  00004ab8    0000007c            : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  00004b34    00000074     libclang_rt.builtins.a : comparedf2.c.obj (.text.__gedf2)
+                  00004ba8    00000008                            : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
+                  00004bb0    00000074                            : truncdfsf2.S.obj (.text.__truncdfsf2)
+                  00004c24    0000006c     libsysbm.a : hostlseek.c.obj (.text.HOSTlseek)
+                  00004c90    0000006c                : hostrename.c.obj (.text.HOSTrename)
+                  00004cfc    0000006c     tools.o (.text._Z9DrawWallsv)
+                  00004d68    0000006c     libc.a : getdevice.c.obj (.text.getdevice)
+                  00004dd4    00000068     tools.o (.text._Z9DrawWaterv)
+                  00004e3c    00000068     libclang_rt.builtins.a : comparedf2.c.obj (.text.__ledf2)
+                  00004ea4    00000064     libc.a : memory.c.obj (.text.split)
+                  00004f08    00000062     libclang_rt.builtins.a : aeabi_dcmp.S.obj (.text.__aeabi_dcmp)
+                  00004f6a    00000002     --HOLE-- [fill = 0]
+                  00004f6c    00000062                            : aeabi_fcmp.S.obj (.text.__aeabi_fcmp)
+                  00004fce    00000002     --HOLE-- [fill = 0]
+                  00004fd0    00000060     libsysbm.a : hostopen.c.obj (.text.HOSTopen)
+                  00005030    00000060     SlidePot.o (.text._ZN8SlidePot2InEv)
+                  00005090    0000005c     tank.o (.text._ZN4Tank10TakeDamageEv)
+                  000050ec    00000058     libsysbm.a : hostread.c.obj (.text.HOSTread)
+                  00005144    00000058                : hostwrite.c.obj (.text.HOSTwrite)
+                  0000519c    00000058     TExaS.o (.text._Z10TExaS_InitP10ADC12_RegsjPFhvE)
+                  000051f4    00000058     tools.o (.text._Z12generateMap1h)
+                  0000524c    00000056     libclang_rt.builtins.a : aeabi_idivmod.S.obj (.text.__aeabi_idivmod)
+                  000052a2    00000002     --HOLE-- [fill = 0]
+                  000052a4    00000054     ST7735.o (.text._Z11fillmessagej)
+                  000052f8    00000054     libc.a : autoinit.c.obj (.text:__TI_auto_init_nobinit)
+                  0000534c    00000052            : fflush.c.obj (.text.__TI_doflush)
+                  0000539e    00000050     tank.o (.text._ZN4Tank6RotateEi)
+                  000053ee    00000002     --HOLE-- [fill = 0]
+                  000053f0    00000050     libsysbm.a : close.c.obj (.text.close)
+                  00005440    0000004e     tools.o (.text._Z12tankMovementjjR4Tank)
+                  0000548e    00000002     --HOLE-- [fill = 0]
+                  00005490    0000004a     libclang_rt.builtins.a : fixdfsi.S.obj (.text.__fixdfsi)
+                  000054da    00000002     --HOLE-- [fill = 0]
+                  000054dc    00000048     libsysbm.a : hostclose.c.obj (.text.HOSTclose)
+                  00005524    00000048                : hostunlink.c.obj (.text.HOSTunlink)
+                  0000556c    00000048     SPI.o (.text._Z14SPI_OutCommandc)
+                  000055b4    00000044     tools.o (.text._Z9queryTankv)
+                  000055f8    00000040     TExaS.o (.text.TIMG7_IRQHandler)
+                  00005638    00000040     SPI.o (.text._Z9SPI_Resetv)
+                  00005678    00000040     bullet.o (.text._ZN6Bullet4DrawEv)
+                  000056b8    00000040     libclang_rt.builtins.a : aeabi_uidivmod.S.obj (.text.__aeabi_uidivmod)
+                  000056f8    00000040                            : extendsfdf2.S.obj (.text.__extendsfdf2)
+                  00005738    00000040     libc.a : fopen.c.obj (.text._search_fp)
+                  00005778    0000003e     tools.o (.text._Z7clamperfff)
+                  000057b6    00000002     --HOLE-- [fill = 0]
+                  000057b8    0000003c     libclang_rt.builtins.a : floatsisf.S.obj (.text.__floatsisf)
+                  000057f4    0000003c                            : comparesf2.S.obj (.text.__gtsf2)
+                  00005830    0000003a                            : comparesf2.S.obj (.text.__eqsf2)
+                  0000586a    00000002     --HOLE-- [fill = 0]
+                  0000586c    0000003a                            : muldsi3.S.obj (.text.__muldsi3)
+                  000058a6    00000002     --HOLE-- [fill = 0]
+                  000058a8    00000038     SPI.o (.text._Z11SPI_OutDatac)
+                  000058e0    00000038     Switch.o (.text._Z11Switch_Initv)
+                  00005918    00000038     LaunchPad.o (.text._Z15ActivatePortA_Bv)
+                  00005950    00000038     bullet.o (.text._ZN6Bullet5EraseEv)
+                  00005988    00000038     libclang_rt.builtins.a : fixsfsi.S.obj (.text.__fixsfsi)
+                  000059c0    00000038     libc.a : rand.c.obj (.text.rand)
+                  000059f8    00000036     tank.o (.text._ZN4Tank15rotateIncrementEi)
+                  00005a2e    00000034     ST7735.o (.text._Z12ST7735_writeiPKcj)
+                  00005a62    00000002     --HOLE-- [fill = 0]
+                  00005a64    00000034     tools.o (.text._Z13displayUpdatev)
+                  00005a98    00000034     Clock.o (.text._Z14Clock_Delay1msj)
+                  00005acc    00000034     ST7735.o (.text._Z16ST7735_SetCursorjj)
+                  00005b00    00000034     LED.o (.text._Z8LED_Initv)
+                  00005b34    00000034     libc.a : fopen.c.obj (.text.__TI_cleanup)
+                  00005b68    00000034     libsysbm.a : trgmsg.c.obj (.text.__TI_readmsg)
+                  00005b9c    00000034                : trgmsg.c.obj (.text.__TI_writemsg)
+                  00005bd0    00000034     libc.a : exit.c.obj (.text.exit)
+                  00005c04    00000034            : getdevice.c.obj (.text.finddevice)
+                  00005c38    00000034            : fopen.c.obj (.text.freopen)
+                  00005c6c    00000032     ST7735.o (.text._Z15ST7735_Color565hhh)
+                  00005c9e    00000032     tank.o (.text._ZN4Tank13TickCooldownsEv)
+                  00005cd0    00000032     tank.o (.text._ZN4Tank4DrawEv)
+                  00005d02    00000002     --HOLE-- [fill = 0]
+                  00005d04    00000030     ST7735.o (.text._ZL10commonInitPKh)
+                  00005d34    00000030     SlidePot.o (.text._ZN8SlidePot4SaveEj)
+                  00005d64    00000030     Lab9HMain.o (.text.__cxx_global_var_init.4)
+                  00005d94    00000030     Lab9HMain.o (.text.__cxx_global_var_init.5)
+                  00005dc4    00000030     libc.a : fopen.c.obj (.text.fopen)
+                  00005df4    0000002e     SlidePot.o (.text._ZN8SlidePot4SyncEv)
+                  00005e22    00000002     --HOLE-- [fill = 0]
+                  00005e24    0000002c     ST7735.o (.text._Z17ST7735_FillScreent)
+                  00005e50    0000002c     Lab9HMain.o (.text.__cxx_global_var_init.1)
+                  00005e7c    0000002c     Lab9HMain.o (.text.__cxx_global_var_init)
+                  00005ea8    0000002c     libclang_rt.builtins.a : floatsidf.S.obj (.text.__floatsidf)
+                  00005ed4    0000002c     libsysbm.a : unlink.c.obj (.text.unlink)
+                  00005f00    00000028     TExaS.o (.text._Z9ADC_StartP10ADC12_Regs)
+                  00005f28    00000028     libclang_rt.builtins.a : floatunsisf.S.obj (.text.__floatunsisf)
+                  00005f50    00000028     libc.a : memory.c.obj (.text.free_list_insert)
+                  00005f78    00000028     libsysbm.a : write.c.obj (.text.write)
+                  00005fa0    00000028     libc.a : boot_cortex_m.c.obj (.text:_c_int00_noargs)
+                  00005fc8    00000026     ST7735.o (.text._Z16ST7735_OutStringPc)
+                  00005fee    00000026     bullet.o (.text._ZN6Bullet10DeactivateEv)
+                  00006014    00000024     libc.a : rand.c.obj (.text.srand)
+                  00006038    0000001e     ST7735.o (.text._ZL9pushColort)
+                  00006056    0000001e     tank.o (.text._ZN4Tank4SetXEi)
+                  00006074    0000001e     tank.o (.text._ZN4Tank4SetYEi)
+                  00006092    00000002     --HOLE-- [fill = 0]
+                  00006094    0000001c     startup_mspm0g3507_ticlang.o (.text.Default_Handler)
+                  000060b0    0000001c     startup_mspm0g3507_ticlang.o (.text.HardFault_Handler)
+                  000060cc    0000001c     Lab9HMain.o (.text._GLOBAL__sub_I_Lab9HMain.cpp)
+                  000060e8    0000001c     Switch.o (.text._Z10Switch_In1v)
+                  00006104    0000001c     Switch.o (.text._Z10Switch_In2v)
+                  00006120    0000001c     ST7735.o (.text._Z11ST7735_openPKcji)
+                  0000613c    0000001c     Switch.o (.text._Z7P1SHOOTv)
+                  00006158    0000001c     Switch.o (.text._Z7P2SHOOTv)
+                  00006174    0000001c     Switch.o (.text._Z8special1v)
+                  00006190    0000001c     Switch.o (.text._Z8special2v)
+                  000061ac    0000001c     tank.o (.text._ZN4Tank8SetAliveEb)
+                  000061c8    0000001c     libc.a : memory.c.obj (.text.free_list_remove)
+                  000061e4    0000001a     tools.o (.text._Z15SlidePotSamplerR8SlidePot)
+                  000061fe    0000001a     bullet.o (.text._ZN6BulletC2Ev)
+                  00006218    0000001a     SlidePot.o (.text._ZN8SlidePotC2Ejj)
+                  00006232    00000016     libc.a : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_0)
+                  00006248    00000010     libclang_rt.builtins.a : adddf3.S.obj (.tramp.__aeabi_dadd.1)
+                  00006258    00000016     ST7735.o (.text._Z11ST7735_readiPcj)
+                  0000626e    00000016     libc.a : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset)
+                  00006284    00000014     LED.o (.text._Z10LED_Togglej)
+                  00006298    00000014     LED.o (.text._Z6LED_Onj)
+                  000062ac    00000014     LED.o (.text._Z7LED_Offj)
+                  000062c0    00000014     tank.o (.text._ZN4Tank5SetHPEh)
+                  000062d4    00000014     Lab9HMain.o (.text.__cxx_global_var_init.2)
+                  000062e8    00000014     Lab9HMain.o (.text.__cxx_global_var_init.3)
+                  000062fc    00000012     tank.o (.text._ZN4Tank11NeedsRedrawEv)
+                  0000630e    00000012     libc.a : memcpy16.S.obj (.text:TI_memcpy_small)
+                  00006320    00000012            : copy_decompress_none.c.obj (.text:decompress:none)
+                  00006332    00000010            : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_2)
+                  00006342    00000010     Clock.o (.text._Z11Clock_Delayj)
+                  00006352    00000002     --HOLE-- [fill = 0]
+                  00006354    00000010     Lab9HMain.o (.text._Z28TExaS_LaunchPadLogicPB27PB26v)
+                  00006364    00000010     tank.o (.text._ZN4Tank8CanShootEv)
+                  00006374    00000010     bullet.o (.text._ZNK6Bullet8IsActiveEv)
+                  00006384    0000000e     libc.a : memory.c.obj (.text.OUTLINED_FUNCTION_0)
+                  00006392    0000000e     ST7735.o (.text._Z12ST7735_lseekili)
+                  000063a0    0000000e     tank.o (.text._ZNK4Tank9GetHealthEv)
+                  000063ae    0000000e     libsysbm.a : hostrename.c.obj (.text.strcpy)
+                  000063bc    0000000e                : hostrename.c.obj (.text.strlen)
+                  000063ca    0000000e     libc.a : memset16.S.obj (.text:TI_memset_small)
+                  000063d8    0000000c     Clock.o (.text._Z10Clock_Freqv)
+                  000063e4    0000000c     ST7735.o (.text._Z13ST7735_renamePKcS0_)
+                  000063f0    0000000c     SlidePot.o (.text._ZN8SlidePot12lastDistanceEv)
+                  000063fc    0000000c     SlidePot.o (.text._ZN8SlidePot8DistanceEv)
+                  00006408    0000000c     tank.o (.text._ZNK4Tank4GetXEv)
+                  00006414    0000000c     tank.o (.text._ZNK4Tank4GetYEv)
+                  00006420    0000000c     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memclr)
+                  0000642c    0000000c     libc.a : memory.c.obj (.text.malloc)
+                  00006438    0000000a            : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_1)
+                  00006442    0000000a            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_3)
+                  0000644c    0000000a            : s_sinf.c.obj (.text.OUTLINED_FUNCTION_3)
+                  00006456    0000000a     ST7735.o (.text._Z12ST7735_closei)
+                  00006460    0000000a     ST7735.o (.text._Z13ST7735_unlinkPKc)
+                  0000646a    0000000a     Lab9HMain.o (.text._Z8PLL_Initv)
+                  00006474    00000008     libsysbm.a : remove.c.obj (.text.remove)
+                  0000647c    00000006     libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_0)
+                  00006482    00000002     --HOLE-- [fill = 0]
+                  00006484    00000010     libclang_rt.builtins.a : muldf3.S.obj (.tramp.__aeabi_dmul.1)
+                  00006494    00000006     libc.a : s_sinf.c.obj (.text.OUTLINED_FUNCTION_0)
+                  0000649a    00000006            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_1)
+                  000064a0    00000006            : s_sinf.c.obj (.text.OUTLINED_FUNCTION_1)
+                  000064a6    00000004            : s_cosf.c.obj (.text.OUTLINED_FUNCTION_2)
+                  000064aa    00000002     --HOLE-- [fill = 0]
+                  000064ac    00000010     libclang_rt.builtins.a : extendsfdf2.S.obj (.tramp.__aeabi_f2d.1)
+                  000064bc    00000004     libc.a : s_sinf.c.obj (.text.OUTLINED_FUNCTION_2)
+                  000064c0    00000004     startup_mspm0g3507_ticlang.o (.text.Reset_Handler)
+                  000064c4    00000004     libc.a : pre_init.c.obj (.text._system_pre_init)
+                  000064c8    00000004            : exit.c.obj (.text:abort)
+                  000064cc    00000004     --HOLE-- [fill = 0]
 
-.cinit     0    000071e8    00000100     
-                  000071e8    000000d5     (.cinit..data.load) [load image, compression = lzss]
-                  000072bd    00000003     --HOLE-- [fill = 0]
-                  000072c0    0000000c     (__TI_handler_table)
-                  000072cc    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  000072d4    00000010     (__TI_cinit_table)
-                  000072e4    00000004     --HOLE-- [fill = 0]
+.cinit     0    00007788    00000100     
+                  00007788    000000d7     (.cinit..data.load) [load image, compression = lzss]
+                  0000785f    00000001     --HOLE-- [fill = 0]
+                  00007860    0000000c     (__TI_handler_table)
+                  0000786c    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00007874    00000010     (__TI_cinit_table)
+                  00007884    00000004     --HOLE-- [fill = 0]
 
-.rodata    0    00006030    000011b0     
-                  00006030    000004fb     ST7735.o (.rodata._ZL4Font)
-                  0000652b    00000001     --HOLE-- [fill = 0]
-                  0000652c    00000214     Lab9HMain.o (.rodata._ZL7MiniRed)
-                  00006740    00000214     Lab9HMain.o (.rodata._ZL8MiniBlue)
-                  00006954    00000108     libc.a : k_rem_pio2.c.obj (.rodata.ipio2)
-                  00006a5c    000000b0     tools.o (.rodata._ZZ12generateMap2hE4maze)
-                  00006b0c    000000a0     tools.o (.rodata._ZZ12generateMap9hE11zigzagWalls)
-                  00006bac    00000080     tools.o (.rodata._ZL6heart2)
-                  00006c2c    00000080     tools.o (.rodata._ZL6heart3)
-                  00006cac    00000080     tools.o (.rodata._ZZ12generateMap8hE9ringWalls)
-                  00006d2c    00000080     tools.o (.rodata._ZZ13generateMap10hE6layout)
-                  00006dac    00000060     tools.o (.rodata._ZZ12generateMap4hE5river)
-                  00006e0c    00000004     fsm.o (.rodata._ZL11Set_English)
-                  00006e10    00000040     libc.a : k_rem_pio2.c.obj (.rodata.PIo2)
-                  00006e50    00000040     tools.o (.rodata._ZZ12generateMap3hE4ring)
-                  00006e90    00000040     tools.o (.rodata._ZZ12generateMap6hE5cover)
-                  00006ed0    00000040     tools.o (.rodata._ZZ12generateMap7hE5cover)
-                  00006f10    0000003b     ST7735.o (.rodata._ZL5Rcmd1)
-                  00006f4b    00000001     --HOLE-- [fill = 0]
-                  00006f4c    00000030     tools.o (.rodata._ZZ13generateMap10hE5pools)
-                  00006f7c    0000002b     ST7735.o (.rodata._ZL5Rcmd3)
-                  00006fa7    00000001     --HOLE-- [fill = 0]
-                  00006fa8    00000020     tools.o (.rodata._ZZ12generateMap3hE5bands)
-                  00006fc8    00000020     tools.o (.rodata.cst32)
-                  00006fe8    0000001d     fsm.o (.rodata._ZL13Again_Spanish)
-                  00007005    0000001d     fsm.o (.rodata._ZL16Again_Portuguese)
-                  00007022    00000019     fsm.o (.rodata._ZL13Again_English)
-                  0000703b    00000016     ST7735.o (.rodata.str1.59959519694590733531)
-                  00007051    00000015     fsm.o (.rodata._ZL12Again_French)
-                  00007066    00000012     fsm.o (.rodata.str1.77457526476974311561)
-                  00007078    00000010     tools.o (.rodata._ZZ12generateMap8hE4pond)
-                  00007088    00000010     tools.o (.rodata._ZZ12generateMap9hE4pool)
-                  00007098    00000010     libc.a : k_rem_pio2.c.obj (.rodata.cst16)
-                  000070a8    0000000f     fsm.o (.rodata.str1.11889828848536890671)
-                  000070b7    0000000f     fsm.o (.rodata.str1.44122112940247738941)
-                  000070c6    0000000f     fsm.o (.rodata.str1.50879906542808893991)
-                  000070d5    0000000d     ST7735.o (.rodata._ZL10Rcmd2green)
-                  000070e2    0000000d     ST7735.o (.rodata._ZL8Rcmd2red)
-                  000070ef    0000000d     fsm.o (.rodata.str1.159722056897094685691)
-                  000070fc    0000000a     fsm.o (.rodata._ZL11Set_Spanish)
-                  00007106    0000000a     fsm.o (.rodata._ZL11Wins_French)
-                  00007110    0000000a     fsm.o (.rodata._ZL12Wins_Spanish)
-                  0000711a    0000000a     fsm.o (.rodata._ZL15Language_French)
-                  00007124    0000000a     fsm.o (.rodata._ZL15Wins_Portuguese)
-                  0000712e    0000000a     fsm.o (.rodata._ZL19Language_Portuguese)
-                  00007138    00000009     fsm.o (.rodata._ZL12Begin_French)
-                  00007141    00000009     fsm.o (.rodata._ZL16Language_English)
-                  0000714a    00000009     fsm.o (.rodata._ZL16Language_Spanish)
-                  00007153    00000009     fsm.o (.rodata.str1.164345169009266180021)
-                  0000715c    00000008     fsm.o (.rodata._ZL13Begin_Spanish)
-                  00007164    00000008     fsm.o (.rodata._ZL14Player_Spanish)
-                  0000716c    00000008     fsm.o (.rodata._ZL17Player_Portuguese)
-                  00007174    00000008     ST7735.o (.rodata.str1.48350117711619464051)
-                  0000717c    00000007     fsm.o (.rodata._ZL10Set_French)
-                  00007183    00000007     fsm.o (.rodata._ZL13Begin_English)
-                  0000718a    00000007     fsm.o (.rodata._ZL13Player_French)
-                  00007191    00000007     fsm.o (.rodata._ZL14Player_English)
-                  00007198    00000007     fsm.o (.rodata._ZL16Ready_Portuguese)
-                  0000719f    00000007     ST7735.o (.rodata.str1.175719450624619433971)
-                  000071a6    00000007     ST7735.o (.rodata.str1.42255827801651177341)
-                  000071ad    00000006     fsm.o (.rodata._ZL12Ready_French)
-                  000071b3    00000006     fsm.o (.rodata._ZL13Ready_English)
-                  000071b9    00000006     fsm.o (.rodata._ZL13Ready_Spanish)
-                  000071bf    00000006     fsm.o (.rodata._ZL16Begin_Portuguese)
-                  000071c5    00000005     fsm.o (.rodata._ZL12Wins_English)
-                  000071ca    00000005     fsm.o (.rodata.str1.59954496583772618611)
-                  000071cf    00000005     fsm.o (.rodata.str1.90166882800938586951)
-                  000071d4    00000004     fsm.o (.rodata._ZL14Set_Portuguese)
-                  000071d8    00000002     ST7735.o (.rodata.str1.145302396146969619001)
-                  000071da    00000006     --HOLE-- [fill = 0]
+.rodata    0    000064d0    000012b0     
+                  000064d0    000004fb     ST7735.o (.rodata._ZL4Font)
+                  000069cb    00000001     --HOLE-- [fill = 0]
+                  000069cc    00000214     Lab9HMain.o (.rodata._ZL7MiniRed)
+                  00006be0    00000214     Lab9HMain.o (.rodata._ZL8MiniBlue)
+                  00006df4    00000108     libc.a : k_rem_pio2.c.obj (.rodata.ipio2)
+                  00006efc    000000b0     tools.o (.rodata._ZZ12generateMap2hE4maze)
+                  00006fac    000000a0     tools.o (.rodata._ZZ12generateMap9hE11zigzagWalls)
+                  0000704c    00000080     tools.o (.rodata._ZL6heart2)
+                  000070cc    00000080     tools.o (.rodata._ZL6heart3)
+                  0000714c    00000080     tools.o (.rodata._ZL6heart4)
+                  000071cc    00000080     tools.o (.rodata._ZL6heart5)
+                  0000724c    00000080     tools.o (.rodata._ZZ12generateMap8hE9ringWalls)
+                  000072cc    00000080     tools.o (.rodata._ZZ13generateMap10hE6layout)
+                  0000734c    00000060     tools.o (.rodata._ZZ12generateMap4hE5river)
+                  000073ac    00000004     fsm.o (.rodata._ZL11Set_English)
+                  000073b0    00000040     libc.a : k_rem_pio2.c.obj (.rodata.PIo2)
+                  000073f0    00000040     tools.o (.rodata._ZZ12generateMap3hE4ring)
+                  00007430    00000040     tools.o (.rodata._ZZ12generateMap6hE5cover)
+                  00007470    00000040     tools.o (.rodata._ZZ12generateMap7hE5cover)
+                  000074b0    0000003b     ST7735.o (.rodata._ZL5Rcmd1)
+                  000074eb    00000001     --HOLE-- [fill = 0]
+                  000074ec    00000030     tools.o (.rodata._ZZ13generateMap10hE5pools)
+                  0000751c    0000002b     ST7735.o (.rodata._ZL5Rcmd3)
+                  00007547    00000001     --HOLE-- [fill = 0]
+                  00007548    00000020     tools.o (.rodata._ZZ12generateMap3hE5bands)
+                  00007568    00000020     tools.o (.rodata.cst32)
+                  00007588    0000001d     fsm.o (.rodata._ZL13Again_Spanish)
+                  000075a5    0000001d     fsm.o (.rodata._ZL16Again_Portuguese)
+                  000075c2    00000019     fsm.o (.rodata._ZL13Again_English)
+                  000075db    00000016     ST7735.o (.rodata.str1.59959519694590733531)
+                  000075f1    00000015     fsm.o (.rodata._ZL12Again_French)
+                  00007606    00000012     fsm.o (.rodata.str1.77457526476974311561)
+                  00007618    00000010     tools.o (.rodata._ZZ12generateMap8hE4pond)
+                  00007628    00000010     tools.o (.rodata._ZZ12generateMap9hE4pool)
+                  00007638    00000010     libc.a : k_rem_pio2.c.obj (.rodata.cst16)
+                  00007648    0000000f     fsm.o (.rodata.str1.11889828848536890671)
+                  00007657    0000000f     fsm.o (.rodata.str1.44122112940247738941)
+                  00007666    0000000f     fsm.o (.rodata.str1.50879906542808893991)
+                  00007675    0000000d     ST7735.o (.rodata._ZL10Rcmd2green)
+                  00007682    0000000d     ST7735.o (.rodata._ZL8Rcmd2red)
+                  0000768f    0000000d     fsm.o (.rodata.str1.159722056897094685691)
+                  0000769c    0000000a     fsm.o (.rodata._ZL11Set_Spanish)
+                  000076a6    0000000a     fsm.o (.rodata._ZL11Wins_French)
+                  000076b0    0000000a     fsm.o (.rodata._ZL12Wins_Spanish)
+                  000076ba    0000000a     fsm.o (.rodata._ZL15Language_French)
+                  000076c4    0000000a     fsm.o (.rodata._ZL15Wins_Portuguese)
+                  000076ce    0000000a     fsm.o (.rodata._ZL19Language_Portuguese)
+                  000076d8    00000009     fsm.o (.rodata._ZL12Begin_French)
+                  000076e1    00000009     fsm.o (.rodata._ZL16Language_English)
+                  000076ea    00000009     fsm.o (.rodata._ZL16Language_Spanish)
+                  000076f3    00000009     fsm.o (.rodata.str1.164345169009266180021)
+                  000076fc    00000008     fsm.o (.rodata._ZL13Begin_Spanish)
+                  00007704    00000008     fsm.o (.rodata._ZL14Player_Spanish)
+                  0000770c    00000008     fsm.o (.rodata._ZL17Player_Portuguese)
+                  00007714    00000008     ST7735.o (.rodata.str1.48350117711619464051)
+                  0000771c    00000007     fsm.o (.rodata._ZL10Set_French)
+                  00007723    00000007     fsm.o (.rodata._ZL13Begin_English)
+                  0000772a    00000007     fsm.o (.rodata._ZL13Player_French)
+                  00007731    00000007     fsm.o (.rodata._ZL14Player_English)
+                  00007738    00000007     fsm.o (.rodata._ZL16Ready_Portuguese)
+                  0000773f    00000007     ST7735.o (.rodata.str1.175719450624619433971)
+                  00007746    00000007     ST7735.o (.rodata.str1.42255827801651177341)
+                  0000774d    00000006     fsm.o (.rodata._ZL12Ready_French)
+                  00007753    00000006     fsm.o (.rodata._ZL13Ready_English)
+                  00007759    00000006     fsm.o (.rodata._ZL13Ready_Spanish)
+                  0000775f    00000006     fsm.o (.rodata._ZL16Begin_Portuguese)
+                  00007765    00000005     fsm.o (.rodata._ZL12Wins_English)
+                  0000776a    00000005     fsm.o (.rodata.str1.59954496583772618611)
+                  0000776f    00000005     fsm.o (.rodata.str1.90166882800938586951)
+                  00007774    00000004     fsm.o (.rodata._ZL14Set_Portuguese)
+                  00007778    00000002     ST7735.o (.rodata.str1.145302396146969619001)
+                  0000777a    00000006     --HOLE-- [fill = 0]
 
 .init_array 
-*          0    000071e0    00000008     
-                  000071e0    00000004     Lab9HMain.o (.init_array)
-                  000071e4    00000004     --HOLE-- [fill = 0]
+*          0    00007780    00000008     
+                  00007780    00000004     Lab9HMain.o (.init_array)
+                  00007784    00000004     --HOLE-- [fill = 0]
 
-.data      0    20200000    00000bc5     UNINITIALIZED
-                  20200000    0000025c     Lab9HMain.o (.data.p1)
-                  2020025c    0000025c     Lab9HMain.o (.data.p2)
-                  202004b8    000001e0     tools.o (.data.walls)
-                  20200698    000001e0     tools.o (.data.waters)
-                  20200878    000000f0     libc.a : defs.c.obj (.data._ftable)
-                  20200968    00000078     libsysbm.a : host_device.c.obj (.data._device)
-                  202009e0    00000070     fsm.o (.data.Phrases)
-                  20200a50    00000054     Lab9HMain.o (.data.bullets1)
-                  20200aa4    00000054     Lab9HMain.o (.data.bullets2)
-                  20200af8    00000050     libsysbm.a : host_device.c.obj (.data._stream)
-                  20200b48    0000001c     Lab9HMain.o (.data.player1SP)
-                  20200b64    0000001c     Lab9HMain.o (.data.player2SP)
-                  20200b80    00000008     libc.a : exit.c.obj (.data..L_MergedGlobals)
-                  20200b88    00000004     Clock.o (.data.BusFreq)
-                  20200b8c    00000004     tools.o (.data.NUM_WALLS)
-                  20200b90    00000004     tools.o (.data.NUM_WATERS)
-                  20200b94    00000004     ST7735.o (.data.StX)
-                  20200b98    00000004     ST7735.o (.data.StY)
-                  20200b9c    00000004     libc.a : defs.c.obj (.data.__TI_ft_end)
-                  20200ba0    00000004            : aeabi_portable.c.obj (.data.__aeabi_errno)
-                  20200ba4    00000004            : _lock.c.obj (.data._lock)
-                  20200ba8    00000004            : _lock.c.obj (.data._unlock)
-                  20200bac    00000004     Lab9HMain.o (.data.time)
-                  20200bb0    00000002     ST7735.o (.data._ZL6_width)
-                  20200bb2    00000002     ST7735.o (.data._ZL7_height)
-                  20200bb4    00000002     fsm.o (.data.winsP1)
-                  20200bb6    00000002     fsm.o (.data.winsP2)
-                  20200bb8    00000001     Lab9HMain.o (.data.TG12Flag)
-                  20200bb9    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E11lastHealth1)
-                  20200bba    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E11lastHealth2)
-                  20200bbb    00000001     Lab9HMain.o (.data.bulletFlag1)
-                  20200bbc    00000001     libsysbm.a : add_device.c.obj (.data.add_device.device_init)
-                  20200bbd    00000001     Lab9HMain.o (.data.bulletFlag2)
-                  20200bbe    00000001     fsm.o (.data.gameState)
-                  20200bbf    00000001     fsm.o (.data.initialLives)
-                  20200bc0    00000001     libc.a : memory.c.obj (.data.memory_is_initialized)
-                  20200bc1    00000001     fsm.o (.data.myLanguage)
-                  20200bc2    00000002     --HOLE--
-                  20200bc4    00000001     libsysbm.a : open.c.obj (.data.open.stream_init)
+.data      0    20200000    00000bed     UNINITIALIZED
+                  20200000    0000026c     Lab9HMain.o (.data.p1)
+                  2020026c    0000026c     Lab9HMain.o (.data.p2)
+                  202004d8    000001e0     tools.o (.data.walls)
+                  202006b8    000001e0     tools.o (.data.waters)
+                  20200898    000000f0     libc.a : defs.c.obj (.data._ftable)
+                  20200988    00000078     libsysbm.a : host_device.c.obj (.data._device)
+                  20200a00    00000070     fsm.o (.data.Phrases)
+                  20200a70    00000054     Lab9HMain.o (.data.bullets1)
+                  20200ac4    00000054     Lab9HMain.o (.data.bullets2)
+                  20200b18    00000050     libsysbm.a : host_device.c.obj (.data._stream)
+                  20200b68    0000001c     Lab9HMain.o (.data.player1SP)
+                  20200b84    0000001c     Lab9HMain.o (.data.player2SP)
+                  20200ba0    00000008     libc.a : exit.c.obj (.data..L_MergedGlobals)
+                  20200ba8    00000004     Clock.o (.data.BusFreq)
+                  20200bac    00000004     tools.o (.data.NUM_WALLS)
+                  20200bb0    00000004     tools.o (.data.NUM_WATERS)
+                  20200bb4    00000004     ST7735.o (.data.StX)
+                  20200bb8    00000004     ST7735.o (.data.StY)
+                  20200bbc    00000004     libc.a : defs.c.obj (.data.__TI_ft_end)
+                  20200bc0    00000004            : aeabi_portable.c.obj (.data.__aeabi_errno)
+                  20200bc4    00000004            : _lock.c.obj (.data._lock)
+                  20200bc8    00000004            : _lock.c.obj (.data._unlock)
+                  20200bcc    00000004            : rand.c.obj (.data.next)
+                  20200bd0    00000004     Lab9HMain.o (.data.time)
+                  20200bd4    00000002     ST7735.o (.data._ZL6_width)
+                  20200bd6    00000002     ST7735.o (.data._ZL7_height)
+                  20200bd8    00000002     fsm.o (.data.winsP1)
+                  20200bda    00000002     fsm.o (.data.winsP2)
+                  20200bdc    00000001     Lab9HMain.o (.data.TG12Flag)
+                  20200bdd    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E11lastShield1)
+                  20200bde    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E11lastShield2)
+                  20200bdf    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E7lastHP1)
+                  20200be0    00000001     tools.o (.data._ZZ10DrawHealthRK4TankS1_E7lastHP2)
+                  20200be1    00000001     Lab9HMain.o (.data.bulletFlag1)
+                  20200be2    00000001     Lab9HMain.o (.data.bulletFlag2)
+                  20200be3    00000001     fsm.o (.data.gameState)
+                  20200be4    00000001     libsysbm.a : add_device.c.obj (.data.add_device.device_init)
+                  20200be5    00000001     fsm.o (.data.initialLives)
+                  20200be6    00000001     fsm.o (.data.myLanguage)
+                  20200be7    00000001     --HOLE--
+                  20200be8    00000001     libc.a : memory.c.obj (.data.memory_is_initialized)
+                  20200be9    00000003     --HOLE--
+                  20200bec    00000001     libsysbm.a : open.c.obj (.data.open.stream_init)
 
-.sysmem    0    20200bc8    00000200     UNINITIALIZED
-                  20200bc8    00000010     libc.a : memory.c.obj (.sysmem)
-                  20200bd8    000001f0     --HOLE--
+.sysmem    0    20200bf0    00000200     UNINITIALIZED
+                  20200bf0    00000010     libc.a : memory.c.obj (.sysmem)
+                  20200c00    000001f0     --HOLE--
 
-.bss       0    20200dc8    000001e9     UNINITIALIZED
-                  20200dc8    00000120     libsysbm.a : trgmsg.c.obj (.bss:_CIOBUF_)
-                  20200ee8    000000a0     libc.a : defs.c.obj (.bss.__TI_tmpnams)
-                  20200f88    0000000c     ST7735.o (.bss.Message)
-                  20200f94    00000008     libsysbm.a : hostopen.c.obj (.bss.parmbuf)
-                  20200f9c    00000004     ST7735.o (.bss.Messageindex)
-                  20200fa0    00000004     TExaS.o (.bss.TExaSLogic)
-                  20200fa4    00000004     TExaS.o (.bss.TExaSadc)
-                  20200fa8    00000004     libc.a : memory.c.obj (.bss.sys_free)
-                  20200fac    00000002     ST7735.o (.bss.StTextColor)
-                  20200fae    00000001     ST7735.o (.bss._ZL8ColStart)
-                  20200faf    00000001     ST7735.o (.bss._ZL8RowStart)
-                  20200fb0    00000001     ST7735.o (.bss._ZL8TabColor)
+.bss       0    20200df0    000001e9     UNINITIALIZED
+                  20200df0    00000120     libsysbm.a : trgmsg.c.obj (.bss:_CIOBUF_)
+                  20200f10    000000a0     libc.a : defs.c.obj (.bss.__TI_tmpnams)
+                  20200fb0    0000000c     ST7735.o (.bss.Message)
+                  20200fbc    00000008     libsysbm.a : hostopen.c.obj (.bss.parmbuf)
+                  20200fc4    00000004     ST7735.o (.bss.Messageindex)
+                  20200fc8    00000004     TExaS.o (.bss.TExaSLogic)
+                  20200fcc    00000004     TExaS.o (.bss.TExaSadc)
+                  20200fd0    00000004     libc.a : memory.c.obj (.bss.sys_free)
+                  20200fd4    00000002     ST7735.o (.bss.StTextColor)
+                  20200fd6    00000001     ST7735.o (.bss._ZL8ColStart)
+                  20200fd7    00000001     ST7735.o (.bss._ZL8RowStart)
+                  20200fd8    00000001     ST7735.o (.bss._ZL8TabColor)
 
 .stack     0    20207e00    00000200     UNINITIALIZED
                   20207e00    00000004     libc.a : boot_cortex_m.c.obj (.stack)
@@ -443,10 +457,10 @@ MODULE SUMMARY
        Module                         code    ro data   rw data
        ------                         ----    -------   -------
     .\
-       tools.o                        4096    1280      970    
+       tools.o                        4326    1536      972    
        ST7735.o                       2864    1449      33     
-       Lab9HMain.o                    554     1068      1439   
-       tank.o                         1678    0         0      
+       Lab9HMain.o                    718     1068      1471   
+       tank.o                         2282    0         0      
        fsm.o                          988     382       119    
        bullet.o                       1282    0         0      
        TExaS.o                        720     0         8      
@@ -456,10 +470,10 @@ MODULE SUMMARY
        Timer.o                        316     0         0      
        Switch.o                       224     0         0      
        LaunchPad.o                    180     0         0      
-       LED.o                          52      0         0      
+       LED.o                          112     0         0      
        Sound.o                        4       0         0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         14298   4179      2573   
+       Total:                         15356   4435      2607   
                                                                
     .\ticlang\
        startup_mspm0g3507_ticlang.o   60      192       0      
@@ -481,6 +495,7 @@ MODULE SUMMARY
        strcmp-armv6m.S.obj            136     0         0      
        copy_decompress_lzss.c.obj     124     0         0      
        fclose.c.obj                   124     0         0      
+       rand.c.obj                     92      0         4      
        autoinit.c.obj                 84      0         0      
        fflush.c.obj                   82      0         0      
        exit.c.obj                     56      0         8      
@@ -493,7 +508,7 @@ MODULE SUMMARY
        _lock.c.obj                    2       0         8      
        pre_init.c.obj                 4       0         0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         6358    344       429    
+       Total:                         6450    344       433    
                                                                
     C:\ti\ccs2000\ccs\tools\compiler\ti-cgt-armllvm_4.0.1.LTS\lib\armv6m-ti-none-eabi/c/libsysbm.a
        trgmsg.c.obj                   104     0         288    
@@ -533,29 +548,30 @@ MODULE SUMMARY
        muldsi3.S.obj                  58      0         0      
        fixsfsi.S.obj                  56      0         0      
        floatsidf.S.obj                44      0         0      
+       floatunsisf.S.obj              40      0         0      
        aeabi_memset.S.obj             12      0         0      
        aeabi_memcpy.S.obj             8       0         0      
        aeabi_div0.c.obj               2       0         0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         2342    0         0      
+       Total:                         2382    0         0      
                                                                
        Heap:                          0       0         512    
        Stack:                         0       0         512    
-       Linker Generated:              0       249       0      
+       Linker Generated:              0       251       0      
     +--+------------------------------+-------+---------+---------+
-       Grand Total:                   24390   4964      4524   
+       Grand Total:                   25580   5222      4562   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 000072d4 records: 2, size/record: 8, table size: 16
-	.data: load addr=000071e8, load size=000000d5 bytes, run addr=20200000, run size=00000bc5 bytes, compression=lzss
-	.bss: load addr=000072cc, load size=00000008 bytes, run addr=20200dc8, run size=000001e9 bytes, compression=zero_init
+__TI_cinit_table @ 00007874 records: 2, size/record: 8, table size: 16
+	.data: load addr=00007788, load size=000000d7 bytes, run addr=20200000, run size=00000bed bytes, compression=lzss
+	.bss: load addr=0000786c, load size=00000008 bytes, run addr=20200df0, run size=000001e9 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 000072c0 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 00007860 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 	index: 2, handler: __TI_zero_init
@@ -567,18 +583,18 @@ callee name               trampoline name
    callee addr  tramp addr   call addr  call info
 --------------  -----------  ---------  ----------------
 __aeabi_dadd              $Tramp$TT$L$PI$$__aeabi_dadd
-   0000130f     00005ddc     00005dda   libc.a : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_0)
-                             00005f98          : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_1)
-                             00005fa2          : s_cosf.c.obj (.text.OUTLINED_FUNCTION_3)
-                             00005fac          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_3)
+   000014e3     00006248     00006246   libc.a : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_0)
+                             00006440          : k_rem_pio2.c.obj (.text.OUTLINED_FUNCTION_1)
+                             0000644a          : s_cosf.c.obj (.text.OUTLINED_FUNCTION_3)
+                             00006454          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_3)
 __aeabi_dmul              $Tramp$TT$L$PI$$__aeabi_dmul
-   00002e51     00005fdc     00005fd8   libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_0)
-                             00005ff0          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_0)
-                             00005ff6          : s_cosf.c.obj (.text.OUTLINED_FUNCTION_1)
-                             00005ffc          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_1)
+   0000338d     00006484     00006480   libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_0)
+                             00006498          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_0)
+                             0000649e          : s_cosf.c.obj (.text.OUTLINED_FUNCTION_1)
+                             000064a4          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_1)
 __aeabi_f2d               $Tramp$TT$L$PI$$__aeabi_f2d
-   000052ad     00006004     00006000   libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_2)
-                             00006016          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_2)
+   000056f9     000064ac     000064a8   libc.a : s_cosf.c.obj (.text.OUTLINED_FUNCTION_2)
+                             000064be          : s_sinf.c.obj (.text.OUTLINED_FUNCTION_2)
 
 [3 trampolines]
 [10 trampoline calls]
@@ -588,176 +604,180 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                             
 -------   ----                             
-00005c29  ADC0_IRQHandler                  
-00005c29  ADC1_IRQHandler                  
-00005c29  AES_IRQHandler                   
-20200b88  BusFreq                          
-00006020  C$$EXIT                          
-0000577d  C$$IO$$                          
-00005c29  CANFD0_IRQHandler                
-00005c29  DAC0_IRQHandler                  
-00005c29  DMA_IRQHandler                   
-00005c29  Default_Handler                  
-00005c29  GROUP0_IRQHandler                
-00005c29  GROUP1_IRQHandler                
-00005091  HOSTclose                        
-00004835  HOSTlseek                        
-00004be1  HOSTopen                         
-00004ca1  HOSTread                         
-000048a1  HOSTrename                       
-000050d9  HOSTunlink                       
-00004cf9  HOSTwrite                        
-00005c45  HardFault_Handler                
-00005c29  I2C0_IRQHandler                  
-00005c29  I2C1_IRQHandler                  
-20200f88  Message                          
-20200f9c  Messageindex                     
-00005c29  NMI_Handler                      
-20200b8c  NUM_WALLS                        
-20200b90  NUM_WATERS                       
-00005c29  PendSV_Handler                   
-202009e0  Phrases                          
-00005c29  RTC_IRQHandler                   
-00006019  Reset_Handler                    
-000071e0  SHT$$INIT_ARRAY$$Base            
-000071e4  SHT$$INIT_ARRAY$$Limit           
-00005c29  SPI0_IRQHandler                  
-00005c29  SPI1_IRQHandler                  
-00005c29  SVC_Handler                      
-20200fac  StTextColor                      
-20200b94  StX                              
-20200b98  StY                              
-00001497  SysTick_Handler                  
-20200fa0  TExaSLogic                       
-20200fa4  TExaSadc                         
-20200bb8  TG12Flag                         
-00005c29  TIMA0_IRQHandler                 
-00005c29  TIMA1_IRQHandler                 
-00005c29  TIMG0_IRQHandler                 
-000044d1  TIMG12_IRQHandler                
-00005c29  TIMG6_IRQHandler                 
-000051ad  TIMG7_IRQHandler                 
-00005c29  TIMG8_IRQHandler                 
-00005e67  TI_memcpy_small                  
-00005f23  TI_memset_small                  
-00005c29  UART0_IRQHandler                 
-00005c29  UART1_IRQHandler                 
-00005c29  UART2_IRQHandler                 
-00005c29  UART3_IRQHandler                 
-20200dc8  _CIOBUF_                         
-00005f31  _Z10Clock_Freqv                  
-000029c1  _Z10DrawHealthRK4TankS1_         
-000034d7  _Z10Sound_Initv                  
-00005c7d  _Z10Switch_In1v                  
-00005c99  _Z10Switch_In2v                  
-00004d51  _Z10TExaS_InitP10ADC12_RegsjPFhvE
-00005e9b  _Z11Clock_Delayj                 
-0000545d  _Z11SPI_OutDatac                 
-00005cb5  _Z11ST7735_openPKcji             
-00005ded  _Z11ST7735_readiPcj              
-00005495  _Z11Switch_Initv                 
-00004e59  _Z11fillmessagej                 
-00003d65  _Z11isCollisionv                 
-00001fdd  _Z11runGameLoopv                 
-00003ae5  _Z12ST7735_InitR10initRFlags     
-00005faf  _Z12ST7735_closei                
-00005eeb  _Z12ST7735_lseekili              
-000055e3  _Z12ST7735_writeiPKcj            
-00001db5  _Z12bulletUpdatev                
-00004da9  _Z12generateMap1h                
-000034d9  _Z12generateMap2h                
-000025f5  _Z12generateMap3h                
-000022fd  _Z12generateMap4h                
-00003641  _Z12generateMap5h                
-0000358d  _Z12generateMap6h                
-000023fd  _Z12generateMap7h                
-000026e9  _Z12generateMap8h                
-000028d1  _Z12generateMap9h                
-0000399d  _Z12rotateUpdatev                
-00004f53  _Z12tankMovementjjR4Tank         
-00005f3d  _Z13ST7735_renamePKcS0_          
-00005fb9  _Z13ST7735_unlinkPKc             
-00005619  _Z13displayUpdatev               
-000027dd  _Z13generateMap10h               
-00001a35  _Z13showEndScreenv               
-0000564d  _Z14Clock_Delay1msj              
-000045d1  _Z14LaunchPad_Initv              
-00005121  _Z14SPI_OutCommandc              
-00002b99  _Z14ST7735_OutCharc              
-00003e01  _Z14ST7735_OutUDecj              
-000038f5  _Z14TimerG7_IntArmtjj            
-000054cd  _Z15ActivatePortA_Bv             
-00000fa9  _Z15Clock_Init80MHzi             
-00005821  _Z15ST7735_Color565hhh           
-0000115d  _Z15ST7735_DrawCharsscssh        
-00001c9d  _Z15ST7735_FillRectsssst         
-00005d79  _Z15SlidePotSamplerR8SlidePot    
-0000406d  _Z15TimerG12_IntArmjj            
-000020ed  _Z15initializeRoundh             
-00005b81  _Z16ST7735_OutStringPc           
-00005681  _Z16ST7735_SetCursorjj           
-0000328d  _Z16curWallCollisionjjjj         
+00006095  ADC0_IRQHandler                  
+00006095  ADC1_IRQHandler                  
+00006095  AES_IRQHandler                   
+20200ba8  BusFreq                          
+000064c8  C$$EXIT                          
+00005bc9  C$$IO$$                          
+00006095  CANFD0_IRQHandler                
+00006095  DAC0_IRQHandler                  
+00006095  DMA_IRQHandler                   
+00006095  Default_Handler                  
+00006095  GROUP0_IRQHandler                
+00006095  GROUP1_IRQHandler                
+000054dd  HOSTclose                        
+00004c25  HOSTlseek                        
+00004fd1  HOSTopen                         
+000050ed  HOSTread                         
+00004c91  HOSTrename                       
+00005525  HOSTunlink                       
+00005145  HOSTwrite                        
+000060b1  HardFault_Handler                
+00006095  I2C0_IRQHandler                  
+00006095  I2C1_IRQHandler                  
+20200fb0  Message                          
+20200fc4  Messageindex                     
+00006095  NMI_Handler                      
+20200bac  NUM_WALLS                        
+20200bb0  NUM_WATERS                       
+00006095  PendSV_Handler                   
+20200a00  Phrases                          
+00006095  RTC_IRQHandler                   
+000064c1  Reset_Handler                    
+00007780  SHT$$INIT_ARRAY$$Base            
+00007784  SHT$$INIT_ARRAY$$Limit           
+00006095  SPI0_IRQHandler                  
+00006095  SPI1_IRQHandler                  
+00006095  SVC_Handler                      
+20200fd4  StTextColor                      
+20200bb4  StX                              
+20200bb8  StY                              
+0000166b  SysTick_Handler                  
+20200fc8  TExaSLogic                       
+20200fcc  TExaSadc                         
+20200bdc  TG12Flag                         
+00006095  TIMA0_IRQHandler                 
+00006095  TIMA1_IRQHandler                 
+00006095  TIMG0_IRQHandler                 
+00001fb1  TIMG12_IRQHandler                
+00006095  TIMG6_IRQHandler                 
+000055f9  TIMG7_IRQHandler                 
+00006095  TIMG8_IRQHandler                 
+0000630f  TI_memcpy_small                  
+000063cb  TI_memset_small                  
+00006095  UART0_IRQHandler                 
+00006095  UART1_IRQHandler                 
+00006095  UART2_IRQHandler                 
+00006095  UART3_IRQHandler                 
+20200df0  _CIOBUF_                         
+000063d9  _Z10Clock_Freqv                  
+00000c0d  _Z10DrawHealthRK4TankS1_         
+00006285  _Z10LED_Togglej                  
+0000394b  _Z10Sound_Initv                  
+000060e9  _Z10Switch_In1v                  
+00006105  _Z10Switch_In2v                  
+0000519d  _Z10TExaS_InitP10ADC12_RegsjPFhvE
+00006343  _Z11Clock_Delayj                 
+000058a9  _Z11SPI_OutDatac                 
+00006121  _Z11ST7735_openPKcji             
+00006259  _Z11ST7735_readiPcj              
+000058e1  _Z11Switch_Initv                 
+000052a5  _Z11fillmessagej                 
+000041e1  _Z11isCollisionv                 
+00002531  _Z11runGameLoopv                 
+00003f61  _Z12ST7735_InitR10initRFlags     
+00006457  _Z12ST7735_closei                
+00006393  _Z12ST7735_lseekili              
+00005a2f  _Z12ST7735_writeiPKcj            
+00002309  _Z12bulletUpdatev                
+000051f5  _Z12generateMap1h                
+0000394d  _Z12generateMap2h                
+00002a41  _Z12generateMap3h                
+00002749  _Z12generateMap4h                
+00003b69  _Z12generateMap5h                
+00003a01  _Z12generateMap6h                
+00002849  _Z12generateMap7h                
+00002b35  _Z12generateMap8h                
+00002d1d  _Z12generateMap9h                
+00003e19  _Z12rotateUpdatev                
+00005441  _Z12tankMovementjjR4Tank         
+000063e5  _Z13ST7735_renamePKcS0_          
+00006461  _Z13ST7735_unlinkPKc             
+00005a65  _Z13displayUpdatev               
+00002c29  _Z13generateMap10h               
+00001c09  _Z13showEndScreenv               
+00005a99  _Z14Clock_Delay1msj              
+000049c1  _Z14LaunchPad_Initv              
+0000556d  _Z14SPI_OutCommandc              
+000030d5  _Z14ST7735_OutCharc              
+0000427d  _Z14ST7735_OutUDecj              
+00003d71  _Z14TimerG7_IntArmtjj            
+00005919  _Z15ActivatePortA_Bv             
+0000117d  _Z15Clock_Init80MHzi             
+00005c6d  _Z15ST7735_Color565hhh           
+00001331  _Z15ST7735_DrawCharsscssh        
+000021f1  _Z15ST7735_FillRectsssst         
+000061e5  _Z15SlidePotSamplerR8SlidePot    
+00004451  _Z15TimerG12_IntArmjj            
+00002641  _Z15initializeRoundh             
+00005fc9  _Z16ST7735_OutStringPc           
+00005acd  _Z16ST7735_SetCursorjj           
+00003701  _Z16curWallCollisionjjjj         
 000009fd  _Z17ST7735_DrawBitmapssPKtss     
-000043c9  _Z17ST7735_DrawStringttPcs       
-000059d9  _Z17ST7735_FillScreent           
-00003b85  _Z17ST7735_InitPrintf10initRFlags
-00003351  _Z17curWaterCollisionjjjj        
-00005ead  _Z28TExaS_LaunchPadLogicPB27PB26v
-00005cd1  _Z7P1SHOOTv                      
-00005ced  _Z7P2SHOOTv                      
-0000532d  _Z7clamperfff                    
-00001b75  _Z8ADC_InitP10ADC12_Regsjj       
-000056b5  _Z8LED_Initv                     
-00005fc3  _Z8PLL_Initv                     
-000024fd  _Z8SPI_Initv                     
-00001499  _Z8showMenuv                     
-00005d09  _Z8special1v                     
-00005d25  _Z8special2v                     
-00005ae1  _Z9ADC_StartP10ADC12_Regs        
-0000490d  _Z9DrawWallsv                    
-000049e5  _Z9DrawWaterv                    
-000051ed  _Z9SPI_Resetv                    
-00002c81  _Z9UART_Initv                    
-00005169  _Z9queryTankv                    
-00005505  _ZN4Tank10TakeDamageEv           
-00005e55  _ZN4Tank11NeedsRedrawEv          
-000036f1  _ZN4Tank11TriVelocityEi          
-00001625  _ZN4Tank12rotateSpriteEf         
-00005853  _ZN4Tank13TickCooldownsEv        
-000055ad  _ZN4Tank15rotateIncrementEi      
-00005885  _ZN4Tank4DrawEv                  
-000021f5  _ZN4Tank4MoveEv                  
-00005beb  _ZN4Tank4SetXEi                  
-00005c09  _ZN4Tank4SetYEi                  
-00005a05  _ZN4Tank5EraseEv                 
-00005e19  _ZN4Tank5SetHPEh                 
-00003fd5  _ZN4Tank5ShootEP6Bulleti         
-00004fa3  _ZN4Tank6RotateEi                
-00005ebd  _ZN4Tank8CanShootEv              
-00005d41  _ZN4Tank8SetAliveEb              
-000031c5  _ZN4TankC1EiiiPKthhjj            
-000031c5  _ZN4TankC2EiiiPKthhjj            
-00005ba7  _ZN6Bullet10DeactivateEv         
-0000522d  _ZN6Bullet4DrawEv                
-00004551  _ZN6Bullet4InitEiifii            
+00004839  _Z17ST7735_DrawStringttPcs       
+00005e25  _Z17ST7735_FillScreent           
+00004001  _Z17ST7735_InitPrintf10initRFlags
+000037c5  _Z17curWaterCollisionjjjj        
+00006355  _Z28TExaS_LaunchPadLogicPB27PB26v
+00006299  _Z6LED_Onj                       
+000062ad  _Z7LED_Offj                      
+0000613d  _Z7P1SHOOTv                      
+00006159  _Z7P2SHOOTv                      
+00005779  _Z7clamperfff                    
+00001e89  _Z8ADC_InitP10ADC12_Regsjj       
+00005b01  _Z8LED_Initv                     
+0000646b  _Z8PLL_Initv                     
+00002949  _Z8SPI_Initv                     
+0000166d  _Z8showMenuv                     
+00006175  _Z8special1v                     
+00006191  _Z8special2v                     
+00005f01  _Z9ADC_StartP10ADC12_Regs        
+00004cfd  _Z9DrawWallsv                    
+00004dd5  _Z9DrawWaterv                    
+00005639  _Z9SPI_Resetv                    
+000031bd  _Z9UART_Initv                    
+000055b5  _Z9queryTankv                    
+00005091  _ZN4Tank10TakeDamageEv           
+000062fd  _ZN4Tank11NeedsRedrawEv          
+00003ab5  _ZN4Tank11TriVelocityEv          
+000017f9  _ZN4Tank12rotateSpriteEf         
+00005c9f  _ZN4Tank13TickCooldownsEv        
+000059f9  _ZN4Tank15rotateIncrementEi      
+00004609  _ZN4Tank16TryActivatePowerEj     
+00005cd1  _ZN4Tank4DrawEv                  
+00001d49  _ZN4Tank4MoveEv                  
+00006057  _ZN4Tank4SetXEi                  
+00006075  _ZN4Tank4SetYEi                  
+000062c1  _ZN4Tank5SetHPEh                 
+00002efd  _ZN4Tank5ShootEP6Bulleti         
+0000539f  _ZN4Tank6RotateEi                
+00006365  _ZN4Tank8CanShootEv              
+000061ad  _ZN4Tank8SetAliveEb              
+000020d5  _ZN4Tank9TickPowerEj             
+00002e0d  _ZN4TankC1EiiiPKthhjj            
+00002e0d  _ZN4TankC2EiiiPKthhjj            
+00005fef  _ZN6Bullet10DeactivateEv         
+00005679  _ZN6Bullet4DrawEv                
+00004941  _ZN6Bullet4InitEiifii            
 00000705  _ZN6Bullet4MoveEv                
-0000553d  _ZN6Bullet5EraseEv               
-00003415  _ZN6Bullet5checkER4Tank          
-00005d93  _ZN6BulletC1Ev                   
-00005d93  _ZN6BulletC2Ev                   
-00005f49  _ZN8SlidePot12lastDistanceEv     
-00004c41  _ZN8SlidePot2InEv                
-00004195  _ZN8SlidePot4InitEj              
-000058e9  _ZN8SlidePot4SaveEj              
-000059a9  _ZN8SlidePot4SyncEv              
-00005f55  _ZN8SlidePot8DistanceEv          
-00005dad  _ZN8SlidePotC1Ejj                
-00005dad  _ZN8SlidePotC2Ejj                
-00005f61  _ZNK4Tank4GetXEv                 
-00005f6d  _ZNK4Tank4GetYEv                 
-00005ef9  _ZNK4Tank9GetHealthEv            
-00005ecd  _ZNK6Bullet8IsActiveEv           
-20200dc8  __CIOBUF_                        
+00005951  _ZN6Bullet5EraseEv               
+00003889  _ZN6Bullet5checkER4Tank          
+000061ff  _ZN6BulletC1Ev                   
+000061ff  _ZN6BulletC2Ev                   
+000063f1  _ZN8SlidePot12lastDistanceEv     
+00005031  _ZN8SlidePot2InEv                
+00004579  _ZN8SlidePot4InitEj              
+00005d35  _ZN8SlidePot4SaveEj              
+00005df5  _ZN8SlidePot4SyncEv              
+000063fd  _ZN8SlidePot8DistanceEv          
+00006219  _ZN8SlidePotC1Ejj                
+00006219  _ZN8SlidePotC2Ejj                
+00006409  _ZNK4Tank4GetXEv                 
+00006415  _ZNK4Tank4GetYEv                 
+000063a1  _ZNK4Tank9GetHealthEv            
+00006375  _ZNK6Bullet8IsActiveEv           
+20200df0  __CIOBUF_                        
 20208000  __STACK_END                      
 00000200  __STACK_SIZE                     
 00000200  __SYSMEM_SIZE                    
@@ -770,157 +790,161 @@ address   name
 00000000  __TI_ATRegion2_region_sz         
 00000000  __TI_ATRegion2_src_addr          
 00000000  __TI_ATRegion2_trg_addr          
-000072d4  __TI_CINIT_Base                  
-000072e4  __TI_CINIT_Limit                 
-000072e4  __TI_CINIT_Warm                  
-000072c0  __TI_Handler_Table_Base          
-000072cc  __TI_Handler_Table_Limit         
-00004ead  __TI_auto_init_nobinit           
-000056e9  __TI_cleanup                     
-20200b80  __TI_cleanup_ptr                 
-0000464d  __TI_closefile                   
-000046c9  __TI_decompress_lzss             
-00005e79  __TI_decompress_none             
-00004f01  __TI_doflush                     
-20200b84  __TI_dtors_ptr                   
-20200b9c  __TI_ft_end                      
+00007874  __TI_CINIT_Base                  
+00007884  __TI_CINIT_Limit                 
+00007884  __TI_CINIT_Warm                  
+00007860  __TI_Handler_Table_Base          
+0000786c  __TI_Handler_Table_Limit         
+000052f9  __TI_auto_init_nobinit           
+00005b35  __TI_cleanup                     
+20200ba0  __TI_cleanup_ptr                 
+00004a3d  __TI_closefile                   
+00004ab9  __TI_decompress_lzss             
+00006321  __TI_decompress_none             
+0000534d  __TI_doflush                     
+20200ba4  __TI_dtors_ptr                   
+20200bbc  __TI_ft_end                      
 ffffffff  __TI_pprof_out_hndl              
 ffffffff  __TI_prof_data_size              
 ffffffff  __TI_prof_data_start             
-0000571d  __TI_readmsg                     
+00005b69  __TI_readmsg                     
 00000000  __TI_static_base__               
-20200ee8  __TI_tmpnams                     
-00005751  __TI_writemsg                    
-00005e03  __TI_zero_init_nomemset          
-0000130f  __adddf3                         
-000030f7  __addsf3                         
-000047c1  __aeabi_d2f                      
-00005045  __aeabi_d2iz                     
-0000130f  __aeabi_dadd                     
-00004b19  __aeabi_dcmpeq                   
-00004b55  __aeabi_dcmpge                   
-00004b69  __aeabi_dcmpgt                   
-00004b41  __aeabi_dcmple                   
-00004b2d  __aeabi_dcmplt                   
-00002e51  __aeabi_dmul                     
-00001305  __aeabi_dsub                     
-20200ba0  __aeabi_errno                    
-00004339  __aeabi_errno_addr               
-000052ad  __aeabi_f2d                      
-00005575  __aeabi_f2iz                     
-000030f7  __aeabi_fadd                     
-00004b7d  __aeabi_fcmpeq                   
-00004bb9  __aeabi_fcmpge                   
-00004bcd  __aeabi_fcmpgt                   
-00004ba5  __aeabi_fcmple                   
-00004b91  __aeabi_fcmplt                   
-0000444d  __aeabi_fdiv                     
-00004225  __aeabi_fmul                     
-000030ed  __aeabi_fsub                     
-00005a89  __aeabi_i2d                      
-0000536d  __aeabi_i2f                      
-00004e01  __aeabi_idiv                     
-00003ae3  __aeabi_idiv0                    
-00004e01  __aeabi_idivmod                  
-00005f79  __aeabi_memclr                   
-00005f79  __aeabi_memclr4                  
-00005f79  __aeabi_memclr8                  
-000047b9  __aeabi_memcpy                   
-000047b9  __aeabi_memcpy4                  
-000047b9  __aeabi_memcpy8                  
-0000526d  __aeabi_uidiv                    
-0000526d  __aeabi_uidivmod                 
+20200f10  __TI_tmpnams                     
+00005b9d  __TI_writemsg                    
+0000626f  __TI_zero_init_nomemset          
+000014e3  __adddf3                         
+00003633  __addsf3                         
+00004bb1  __aeabi_d2f                      
+00005491  __aeabi_d2iz                     
+000014e3  __aeabi_dadd                     
+00004f09  __aeabi_dcmpeq                   
+00004f45  __aeabi_dcmpge                   
+00004f59  __aeabi_dcmpgt                   
+00004f31  __aeabi_dcmple                   
+00004f1d  __aeabi_dcmplt                   
+0000338d  __aeabi_dmul                     
+000014d9  __aeabi_dsub                     
+20200bc0  __aeabi_errno                    
+000047a9  __aeabi_errno_addr               
+000056f9  __aeabi_f2d                      
+00005989  __aeabi_f2iz                     
+00003633  __aeabi_fadd                     
+00004f6d  __aeabi_fcmpeq                   
+00004fa9  __aeabi_fcmpge                   
+00004fbd  __aeabi_fcmpgt                   
+00004f95  __aeabi_fcmple                   
+00004f81  __aeabi_fcmplt                   
+000048bd  __aeabi_fdiv                     
+00004695  __aeabi_fmul                     
+00003629  __aeabi_fsub                     
+00005ea9  __aeabi_i2d                      
+000057b9  __aeabi_i2f                      
+0000524d  __aeabi_idiv                     
+00003f5f  __aeabi_idiv0                    
+0000524d  __aeabi_idivmod                  
+00006421  __aeabi_memclr                   
+00006421  __aeabi_memclr4                  
+00006421  __aeabi_memclr8                  
+00004ba9  __aeabi_memcpy                   
+00004ba9  __aeabi_memcpy4                  
+00004ba9  __aeabi_memcpy8                  
+00005f29  __aeabi_ui2f                     
+000056b9  __aeabi_uidiv                    
+000056b9  __aeabi_uidivmod                 
 ffffffff  __binit__                        
-00004a4d  __cmpdf2                         
-000053e5  __cmpsf2                         
-0000444d  __divsf3                         
-00004a4d  __eqdf2                          
-000053e5  __eqsf2                          
-000052ad  __extendsfdf2                    
-00005045  __fixdfsi                        
-00005575  __fixsfsi                        
-00005a89  __floatsidf                      
-0000536d  __floatsisf                      
-00004745  __gedf2                          
-000053a9  __gesf2                          
-00004745  __gtdf2                          
-000053a9  __gtsf2                          
+00004e3d  __cmpdf2                         
+00005831  __cmpsf2                         
+000048bd  __divsf3                         
+00004e3d  __eqdf2                          
+00005831  __eqsf2                          
+000056f9  __extendsfdf2                    
+00005491  __fixdfsi                        
+00005989  __fixsfsi                        
+00005ea9  __floatsidf                      
+000057b9  __floatsisf                      
+00005f29  __floatunsisf                    
+00004b35  __gedf2                          
+000057f5  __gesf2                          
+00004b35  __gtdf2                          
+000057f5  __gtsf2                          
 000000c1  __kernel_rem_pio2                
-00004a4d  __ledf2                          
-000053e5  __lesf2                          
-00004a4d  __ltdf2                          
-000053e5  __ltsf2                          
+00004e3d  __ledf2                          
+00005831  __lesf2                          
+00004e3d  __ltdf2                          
+00005831  __ltsf2                          
 UNDEFED   __mpu_init                       
-00002e51  __muldf3                         
-00005421  __muldsi3                        
-00004225  __mulsf3                         
-00004a4d  __nedf2                          
-000053e5  __nesf2                          
+0000338d  __muldf3                         
+0000586d  __muldsi3                        
+00004695  __mulsf3                         
+00004e3d  __nedf2                          
+00005831  __nesf2                          
 20207e00  __stack                          
 20200000  __start___llvm_prf_bits          
 20200000  __start___llvm_prf_cnts          
 20200000  __stop___llvm_prf_bits           
 20200000  __stop___llvm_prf_cnts           
-00001305  __subdf3                         
-000030ed  __subsf3                         
-000047c1  __truncdfsf2                     
-00005b59  _c_int00_noargs                  
-20200968  _device                          
-20200878  _ftable                          
-20200ba4  _lock                            
-000044cf  _nop                             
-20200af8  _stream                          
-20200bc8  _sys_memory                      
+000014d9  __subdf3                         
+00003629  __subsf3                         
+00004bb1  __truncdfsf2                     
+00005fa1  _c_int00_noargs                  
+20200988  _device                          
+20200898  _ftable                          
+20200bc4  _lock                            
+0000493f  _nop                             
+20200b18  _stream                          
+20200bf0  _sys_memory                      
 UNDEFED   _system_post_cinit               
-0000601d  _system_pre_init                 
-20200ba8  _unlock                          
-00006021  abort                            
-00002aad  add_device                       
-00001ec9  aligned_alloc                    
+000064c5  _system_pre_init                 
+20200bc8  _unlock                          
+000064c9  abort                            
+00002fe9  add_device                       
+0000241d  aligned_alloc                    
 ffffffff  binit                            
-20200bbb  bulletFlag1                      
-20200bbd  bulletFlag2                      
-20200a50  bullets1                         
-20200aa4  bullets2                         
-00004ff5  close                            
-00000c0d  cosf                             
-00005785  exit                             
-000057b9  finddevice                       
-000018f1  floor                            
-000018f1  floorl                           
-00005979  fopen                            
-00002d69  free                             
-000057ed  freopen                          
-20200bbe  gameState                        
-00004979  getdevice                        
-20200bbf  initialLives                     
+20200be1  bulletFlag1                      
+20200be2  bulletFlag2                      
+20200a70  bullets1                         
+20200ac4  bullets2                         
+000053f1  close                            
+00000de1  cosf                             
+00005bd1  exit                             
+00005c05  finddevice                       
+00001ac5  floor                            
+00001ac5  floorl                           
+00005dc5  fopen                            
+000032a5  free                             
+00005c39  freopen                          
+20200be3  gameState                        
+00004d69  getdevice                        
+20200be5  initialLives                     
 00000000  interruptVectors                 
-00003015  ldexp                            
-00003015  ldexpl                           
-00004101  main                             
-00005f85  malloc                           
-00001ec9  memalign                         
-20200bc1  myLanguage                       
-00003c25  open                             
+00003551  ldexp                            
+00003551  ldexpl                           
+000044e5  main                             
+0000642d  malloc                           
+0000241d  memalign                         
+20200be6  myLanguage                       
+000040a1  open                             
 20200000  p1                               
-2020025c  p2                               
-20200f94  parmbuf                          
-20200b48  player1SP                        
-20200b64  player2SP                        
-00005fcd  remove                           
-00003015  scalbn                           
-00003015  scalbnl                          
-00002f35  setvbuf                          
-00000de1  sinf                             
-00003cc5  sqrtf                            
-00004341  strcmp                           
-20200bac  time                             
-00005ab5  unlink                           
-202004b8  walls                            
-20200698  waters                           
-20200bb4  winsP1                           
-20200bb6  winsP2                           
-00005b31  write                            
+2020026c  p2                               
+20200fbc  parmbuf                          
+20200b68  player1SP                        
+20200b84  player2SP                        
+000059c1  rand                             
+00006475  remove                           
+00003551  scalbn                           
+00003551  scalbnl                          
+00003471  setvbuf                          
+00000fb5  sinf                             
+00004141  sqrtf                            
+00006015  srand                            
+000047b1  strcmp                           
+20200bd0  time                             
+00005ed5  unlink                           
+202004d8  walls                            
+202006b8  waters                           
+20200bd8  winsP1                           
+20200bda  winsP2                           
+00005f79  write                            
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -943,314 +967,322 @@ address   name
 00000200  __SYSMEM_SIZE                    
 00000705  _ZN6Bullet4MoveEv                
 000009fd  _Z17ST7735_DrawBitmapssPKtss     
-00000c0d  cosf                             
-00000de1  sinf                             
-00000fa9  _Z15Clock_Init80MHzi             
-0000115d  _Z15ST7735_DrawCharsscssh        
-00001305  __aeabi_dsub                     
-00001305  __subdf3                         
-0000130f  __adddf3                         
-0000130f  __aeabi_dadd                     
-00001497  SysTick_Handler                  
-00001499  _Z8showMenuv                     
-00001625  _ZN4Tank12rotateSpriteEf         
-000018f1  floor                            
-000018f1  floorl                           
-00001a35  _Z13showEndScreenv               
-00001b75  _Z8ADC_InitP10ADC12_Regsjj       
-00001c9d  _Z15ST7735_FillRectsssst         
-00001db5  _Z12bulletUpdatev                
-00001ec9  aligned_alloc                    
-00001ec9  memalign                         
-00001fdd  _Z11runGameLoopv                 
-000020ed  _Z15initializeRoundh             
-000021f5  _ZN4Tank4MoveEv                  
-000022fd  _Z12generateMap4h                
-000023fd  _Z12generateMap7h                
-000024fd  _Z8SPI_Initv                     
-000025f5  _Z12generateMap3h                
-000026e9  _Z12generateMap8h                
-000027dd  _Z13generateMap10h               
-000028d1  _Z12generateMap9h                
-000029c1  _Z10DrawHealthRK4TankS1_         
-00002aad  add_device                       
-00002b99  _Z14ST7735_OutCharc              
-00002c81  _Z9UART_Initv                    
-00002d69  free                             
-00002e51  __aeabi_dmul                     
-00002e51  __muldf3                         
-00002f35  setvbuf                          
-00003015  ldexp                            
-00003015  ldexpl                           
-00003015  scalbn                           
-00003015  scalbnl                          
-000030ed  __aeabi_fsub                     
-000030ed  __subsf3                         
-000030f7  __addsf3                         
-000030f7  __aeabi_fadd                     
-000031c5  _ZN4TankC1EiiiPKthhjj            
-000031c5  _ZN4TankC2EiiiPKthhjj            
-0000328d  _Z16curWallCollisionjjjj         
-00003351  _Z17curWaterCollisionjjjj        
-00003415  _ZN6Bullet5checkER4Tank          
-000034d7  _Z10Sound_Initv                  
-000034d9  _Z12generateMap2h                
-0000358d  _Z12generateMap6h                
-00003641  _Z12generateMap5h                
-000036f1  _ZN4Tank11TriVelocityEi          
-000038f5  _Z14TimerG7_IntArmtjj            
-0000399d  _Z12rotateUpdatev                
-00003ae3  __aeabi_idiv0                    
-00003ae5  _Z12ST7735_InitR10initRFlags     
-00003b85  _Z17ST7735_InitPrintf10initRFlags
-00003c25  open                             
-00003cc5  sqrtf                            
-00003d65  _Z11isCollisionv                 
-00003e01  _Z14ST7735_OutUDecj              
-00003fd5  _ZN4Tank5ShootEP6Bulleti         
-0000406d  _Z15TimerG12_IntArmjj            
-00004101  main                             
-00004195  _ZN8SlidePot4InitEj              
-00004225  __aeabi_fmul                     
-00004225  __mulsf3                         
-00004339  __aeabi_errno_addr               
-00004341  strcmp                           
-000043c9  _Z17ST7735_DrawStringttPcs       
-0000444d  __aeabi_fdiv                     
-0000444d  __divsf3                         
-000044cf  _nop                             
-000044d1  TIMG12_IRQHandler                
-00004551  _ZN6Bullet4InitEiifii            
-000045d1  _Z14LaunchPad_Initv              
-0000464d  __TI_closefile                   
-000046c9  __TI_decompress_lzss             
-00004745  __gedf2                          
-00004745  __gtdf2                          
-000047b9  __aeabi_memcpy                   
-000047b9  __aeabi_memcpy4                  
-000047b9  __aeabi_memcpy8                  
-000047c1  __aeabi_d2f                      
-000047c1  __truncdfsf2                     
-00004835  HOSTlseek                        
-000048a1  HOSTrename                       
-0000490d  _Z9DrawWallsv                    
-00004979  getdevice                        
-000049e5  _Z9DrawWaterv                    
-00004a4d  __cmpdf2                         
-00004a4d  __eqdf2                          
-00004a4d  __ledf2                          
-00004a4d  __ltdf2                          
-00004a4d  __nedf2                          
-00004b19  __aeabi_dcmpeq                   
-00004b2d  __aeabi_dcmplt                   
-00004b41  __aeabi_dcmple                   
-00004b55  __aeabi_dcmpge                   
-00004b69  __aeabi_dcmpgt                   
-00004b7d  __aeabi_fcmpeq                   
-00004b91  __aeabi_fcmplt                   
-00004ba5  __aeabi_fcmple                   
-00004bb9  __aeabi_fcmpge                   
-00004bcd  __aeabi_fcmpgt                   
-00004be1  HOSTopen                         
-00004c41  _ZN8SlidePot2InEv                
-00004ca1  HOSTread                         
-00004cf9  HOSTwrite                        
-00004d51  _Z10TExaS_InitP10ADC12_RegsjPFhvE
-00004da9  _Z12generateMap1h                
-00004e01  __aeabi_idiv                     
-00004e01  __aeabi_idivmod                  
-00004e59  _Z11fillmessagej                 
-00004ead  __TI_auto_init_nobinit           
-00004f01  __TI_doflush                     
-00004f53  _Z12tankMovementjjR4Tank         
-00004fa3  _ZN4Tank6RotateEi                
-00004ff5  close                            
-00005045  __aeabi_d2iz                     
-00005045  __fixdfsi                        
-00005091  HOSTclose                        
-000050d9  HOSTunlink                       
-00005121  _Z14SPI_OutCommandc              
-00005169  _Z9queryTankv                    
-000051ad  TIMG7_IRQHandler                 
-000051ed  _Z9SPI_Resetv                    
-0000522d  _ZN6Bullet4DrawEv                
-0000526d  __aeabi_uidiv                    
-0000526d  __aeabi_uidivmod                 
-000052ad  __aeabi_f2d                      
-000052ad  __extendsfdf2                    
-0000532d  _Z7clamperfff                    
-0000536d  __aeabi_i2f                      
-0000536d  __floatsisf                      
-000053a9  __gesf2                          
-000053a9  __gtsf2                          
-000053e5  __cmpsf2                         
-000053e5  __eqsf2                          
-000053e5  __lesf2                          
-000053e5  __ltsf2                          
-000053e5  __nesf2                          
-00005421  __muldsi3                        
-0000545d  _Z11SPI_OutDatac                 
-00005495  _Z11Switch_Initv                 
-000054cd  _Z15ActivatePortA_Bv             
-00005505  _ZN4Tank10TakeDamageEv           
-0000553d  _ZN6Bullet5EraseEv               
-00005575  __aeabi_f2iz                     
-00005575  __fixsfsi                        
-000055ad  _ZN4Tank15rotateIncrementEi      
-000055e3  _Z12ST7735_writeiPKcj            
-00005619  _Z13displayUpdatev               
-0000564d  _Z14Clock_Delay1msj              
-00005681  _Z16ST7735_SetCursorjj           
-000056b5  _Z8LED_Initv                     
-000056e9  __TI_cleanup                     
-0000571d  __TI_readmsg                     
-00005751  __TI_writemsg                    
-0000577d  C$$IO$$                          
-00005785  exit                             
-000057b9  finddevice                       
-000057ed  freopen                          
-00005821  _Z15ST7735_Color565hhh           
-00005853  _ZN4Tank13TickCooldownsEv        
-00005885  _ZN4Tank4DrawEv                  
-000058e9  _ZN8SlidePot4SaveEj              
-00005979  fopen                            
-000059a9  _ZN8SlidePot4SyncEv              
-000059d9  _Z17ST7735_FillScreent           
-00005a05  _ZN4Tank5EraseEv                 
-00005a89  __aeabi_i2d                      
-00005a89  __floatsidf                      
-00005ab5  unlink                           
-00005ae1  _Z9ADC_StartP10ADC12_Regs        
-00005b31  write                            
-00005b59  _c_int00_noargs                  
-00005b81  _Z16ST7735_OutStringPc           
-00005ba7  _ZN6Bullet10DeactivateEv         
-00005beb  _ZN4Tank4SetXEi                  
-00005c09  _ZN4Tank4SetYEi                  
-00005c29  ADC0_IRQHandler                  
-00005c29  ADC1_IRQHandler                  
-00005c29  AES_IRQHandler                   
-00005c29  CANFD0_IRQHandler                
-00005c29  DAC0_IRQHandler                  
-00005c29  DMA_IRQHandler                   
-00005c29  Default_Handler                  
-00005c29  GROUP0_IRQHandler                
-00005c29  GROUP1_IRQHandler                
-00005c29  I2C0_IRQHandler                  
-00005c29  I2C1_IRQHandler                  
-00005c29  NMI_Handler                      
-00005c29  PendSV_Handler                   
-00005c29  RTC_IRQHandler                   
-00005c29  SPI0_IRQHandler                  
-00005c29  SPI1_IRQHandler                  
-00005c29  SVC_Handler                      
-00005c29  TIMA0_IRQHandler                 
-00005c29  TIMA1_IRQHandler                 
-00005c29  TIMG0_IRQHandler                 
-00005c29  TIMG6_IRQHandler                 
-00005c29  TIMG8_IRQHandler                 
-00005c29  UART0_IRQHandler                 
-00005c29  UART1_IRQHandler                 
-00005c29  UART2_IRQHandler                 
-00005c29  UART3_IRQHandler                 
-00005c45  HardFault_Handler                
-00005c7d  _Z10Switch_In1v                  
-00005c99  _Z10Switch_In2v                  
-00005cb5  _Z11ST7735_openPKcji             
-00005cd1  _Z7P1SHOOTv                      
-00005ced  _Z7P2SHOOTv                      
-00005d09  _Z8special1v                     
-00005d25  _Z8special2v                     
-00005d41  _ZN4Tank8SetAliveEb              
-00005d79  _Z15SlidePotSamplerR8SlidePot    
-00005d93  _ZN6BulletC1Ev                   
-00005d93  _ZN6BulletC2Ev                   
-00005dad  _ZN8SlidePotC1Ejj                
-00005dad  _ZN8SlidePotC2Ejj                
-00005ded  _Z11ST7735_readiPcj              
-00005e03  __TI_zero_init_nomemset          
-00005e19  _ZN4Tank5SetHPEh                 
-00005e55  _ZN4Tank11NeedsRedrawEv          
-00005e67  TI_memcpy_small                  
-00005e79  __TI_decompress_none             
-00005e9b  _Z11Clock_Delayj                 
-00005ead  _Z28TExaS_LaunchPadLogicPB27PB26v
-00005ebd  _ZN4Tank8CanShootEv              
-00005ecd  _ZNK6Bullet8IsActiveEv           
-00005eeb  _Z12ST7735_lseekili              
-00005ef9  _ZNK4Tank9GetHealthEv            
-00005f23  TI_memset_small                  
-00005f31  _Z10Clock_Freqv                  
-00005f3d  _Z13ST7735_renamePKcS0_          
-00005f49  _ZN8SlidePot12lastDistanceEv     
-00005f55  _ZN8SlidePot8DistanceEv          
-00005f61  _ZNK4Tank4GetXEv                 
-00005f6d  _ZNK4Tank4GetYEv                 
-00005f79  __aeabi_memclr                   
-00005f79  __aeabi_memclr4                  
-00005f79  __aeabi_memclr8                  
-00005f85  malloc                           
-00005faf  _Z12ST7735_closei                
-00005fb9  _Z13ST7735_unlinkPKc             
-00005fc3  _Z8PLL_Initv                     
-00005fcd  remove                           
-00006019  Reset_Handler                    
-0000601d  _system_pre_init                 
-00006020  C$$EXIT                          
-00006021  abort                            
-000071e0  SHT$$INIT_ARRAY$$Base            
-000071e4  SHT$$INIT_ARRAY$$Limit           
-000072c0  __TI_Handler_Table_Base          
-000072cc  __TI_Handler_Table_Limit         
-000072d4  __TI_CINIT_Base                  
-000072e4  __TI_CINIT_Limit                 
-000072e4  __TI_CINIT_Warm                  
+00000c0d  _Z10DrawHealthRK4TankS1_         
+00000de1  cosf                             
+00000fb5  sinf                             
+0000117d  _Z15Clock_Init80MHzi             
+00001331  _Z15ST7735_DrawCharsscssh        
+000014d9  __aeabi_dsub                     
+000014d9  __subdf3                         
+000014e3  __adddf3                         
+000014e3  __aeabi_dadd                     
+0000166b  SysTick_Handler                  
+0000166d  _Z8showMenuv                     
+000017f9  _ZN4Tank12rotateSpriteEf         
+00001ac5  floor                            
+00001ac5  floorl                           
+00001c09  _Z13showEndScreenv               
+00001d49  _ZN4Tank4MoveEv                  
+00001e89  _Z8ADC_InitP10ADC12_Regsjj       
+00001fb1  TIMG12_IRQHandler                
+000020d5  _ZN4Tank9TickPowerEj             
+000021f1  _Z15ST7735_FillRectsssst         
+00002309  _Z12bulletUpdatev                
+0000241d  aligned_alloc                    
+0000241d  memalign                         
+00002531  _Z11runGameLoopv                 
+00002641  _Z15initializeRoundh             
+00002749  _Z12generateMap4h                
+00002849  _Z12generateMap7h                
+00002949  _Z8SPI_Initv                     
+00002a41  _Z12generateMap3h                
+00002b35  _Z12generateMap8h                
+00002c29  _Z13generateMap10h               
+00002d1d  _Z12generateMap9h                
+00002e0d  _ZN4TankC1EiiiPKthhjj            
+00002e0d  _ZN4TankC2EiiiPKthhjj            
+00002efd  _ZN4Tank5ShootEP6Bulleti         
+00002fe9  add_device                       
+000030d5  _Z14ST7735_OutCharc              
+000031bd  _Z9UART_Initv                    
+000032a5  free                             
+0000338d  __aeabi_dmul                     
+0000338d  __muldf3                         
+00003471  setvbuf                          
+00003551  ldexp                            
+00003551  ldexpl                           
+00003551  scalbn                           
+00003551  scalbnl                          
+00003629  __aeabi_fsub                     
+00003629  __subsf3                         
+00003633  __addsf3                         
+00003633  __aeabi_fadd                     
+00003701  _Z16curWallCollisionjjjj         
+000037c5  _Z17curWaterCollisionjjjj        
+00003889  _ZN6Bullet5checkER4Tank          
+0000394b  _Z10Sound_Initv                  
+0000394d  _Z12generateMap2h                
+00003a01  _Z12generateMap6h                
+00003ab5  _ZN4Tank11TriVelocityEv          
+00003b69  _Z12generateMap5h                
+00003d71  _Z14TimerG7_IntArmtjj            
+00003e19  _Z12rotateUpdatev                
+00003f5f  __aeabi_idiv0                    
+00003f61  _Z12ST7735_InitR10initRFlags     
+00004001  _Z17ST7735_InitPrintf10initRFlags
+000040a1  open                             
+00004141  sqrtf                            
+000041e1  _Z11isCollisionv                 
+0000427d  _Z14ST7735_OutUDecj              
+00004451  _Z15TimerG12_IntArmjj            
+000044e5  main                             
+00004579  _ZN8SlidePot4InitEj              
+00004609  _ZN4Tank16TryActivatePowerEj     
+00004695  __aeabi_fmul                     
+00004695  __mulsf3                         
+000047a9  __aeabi_errno_addr               
+000047b1  strcmp                           
+00004839  _Z17ST7735_DrawStringttPcs       
+000048bd  __aeabi_fdiv                     
+000048bd  __divsf3                         
+0000493f  _nop                             
+00004941  _ZN6Bullet4InitEiifii            
+000049c1  _Z14LaunchPad_Initv              
+00004a3d  __TI_closefile                   
+00004ab9  __TI_decompress_lzss             
+00004b35  __gedf2                          
+00004b35  __gtdf2                          
+00004ba9  __aeabi_memcpy                   
+00004ba9  __aeabi_memcpy4                  
+00004ba9  __aeabi_memcpy8                  
+00004bb1  __aeabi_d2f                      
+00004bb1  __truncdfsf2                     
+00004c25  HOSTlseek                        
+00004c91  HOSTrename                       
+00004cfd  _Z9DrawWallsv                    
+00004d69  getdevice                        
+00004dd5  _Z9DrawWaterv                    
+00004e3d  __cmpdf2                         
+00004e3d  __eqdf2                          
+00004e3d  __ledf2                          
+00004e3d  __ltdf2                          
+00004e3d  __nedf2                          
+00004f09  __aeabi_dcmpeq                   
+00004f1d  __aeabi_dcmplt                   
+00004f31  __aeabi_dcmple                   
+00004f45  __aeabi_dcmpge                   
+00004f59  __aeabi_dcmpgt                   
+00004f6d  __aeabi_fcmpeq                   
+00004f81  __aeabi_fcmplt                   
+00004f95  __aeabi_fcmple                   
+00004fa9  __aeabi_fcmpge                   
+00004fbd  __aeabi_fcmpgt                   
+00004fd1  HOSTopen                         
+00005031  _ZN8SlidePot2InEv                
+00005091  _ZN4Tank10TakeDamageEv           
+000050ed  HOSTread                         
+00005145  HOSTwrite                        
+0000519d  _Z10TExaS_InitP10ADC12_RegsjPFhvE
+000051f5  _Z12generateMap1h                
+0000524d  __aeabi_idiv                     
+0000524d  __aeabi_idivmod                  
+000052a5  _Z11fillmessagej                 
+000052f9  __TI_auto_init_nobinit           
+0000534d  __TI_doflush                     
+0000539f  _ZN4Tank6RotateEi                
+000053f1  close                            
+00005441  _Z12tankMovementjjR4Tank         
+00005491  __aeabi_d2iz                     
+00005491  __fixdfsi                        
+000054dd  HOSTclose                        
+00005525  HOSTunlink                       
+0000556d  _Z14SPI_OutCommandc              
+000055b5  _Z9queryTankv                    
+000055f9  TIMG7_IRQHandler                 
+00005639  _Z9SPI_Resetv                    
+00005679  _ZN6Bullet4DrawEv                
+000056b9  __aeabi_uidiv                    
+000056b9  __aeabi_uidivmod                 
+000056f9  __aeabi_f2d                      
+000056f9  __extendsfdf2                    
+00005779  _Z7clamperfff                    
+000057b9  __aeabi_i2f                      
+000057b9  __floatsisf                      
+000057f5  __gesf2                          
+000057f5  __gtsf2                          
+00005831  __cmpsf2                         
+00005831  __eqsf2                          
+00005831  __lesf2                          
+00005831  __ltsf2                          
+00005831  __nesf2                          
+0000586d  __muldsi3                        
+000058a9  _Z11SPI_OutDatac                 
+000058e1  _Z11Switch_Initv                 
+00005919  _Z15ActivatePortA_Bv             
+00005951  _ZN6Bullet5EraseEv               
+00005989  __aeabi_f2iz                     
+00005989  __fixsfsi                        
+000059c1  rand                             
+000059f9  _ZN4Tank15rotateIncrementEi      
+00005a2f  _Z12ST7735_writeiPKcj            
+00005a65  _Z13displayUpdatev               
+00005a99  _Z14Clock_Delay1msj              
+00005acd  _Z16ST7735_SetCursorjj           
+00005b01  _Z8LED_Initv                     
+00005b35  __TI_cleanup                     
+00005b69  __TI_readmsg                     
+00005b9d  __TI_writemsg                    
+00005bc9  C$$IO$$                          
+00005bd1  exit                             
+00005c05  finddevice                       
+00005c39  freopen                          
+00005c6d  _Z15ST7735_Color565hhh           
+00005c9f  _ZN4Tank13TickCooldownsEv        
+00005cd1  _ZN4Tank4DrawEv                  
+00005d35  _ZN8SlidePot4SaveEj              
+00005dc5  fopen                            
+00005df5  _ZN8SlidePot4SyncEv              
+00005e25  _Z17ST7735_FillScreent           
+00005ea9  __aeabi_i2d                      
+00005ea9  __floatsidf                      
+00005ed5  unlink                           
+00005f01  _Z9ADC_StartP10ADC12_Regs        
+00005f29  __aeabi_ui2f                     
+00005f29  __floatunsisf                    
+00005f79  write                            
+00005fa1  _c_int00_noargs                  
+00005fc9  _Z16ST7735_OutStringPc           
+00005fef  _ZN6Bullet10DeactivateEv         
+00006015  srand                            
+00006057  _ZN4Tank4SetXEi                  
+00006075  _ZN4Tank4SetYEi                  
+00006095  ADC0_IRQHandler                  
+00006095  ADC1_IRQHandler                  
+00006095  AES_IRQHandler                   
+00006095  CANFD0_IRQHandler                
+00006095  DAC0_IRQHandler                  
+00006095  DMA_IRQHandler                   
+00006095  Default_Handler                  
+00006095  GROUP0_IRQHandler                
+00006095  GROUP1_IRQHandler                
+00006095  I2C0_IRQHandler                  
+00006095  I2C1_IRQHandler                  
+00006095  NMI_Handler                      
+00006095  PendSV_Handler                   
+00006095  RTC_IRQHandler                   
+00006095  SPI0_IRQHandler                  
+00006095  SPI1_IRQHandler                  
+00006095  SVC_Handler                      
+00006095  TIMA0_IRQHandler                 
+00006095  TIMA1_IRQHandler                 
+00006095  TIMG0_IRQHandler                 
+00006095  TIMG6_IRQHandler                 
+00006095  TIMG8_IRQHandler                 
+00006095  UART0_IRQHandler                 
+00006095  UART1_IRQHandler                 
+00006095  UART2_IRQHandler                 
+00006095  UART3_IRQHandler                 
+000060b1  HardFault_Handler                
+000060e9  _Z10Switch_In1v                  
+00006105  _Z10Switch_In2v                  
+00006121  _Z11ST7735_openPKcji             
+0000613d  _Z7P1SHOOTv                      
+00006159  _Z7P2SHOOTv                      
+00006175  _Z8special1v                     
+00006191  _Z8special2v                     
+000061ad  _ZN4Tank8SetAliveEb              
+000061e5  _Z15SlidePotSamplerR8SlidePot    
+000061ff  _ZN6BulletC1Ev                   
+000061ff  _ZN6BulletC2Ev                   
+00006219  _ZN8SlidePotC1Ejj                
+00006219  _ZN8SlidePotC2Ejj                
+00006259  _Z11ST7735_readiPcj              
+0000626f  __TI_zero_init_nomemset          
+00006285  _Z10LED_Togglej                  
+00006299  _Z6LED_Onj                       
+000062ad  _Z7LED_Offj                      
+000062c1  _ZN4Tank5SetHPEh                 
+000062fd  _ZN4Tank11NeedsRedrawEv          
+0000630f  TI_memcpy_small                  
+00006321  __TI_decompress_none             
+00006343  _Z11Clock_Delayj                 
+00006355  _Z28TExaS_LaunchPadLogicPB27PB26v
+00006365  _ZN4Tank8CanShootEv              
+00006375  _ZNK6Bullet8IsActiveEv           
+00006393  _Z12ST7735_lseekili              
+000063a1  _ZNK4Tank9GetHealthEv            
+000063cb  TI_memset_small                  
+000063d9  _Z10Clock_Freqv                  
+000063e5  _Z13ST7735_renamePKcS0_          
+000063f1  _ZN8SlidePot12lastDistanceEv     
+000063fd  _ZN8SlidePot8DistanceEv          
+00006409  _ZNK4Tank4GetXEv                 
+00006415  _ZNK4Tank4GetYEv                 
+00006421  __aeabi_memclr                   
+00006421  __aeabi_memclr4                  
+00006421  __aeabi_memclr8                  
+0000642d  malloc                           
+00006457  _Z12ST7735_closei                
+00006461  _Z13ST7735_unlinkPKc             
+0000646b  _Z8PLL_Initv                     
+00006475  remove                           
+000064c1  Reset_Handler                    
+000064c5  _system_pre_init                 
+000064c8  C$$EXIT                          
+000064c9  abort                            
+00007780  SHT$$INIT_ARRAY$$Base            
+00007784  SHT$$INIT_ARRAY$$Limit           
+00007860  __TI_Handler_Table_Base          
+0000786c  __TI_Handler_Table_Limit         
+00007874  __TI_CINIT_Base                  
+00007884  __TI_CINIT_Limit                 
+00007884  __TI_CINIT_Warm                  
 20200000  __start___llvm_prf_bits          
 20200000  __start___llvm_prf_cnts          
 20200000  __stop___llvm_prf_bits           
 20200000  __stop___llvm_prf_cnts           
 20200000  p1                               
-2020025c  p2                               
-202004b8  walls                            
-20200698  waters                           
-20200878  _ftable                          
-20200968  _device                          
-202009e0  Phrases                          
-20200a50  bullets1                         
-20200aa4  bullets2                         
-20200af8  _stream                          
-20200b48  player1SP                        
-20200b64  player2SP                        
-20200b80  __TI_cleanup_ptr                 
-20200b84  __TI_dtors_ptr                   
-20200b88  BusFreq                          
-20200b8c  NUM_WALLS                        
-20200b90  NUM_WATERS                       
-20200b94  StX                              
-20200b98  StY                              
-20200b9c  __TI_ft_end                      
-20200ba0  __aeabi_errno                    
-20200ba4  _lock                            
-20200ba8  _unlock                          
-20200bac  time                             
-20200bb4  winsP1                           
-20200bb6  winsP2                           
-20200bb8  TG12Flag                         
-20200bbb  bulletFlag1                      
-20200bbd  bulletFlag2                      
-20200bbe  gameState                        
-20200bbf  initialLives                     
-20200bc1  myLanguage                       
-20200bc8  _sys_memory                      
-20200dc8  _CIOBUF_                         
-20200dc8  __CIOBUF_                        
-20200ee8  __TI_tmpnams                     
-20200f88  Message                          
-20200f94  parmbuf                          
-20200f9c  Messageindex                     
-20200fa0  TExaSLogic                       
-20200fa4  TExaSadc                         
-20200fac  StTextColor                      
+2020026c  p2                               
+202004d8  walls                            
+202006b8  waters                           
+20200898  _ftable                          
+20200988  _device                          
+20200a00  Phrases                          
+20200a70  bullets1                         
+20200ac4  bullets2                         
+20200b18  _stream                          
+20200b68  player1SP                        
+20200b84  player2SP                        
+20200ba0  __TI_cleanup_ptr                 
+20200ba4  __TI_dtors_ptr                   
+20200ba8  BusFreq                          
+20200bac  NUM_WALLS                        
+20200bb0  NUM_WATERS                       
+20200bb4  StX                              
+20200bb8  StY                              
+20200bbc  __TI_ft_end                      
+20200bc0  __aeabi_errno                    
+20200bc4  _lock                            
+20200bc8  _unlock                          
+20200bd0  time                             
+20200bd8  winsP1                           
+20200bda  winsP2                           
+20200bdc  TG12Flag                         
+20200be1  bulletFlag1                      
+20200be2  bulletFlag2                      
+20200be3  gameState                        
+20200be5  initialLives                     
+20200be6  myLanguage                       
+20200bf0  _sys_memory                      
+20200df0  _CIOBUF_                         
+20200df0  __CIOBUF_                        
+20200f10  __TI_tmpnams                     
+20200fb0  Message                          
+20200fbc  parmbuf                          
+20200fc4  Messageindex                     
+20200fc8  TExaSLogic                       
+20200fcc  TExaSadc                         
+20200fd4  StTextColor                      
 20207e00  __stack                          
 20208000  __STACK_END                      
 ffffffff  __TI_pprof_out_hndl              
@@ -1261,4 +1293,4 @@ ffffffff  binit
 UNDEFED   __mpu_init                       
 UNDEFED   _system_post_cinit               
 
-[333 symbols]
+[341 symbols]

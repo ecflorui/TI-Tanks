@@ -24,6 +24,7 @@
 #include "bullet.h"
 #include "tools.h" //here's where all helper functions are located
 #include "fsm.h" //fsm things are here
+#include "LED.h"
 
 #define MAX_BULLETS 3
 Bullet bullets1[MAX_BULLETS]; //10 bullets avaliable for each player. if it's a dead, bullet it won't move. if alive, it'll move.
@@ -52,7 +53,7 @@ SlidePot player2SP(0,0); //no input for SP Constructor b/c we only care about ra
 
 Tank p1 = Tank(50, 50, 0, //Tank 1
            MiniRed,
-           1, 5, 19, 14);
+           0, 5, 19, 14);
 Tank p2 = Tank(100, 50, 0, //Tank 2
            MiniBlue,
            1, 5, 19, 14);
@@ -76,6 +77,21 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
 
       tankMovement(time, 1, p1);
       tankMovement(time, 2, p2);
+
+     p1.TickPower(time);
+     p2.TickPower(time);
+
+  // 2) check for activate button press
+    if(special2()) p1.TryActivatePower(time);
+    if(special1()) p2.TryActivatePower(time);
+
+    if ((time % 20) && (p1.puActive)) {
+      LED_Toggle(4);
+    }
+
+    if ((time % 20) && (p2.puActive)) {
+      LED_Toggle(1);
+    }
 
       queryTank();
 
@@ -110,6 +126,7 @@ int main(void){
   TimerG12_IntArm(2666667,1);
   Switch_Init();
   __enable_irq();
+  
 
   
 

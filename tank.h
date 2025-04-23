@@ -67,7 +67,8 @@ struct Tank {
         void Rotate(int32_t angleChange);
         void rotateSprite(float degrees);
         void rotateIncrement(int32_t delta);
-        void TriVelocity(int32_t magnitude);
+        void TriVelocity();
+        uint32_t magnitude = 1;
 
         void TakeDamage();
         bool CanShoot();
@@ -91,6 +92,21 @@ struct Tank {
         void SetX(int32_t px);
         void SetY(int32_t py);
         void SetHP(uint8_t hp);
+
+        //power up setup 
+
+        enum Power { PU_None=0, PU_Shield, PU_Speed, PU_Bullet } puType;
+        bool  puReady;         // this state means that power up can be used
+        bool  puActive;        // power up is active for the player
+        uint32_t puLoadStart;  // time when load began
+        uint32_t puEffStart;   // time when effect began
+
+        void TickPower(uint32_t now);
+        void TryActivatePower(uint32_t now);
+
+        static constexpr uint32_t LOAD_TICKS   =  7*30;    // 7 seconds @30 Hz = 210 ticks
+        static constexpr uint32_t EFFECT_TICKS = 10*30;    // 10 seconds @30 Hz = 300 ticks
+
 };
 
 #endif 

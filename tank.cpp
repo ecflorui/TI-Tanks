@@ -18,7 +18,11 @@
 #include "Sound.h"
 #include <math.h>
 #include "images/images.h"
+#include "LED.h"
 
+extern uint32_t time;
+extern Tank p1;
+extern Tank p2;
 
 Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
            const uint16_t* sprite, 
@@ -49,9 +53,76 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
 
     for (int i = 0; i < width * height; i++) {
     rotatedTank[i] = sprite[i];
+
+
+    //power up stuff
 }
+    puType      = PU_None;
+    puReady     = false;
+    puActive    = false;
+    puLoadStart = 0;         
+    puEffStart  = 0;
 
     Rotate(0);
+}
+
+// at top of tank.cpp (or in tank.h):
+static constexpr uint32_t LOAD_TICKS   = 7 * 30;   // 7 s @30 Hz
+static constexpr uint32_t EFFECT_TICKS = 10 * 30;  // 10 s @30 Hz
+
+void Tank::TickPower(uint32_t now) {
+    // 1) Kick off the load timer
+    if (!puReady && !puActive && puLoadStart == 0) {
+        puLoadStart = now;
+    }
+
+    // 2) Finish loading after 7 s → power is ready
+    if (!puReady && !puActive && now - puLoadStart >= LOAD_TICKS) {
+        puReady = true;
+
+        srand(now);
+        puType  = static_cast<Power>((rand() % 3) + 1);
+
+        // turn on the “ready” LED for this player
+        if (playerNum == 0) LED_On(4);  // PA17
+        else                LED_On(1);  // PA15
+    }
+
+    // 3) Expire the effect after 10 s
+    if (puActive && now - puEffStart >= EFFECT_TICKS) {
+        puActive    = false;
+        puType      = PU_None;
+        magnitude   = 1;            // revert speed boost
+
+        // turn off the LED
+        if (playerNum == 0) LED_Off(4);
+        else                LED_Off(1);
+
+        // immediately begin loading the next power-up
+        puLoadStart = now;
+        puReady     = false;
+    }
+}
+
+
+void Tank::TryActivatePower(uint32_t now) {
+  if(puReady && !puActive) {
+    puReady     = false;
+    puActive    = true;
+    puEffStart  = now;
+    // apply effect immediately
+    switch(puType) {
+      case PU_Shield:
+        DrawHealth(p1, p2);
+        break;
+      case PU_Speed:
+        magnitude = 2;
+        break;
+      case PU_Bullet:
+        break;
+      default: break;
+    }
+  }
 }
 
 void Tank::Draw() {
@@ -98,7 +169,7 @@ void Tank::Move() {
         return;
     }
 
-    Erase();
+    ST7735_FillRect(old_fx, old_fy - height, width, height, 0x3467);//updated erase() function for faster magnitudes
     needUpdate = true;
 }
 
@@ -168,7 +239,7 @@ void Tank::rotateIncrement(int32_t delta) {
     }
 }
 
-void Tank::TriVelocity(int32_t magnitude) {
+void Tank::TriVelocity() {
     float radians = angle * (3.14159265f / 180.0f);
     
     float dx = cosf(radians);
@@ -186,6 +257,7 @@ void Tank::TriVelocity(int32_t magnitude) {
 }
 
 void Tank::TakeDamage() {
+    if(puActive && puType==PU_Shield) return; //no need to take damage
     if (health > 0) {
         health--;
     }
@@ -241,9 +313,13 @@ void Tank::Shoot(Bullet bullets[], int maxBullets) {
             int32_t centerX = x + (width /2); //launch from center
             int32_t centerY = y - height / 2;  
 
-            bullets[i].Init(centerX, centerY, (float)angle, 2, 120);  // speed has default 2, life is 4s (120 with 30 hz G12 clock going)
+            int speed = 2;
+            if(puActive && puType==PU_Bullet) speed *= 2;
+
+            bullets[i].Init(centerX, centerY, (float)angle, speed, 120);  // speed has default 2, life is 4s (120 with 30 hz G12 clock going)
             //300 (10s) life for bullet for testing purposes currently, change this back. customizable for potential powerup?
-            shotCooldown = 45; // 1 second cooldown given 30 hz, i may adjust this later
+            if(puActive && puType==PU_Bullet) shotCooldown = 30;
+            else shotCooldown = 45; // 1 second cooldown given 30 hz, i may adjust this later
             break;
         }
     }
