@@ -11,6 +11,9 @@
 extern Bullet bullets1[];
 extern Bullet bullets2[];
 
+extern Tank p1;
+extern Tank p2;
+
 #define MAX_BULLETS 3
 
 
@@ -132,6 +135,8 @@ uint8_t lang = 0;
   }
 }
 
+
+
 void runGameLoop(void) {
       __disable_irq();
     ST7735_FillScreen(0x0000);
@@ -181,7 +186,11 @@ ST7735_SetCursor(0, 1);
     bullets1[i].Deactivate();
     bullets2[i].Deactivate();
    }
-   Clock_Delay1ms(2000);
+
+   p1.powerDisable(); //get rid of power ups
+  p2.powerDisable();
+
+   Clock_Delay1ms(1000);
 
 
   while (1) {

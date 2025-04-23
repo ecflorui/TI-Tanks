@@ -138,6 +138,57 @@ void rotateUpdate() {
   }
 }
 
+void DrawPowerIcons(bool redraw) {
+    if (time < 2) return; //inital icons get drawn
+
+    static int8_t prev1 = -1;
+    static int8_t prev2 = -1;
+
+    int8_t cur1 = p1.puType;
+    int8_t cur2 = p2.puType;
+
+    if ((cur1 != prev1) ||redraw){
+
+      switch (p1.puType) {
+        case Tank::PU_Shield:
+          ST7735_DrawBitmap(1, 90, shieldRed, 8,8);
+          break;
+        case Tank::PU_Bullet:
+          ST7735_DrawBitmap(1, 90, fireRed, 8,8);
+          break;
+        case Tank::PU_Speed:
+          ST7735_DrawBitmap(1, 90, speedRed, 8,8);
+          break;
+        default:
+          ST7735_DrawBitmap(1, 90, noRed, 8,8);\
+          break;
+      }
+
+    }
+
+    
+    if ((cur2 != prev2) || redraw) {
+    switch (p2.puType) {
+        case Tank::PU_Shield:
+          ST7735_DrawBitmap(1, 78, shieldBlue, 8,8);
+          break;
+        case Tank::PU_Bullet:
+          ST7735_DrawBitmap(1, 78, fireBlue, 8,8);
+          break;
+        case Tank::PU_Speed:
+          ST7735_DrawBitmap(1, 78, speedBlue, 8,8);
+          break;
+        default:
+          ST7735_DrawBitmap(1, 78, noBlue, 8,8);
+          break;
+      }   
+    }
+
+    prev1 = cur1;
+    prev2 = cur2;
+}
+
+
 void displayUpdate() {
      // Only draw when ISR signals it's time
     if (p1.NeedsRedraw())  
@@ -216,11 +267,17 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
     static int8_t  lastHP2       = -1;
     static bool    lastShield1   = false;
     static bool    lastShield2   = false;
+    static bool    prevState1   = false;
+    static bool    prevState2   = false;
 
     int8_t  hp1     = player1.GetHealth();
     int8_t  hp2     = player2.GetHealth();
     bool    shield1 = player1.puActive && player1.puType == Tank::PU_Shield;
     bool    shield2 = player2.puActive && player2.puType == Tank::PU_Shield;
+
+    bool curState1 = player1.puActive;
+    bool curState2 = player1.puActive;
+
 
 
     if (hp1 != lastHP1 || hp2 != lastHP2 || shield1 != lastShield1 || shield2 != lastShield2) {
@@ -245,7 +302,10 @@ void DrawHealth(const Tank& player1, const Tank& player2) {
           int y = 160 - 2 - i*spacing - 8;
             ST7735_DrawBitmap(x+1, y+8,shield1 ? heart5 : heart2, 8,8);
         }
+
+            DrawPowerIcons(1); //need to redraw
     }
+    DrawPowerIcons(0); //only if new state
 }
 
 
@@ -576,8 +636,7 @@ const uint32_t t      = 6;               // wall/water thickness
         { left,   40, 30,            t },
         { left + 50, 40, width - 50, t },
 
-        { left + 40, 80, 30,            t },
-        { left + 70, 80, width - 70,    t },
+        { left + 80, 80, width - 70,    t },
 
         { left, 120, 40,            t },
         { left + 60, 120, width - 60, t },
@@ -707,6 +766,7 @@ void initializeRound(uint8_t hp) {
 
   DrawWalls();
   DrawWater();
+
 
   __enable_irq();
 }

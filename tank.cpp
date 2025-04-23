@@ -63,6 +63,7 @@ Tank::Tank(int32_t startX, int32_t startY, int32_t startAngle,
     puLoadStart = 0;         
     puEffStart  = 0;
 
+
     Rotate(0);
 }
 
@@ -86,6 +87,7 @@ void Tank::TickPower(uint32_t now) {
         // turn on the “ready” LED for this player
         if (playerNum == 0) LED_On(4);  // PA17
         else                LED_On(1);  // PA15
+
     }
 
     // 3) Expire the effect after 10 s
@@ -98,12 +100,20 @@ void Tank::TickPower(uint32_t now) {
         if (playerNum == 0) LED_Off(4);
         else                LED_Off(1);
 
+
         // immediately begin loading the next power-up
         puLoadStart = now;
         puReady     = false;
     }
 }
 
+void Tank::powerDisable() {
+puType = PU_None;
+    puReady = false;
+    puActive = false;
+    puLoadStart = 0;
+    puEffStart = 0;
+}
 
 void Tank::TryActivatePower(uint32_t now) {
   if(puReady && !puActive) {
@@ -113,7 +123,6 @@ void Tank::TryActivatePower(uint32_t now) {
     // apply effect immediately
     switch(puType) {
       case PU_Shield:
-        DrawHealth(p1, p2);
         break;
       case PU_Speed:
         magnitude = 2;
@@ -324,4 +333,5 @@ void Tank::Shoot(Bullet bullets[], int maxBullets) {
         }
     }
 }
+
 

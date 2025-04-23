@@ -107,6 +107,7 @@ struct Tank {
         static constexpr uint32_t LOAD_TICKS   =  7*30;    // 7 seconds @30 Hz = 210 ticks
         static constexpr uint32_t EFFECT_TICKS = 10*30;    // 10 seconds @30 Hz = 300 ticks
 
+        void powerDisable(void);
 };
 
 #endif 
