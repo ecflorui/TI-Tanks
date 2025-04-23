@@ -20,6 +20,7 @@ C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/SlidePot.cpp \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/TExaS.cpp \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Timer.cpp \
 ../bullet.cpp \
+../fsm.cpp \
 ../tank.cpp \
 ../tools.cpp 
 
@@ -41,6 +42,7 @@ OBJS += \
 ./TExaS.o \
 ./Timer.o \
 ./bullet.o \
+./fsm.o \
 ./tank.o \
 ./tools.o 
 
@@ -59,6 +61,7 @@ CPP_DEPS += \
 ./TExaS.d \
 ./Timer.d \
 ./bullet.d \
+./fsm.d \
 ./tank.d \
 ./tools.d 
 
@@ -77,6 +80,7 @@ OBJS__QUOTED += \
 "TExaS.o" \
 "Timer.o" \
 "bullet.o" \
+"fsm.o" \
 "tank.o" \
 "tools.o" 
 
@@ -95,6 +99,7 @@ CPP_DEPS__QUOTED += \
 "TExaS.d" \
 "Timer.d" \
 "bullet.d" \
+"fsm.d" \
 "tank.d" \
 "tools.d" 
 
@@ -113,6 +118,7 @@ CPP_SRCS__QUOTED += \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/TExaS.cpp" \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Timer.cpp" \
 "../bullet.cpp" \
+"../fsm.cpp" \
 "../tank.cpp" \
 "../tools.cpp" 
 

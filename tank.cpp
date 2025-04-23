@@ -241,9 +241,9 @@ void Tank::Shoot(Bullet bullets[], int maxBullets) {
             int32_t centerX = x + (width /2); //launch from center
             int32_t centerY = y - height / 2;  
 
-            bullets[i].Init(centerX, centerY, (float)angle, 2, 300);  // speed has default 2, life is 4s (120 with 30 hz G12 clock going)
+            bullets[i].Init(centerX, centerY, (float)angle, 2, 120);  // speed has default 2, life is 4s (120 with 30 hz G12 clock going)
             //300 (10s) life for bullet for testing purposes currently, change this back. customizable for potential powerup?
-            shotCooldown = 30; // 1 second cooldown given 30 hz, i may adjust this later
+            shotCooldown = 45; // 1 second cooldown given 30 hz, i may adjust this later
             break;
         }
     }

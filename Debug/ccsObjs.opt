@@ -12,6 +12,7 @@
 "./TExaS.o"
 "./Timer.o"
 "./bullet.o"
+"./fsm.o"
 "./tank.o"
 "./tools.o"
 "./images/SpaceInvaders/pipedreams/PipeSound.o"

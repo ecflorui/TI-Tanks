@@ -40,7 +40,7 @@ void Bullet::Move() {
   if (!active) return;
 
   // 1) erase old
-  if (time <= 296) Erase();
+  if (time <= 116) Erase();
 
   if (time % 90) //dont want to update too quickly, every 3 s
   DrawWater(); //so that bullets go over 
@@ -76,7 +76,7 @@ void Bullet::Move() {
 
   // 4) advance life & maybe draw
   time--;
-  if (time > 296) return;
+  if (time > 116) return;
 
   if (x < 10 || x > 126 || y < 0 || y > 161 || time <= 0) {
     active = false;
@@ -121,7 +121,7 @@ void Bullet::check(Tank& t) {
     int32_t bottom = t.GetY();
 
     // Simple AABB (Axis-Aligned Bounding Box) check
-    if ((x >= left && x <= right && y >= top && y <= bottom) && (time < 295))  {
+    if ((x >= left && x <= right && y >= top && y <= bottom) && (time < 115))  {
         t.TakeDamage();
         Deactivate();
     }

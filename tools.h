@@ -22,6 +22,9 @@
 class Tank;
 class Bullet;
 
+void initializeRound(uint8_t hp);
+void nextStage(uint8_t w);
+
 void SlidePotSampler(SlidePot &s);
 void tankMovement(uint32_t time, uint32_t playerNum, Tank &t);
 void queryTank(void);
@@ -41,6 +44,16 @@ uint32_t Random(uint32_t n);
 void DrawWalls();
 void DrawWater();
 
-void generateMap1();
+void generateMap1(uint8_t hp);
+void generateMap2(uint8_t hp);
+void generateMap3(uint8_t hp);
+void generateMap4(uint8_t hp);
+void generateMap5(uint8_t hp);
+void generateMap6(uint8_t hp);
+void generateMap7(uint8_t hp);
+void generateMap8(uint8_t hp);
+void generateMap9(uint8_t hp);
+void generateMap10(uint8_t hp);
+
 
 

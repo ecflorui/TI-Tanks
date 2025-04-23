@@ -23,7 +23,7 @@
 
 using namespace std;
 
-#define MAX_BULLETS 10
+#define MAX_BULLETS 3
 extern uint32_t time;
 extern Bullet bullets1[];
 extern Bullet bullets2[];
@@ -34,6 +34,8 @@ extern Tank p2;
 extern bool TG12Flag;
 extern SlidePot player1SP;
 extern SlidePot player2SP;
+extern bool deathFlag;
+extern bool gameEndFlag;
 
 
 //gamestate stuff
@@ -48,18 +50,17 @@ const int WINS_NEEDED  = 3;
 
 
 //different walls
-Wall walls[] = {
-};
-
+Wall walls[30]; //no more than 30 walls
 int NUM_WALLS = 0;
 
-Water waters[] = {
-};
+Water waters[30]; //no more than 30 waters
 
 int NUM_WATERS = 0;
 
 
 uint32_t M=1;
+
+
 
 void SlidePotSampler(SlidePot &s) {
     uint32_t newData = s.In();
@@ -109,7 +110,7 @@ void bulletUpdate() {
     p2.TickCooldowns(); //we have a global bullets array
     for (int i = 0; i < MAX_BULLETS; i++) {
     bullets2[i].check(p1);
-    bullets1[i].check(p2);
+    bullets2[i].check(p2);
     bullets2[i].Move();
     }
 
@@ -174,7 +175,7 @@ bool isCollision() {
 bool curWallCollision(uint32_t x, uint32_t y, uint32_t w, uint32_t h) {
   for (int i = 0; i < NUM_WALLS; i++) {
     Wall& wall = walls[i];
-    bool overlap = !(x + w <= wall.x || x >= wall.x + wall.width || y + (h+1) <= wall.y || y >= wall.y +((wall.height+1)));
+    bool overlap = !(x + w <= (wall.x) || x >= wall.x + wall.width || y + (h+1) <= wall.y || y >= wall.y +((wall.height+1)));
     if (overlap) return true;
   }
   return false;
@@ -252,7 +253,165 @@ void DrawWater() {
     ST7735_FillRect(water.x, water.y, water.width, water.height, ST7735_BLUE);
   }
 }
-void generateMap1() { //empty
+
+
+void generateMap1(uint8_t hp) { //empty
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+
+
+
+void generateMap2(uint8_t hp) {
+    const uint32_t t = 5;      // wall thickness
+    const uint32_t left = 10;  // leave first 10px for health
+    const uint32_t width = 128 - left;
+    const uint32_t height = 160;
+
+    static const Wall maze[] = {
+
+      { left, 0, width, t},  
+      { left, height-t, width, t},  
+      { left, 0, t, height},  
+      { left+width-t, 0, t, height},  
+
+      // vertical corridors
+      {left + 30, 90, t , 70},
+      { left + 50, 0, t, 70},
+      { left + 80, 88, t, 40},
+      { left + 80, 0, t, 20},
+      // { left +100,     t,  t,           50         },
+      // { left +100,     90, t,           60         },
+
+      // // horizontal corridors
+      {left + 60, 128, 78, t },
+      {left+30, 50, 46, t},
+      {left+100, 50, 20, t},
+      // { left,          100,50,          t          },
+      // { left+68,       100,50,          t          },
+    };
+
+
+  NUM_WALLS = sizeof(maze)/sizeof(maze[0]);
+
+  for(int i = 0; i < NUM_WALLS; ++i){
+    walls[i] = maze[i];
+  }
+
+
+  NUM_WATERS = 0;
+
+  p1.SetX(95); 
+  p1.SetY(153); 
+  p1.SetHP(hp);
+  p2.SetX(20); 
+  p2.SetY(20); 
+  p2.SetHP(hp);
+}
+
+
+
+void generateMap3(uint8_t hp) { //the ring
+
+    const uint32_t t = 7;      // wall thickness
+    const uint32_t left = 10;  // leave first 10px for health
+    const uint32_t width = 128 - left;
+    const uint32_t height = 160;
+
+    static const Wall bands[] = {
+      {left + 32, 57, t , 53},
+      {left + 77, 57, t , 53},
+    };
+
+    NUM_WALLS = sizeof(bands)/sizeof(bands[0]);
+
+    static const Water ring[]  = {
+      //vertical
+      {left + 25, 50, t , 60},
+      {left + 85, 50, t , 60},
+
+      //horizontal
+      {left + 25, 50, 60 , t},
+      {left + 25, 110, 67 , t},
+    };
+    NUM_WATERS = sizeof(ring)/sizeof(ring[0]);
+
+      for(int i = 0; i < NUM_WATERS; ++i){
+    waters[i] = ring[i];
+  }
+
+    for(int i = 0; i < NUM_WALLS; ++i){
+    walls[i] = bands[i];
+  }
+
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+
+void generateMap4(uint8_t hp) { //bridges
+
+    const uint32_t t = 10;      // wall thickness
+    const uint32_t left = 10;  // leave first 10px for health
+    const uint32_t width = 128 - left;
+    const uint32_t height = 160;
+
+    Wall bands[] = {
+      {left, 65, t, 30},
+      {width, 65, t, 30},
+    };
+    NUM_WALLS = sizeof(bands)/sizeof(bands[0]);
+
+    static const Water river[] = {
+      { left, 55, 25, t},  
+      { left, 95, 25, t}, 
+
+      {left + 50, 55, 15, t},  
+      {left + 50, 95, 15, t}, 
+
+       {left + 90, 55, 38, t},  
+      {left + 90, 95, 38, t}, 
+    };
+
+     NUM_WATERS = sizeof(river)/sizeof(river[0]);
+
+      for(int i = 0; i < NUM_WATERS; ++i){
+    waters[i] = river[i];
+  }
+
+    for(int i = 0; i < NUM_WALLS; ++i){
+    walls[i] = bands[i];
+  }
+
+
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+void generateMap5(uint8_t hp) { //islands
     Wall walls[] = {};
     int NUM_WALLS = 0;
 
@@ -267,3 +426,179 @@ void generateMap1() { //empty
     p2.SetY(30);
     p2.SetHP(5);
 }
+
+void generateMap6(uint8_t hp) { //water shootout
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+void generateMap7(uint8_t hp) { //bouncy castle
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+void generateMap8(uint8_t hp) { //stranded island
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+
+void generateMap9(uint8_t hp) { //maze 2
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+void generateMap10(uint8_t hp) { //ping pong
+    Wall walls[] = {};
+    int NUM_WALLS = 0;
+
+    Water waters[] = {};
+    int NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+
+void initializeRound(uint8_t hp) {
+
+  __disable_irq();
+
+  uint8_t pickMap = 3; //time %10
+
+  switch (pickMap){
+    case 0:
+      generateMap1(hp);
+      break;
+
+    case 1:
+      generateMap2(hp);
+      break;
+
+    case 2:
+      generateMap3(hp);
+      break;
+      
+    case 3:
+      generateMap4(hp);
+      break;
+    
+    case 4:
+      generateMap5(hp);
+      break;
+      
+    case 5:
+      generateMap6(hp);
+      break;
+
+    case 6:
+      generateMap7(hp);
+      break;
+      
+    case 7:
+      generateMap8(hp);
+      break;
+
+    case 8:
+      generateMap9(hp);
+      break;
+      
+    case 9:
+      generateMap10(hp);
+      break;
+
+    default:
+      generateMap1(hp);
+      break;
+  }
+
+  ST7735_FillScreen(0x3467);
+
+  p1.SetAlive(1);
+  p1.SetAlive(1);
+
+  p1.Draw();
+  p2.Draw();
+
+  DrawWalls();
+  DrawWater();
+
+  __enable_irq();
+}
+
+// void nextStage(uint8_t w) {
+
+//   __disable_irq();
+//   ST7735_FillScreen(ST7735_BLACK);
+
+//   if (w == 0) {
+//     //ST7735_DrawString("PLAYER RED LOST"); //placeholder
+//     Clock_Delay1ms(500);
+//     p2SeriesWins++;
+//     if (p2SeriesWins == WINS_NEEDED) {
+//       gameEndFlag = true;
+//     }
+//   }
+
+//   if (w == 1) {
+
+//     //ST7735_DrawString("PLAYER BLUE LOST"); //placeholder
+//     Clock_Delay1ms(500);
+//     p1SeriesWins++;
+//     if (p2SeriesWins == WINS_NEEDED) {
+//       gameEndFlag = true;
+//       return;
+//     }
+//   }
+
+//   initializeRound();
+// }
