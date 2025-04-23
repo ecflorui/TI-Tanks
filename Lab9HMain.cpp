@@ -85,11 +85,11 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     if(special2()) p1.TryActivatePower(time);
     if(special1()) p2.TryActivatePower(time);
 
-    if ((time % 20) && (p1.puActive)) {
+    if ((time % 200) && (p1.puActive)) {
       LED_Toggle(4);
     }
 
-    if ((time % 20) && (p2.puActive)) {
+    if ((time % 200) && (p2.puActive)) {
       LED_Toggle(1);
     }
 
