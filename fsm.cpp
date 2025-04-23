@@ -109,7 +109,7 @@ uint8_t lang = 0;
 
     // Increase lives (max 5)
     if (sw6 && !sw5 || sw5 && !sw6) {
-      lives = (lives % 5) + 1;
+      lives = (lives % 7) + 1;
 
       ST7735_SetCursor(4, 8);
       ST7735_OutUDec(lives);

@@ -411,28 +411,19 @@ void generateMap4(uint8_t hp) { //bridges
     p2.SetHP(hp);
 }
 
-void generateMap5(uint8_t hp) { //islands
+void generateMap5(uint8_t hp) { //water shootout
     Wall walls[] = {};
-    int NUM_WALLS = 0;
+    NUM_WALLS = 0;
 
-    Water waters[] = {};
-    int NUM_WATERS = 0;
-    
-    p1.SetX(60);
-    p1.SetY(140);
-    p1.SetHP(5);
+    Water river[] = {
+      {10, 70, 118, 20}
+    };
 
-    p2.SetX(60);
-    p2.SetY(30);
-    p2.SetHP(5);
-}
+   NUM_WATERS = sizeof(river)/sizeof(river[0]);
 
-void generateMap6(uint8_t hp) { //water shootout
-    Wall walls[] = {};
-    int NUM_WALLS = 0;
-
-    Water waters[] = {};
-    int NUM_WATERS = 0;
+      for(int i = 0; i < NUM_WATERS; ++i){
+    waters[i] = river[i];
+  }
     
     p1.SetX(60);
     p1.SetY(140);
@@ -443,12 +434,70 @@ void generateMap6(uint8_t hp) { //water shootout
     p2.SetHP(hp);
 }
 
-void generateMap7(uint8_t hp) { //bouncy castle
-    Wall walls[] = {};
-    int NUM_WALLS = 0;
+void generateMap6(uint8_t hp) { //bouncy castle
+
+    const uint32_t t = 4;      // wall thickness
+    const uint32_t left = 10;  // leave first 10px for health
+    const uint32_t width = 128 - left;
+    const uint32_t height = 160;
+
+    static const Wall cover[] = {
+
+      { left, 0, width, t},  
+      { left, height-t, width, t},  
+      { left, 0, t, height},  
+      { left+width-t, 0, t, height}, 
+    };
+    
+   NUM_WALLS = sizeof(cover)/sizeof(cover[0]);
+
+      for(int i = 0; i < NUM_WALLS; ++i){
+    walls[i] = cover[i];
+  }
 
     Water waters[] = {};
-    int NUM_WATERS = 0;
+    NUM_WATERS = 0;
+    
+    p1.SetX(60);
+    p1.SetY(140);
+    p1.SetHP(hp);
+
+    p2.SetX(60);
+    p2.SetY(30);
+    p2.SetHP(hp);
+}
+
+void generateMap7(uint8_t hp) { //ping pong 
+
+
+    const uint32_t t = 5;      // wall thickness
+    const uint32_t left = 10;  // leave first 10px for health
+    const uint32_t width = 128 - left;
+    const uint32_t height = 160;
+
+    static const Wall cover[] = {
+
+      { left, 0, width, t},  
+      { left, height-t, width, t},  
+      { left, 0, t, height},  
+      { left+width-t, 0, t, height}, 
+    };
+    
+   NUM_WALLS = sizeof(cover)/sizeof(cover[0]);
+
+        for(int i = 0; i < NUM_WALLS; ++i){
+    walls[i] = cover[i];
+  }
+
+       Water river[] = {
+      {10, 70, 118, 20}
+    };
+
+   NUM_WATERS = sizeof(river)/sizeof(river[0]);
+
+      for(int i = 0; i < NUM_WATERS; ++i){
+    waters[i] = river[i];
+  }
     
     p1.SetX(60);
     p1.SetY(140);
@@ -492,7 +541,7 @@ void generateMap9(uint8_t hp) { //maze 2
     p2.SetHP(hp);
 }
 
-void generateMap10(uint8_t hp) { //ping pong
+void generateMap10(uint8_t hp) { //islands
     Wall walls[] = {};
     int NUM_WALLS = 0;
 
@@ -513,7 +562,7 @@ void initializeRound(uint8_t hp) {
 
   __disable_irq();
 
-  uint8_t pickMap = 3; //time %10
+  uint8_t pickMap = time % 7; //time %10
 
   switch (pickMap){
     case 0:

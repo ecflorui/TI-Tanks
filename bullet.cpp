@@ -42,7 +42,7 @@ void Bullet::Move() {
   // 1) erase old
   if (time <= 116) Erase();
 
-  if (time % 90) //dont want to update too quickly, every 3 s
+  if (time % 100) //dont want to update too quickly, every 3 s
   DrawWater(); //so that bullets go over 
 
   // 2) HORIZONTAL step + bounce
