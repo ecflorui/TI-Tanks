@@ -81,8 +81,8 @@ void Tank::TickPower(uint32_t now) {
     if (!puReady && !puActive && now - puLoadStart >= LOAD_TICKS) {
         puReady = true;
 
-        srand(now);
-        puType  = static_cast<Power>((rand() % 3) + 1);
+        srand(now * x + y);
+        puType  = static_cast<Power>((rand()  % 3) + 1);
 
         // turn on the “ready” LED for this player
         if (playerNum == 0) LED_On(4);  // PA17
