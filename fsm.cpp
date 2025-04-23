@@ -5,7 +5,13 @@
 #include "Switch.h"
 #include "tank.h" // placement new for Tank re‐init
 #include "tools.h"
+#include "bullet.h"
 #include <cstdint>
+
+extern Bullet bullets1[];
+extern Bullet bullets2[];
+
+#define MAX_BULLETS 3
 
 
 Language_t myLanguage = English;
@@ -170,6 +176,11 @@ ST7735_SetCursor(0, 1);
   ST7735_OutUDec(winsP2);
   ST7735_SetCursor(0, 4);
    ST7735_OutString((char *)Phrases[5][myLanguage]);
+
+   for (int i = 0; i < MAX_BULLETS; i++) {
+    bullets1[i].Deactivate();
+    bullets2[i].Deactivate();
+   }
    Clock_Delay1ms(2000);
 
 

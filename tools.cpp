@@ -508,61 +508,138 @@ void generateMap7(uint8_t hp) { //ping pong
     p2.SetHP(hp);
 }
 
-void generateMap8(uint8_t hp) { //stranded island
-    Wall walls[] = {};
-    int NUM_WALLS = 0;
+void generateMap8(uint8_t hp) { //the moat
+    const uint32_t t      = 6;               // wall/water thickness
+    const uint32_t left   = 10;              // leave x=0…9 clear for health bar
+    const uint32_t width  = 128 - left;
+    const uint32_t height = 160;
 
-    Water waters[] = {};
-    int NUM_WATERS = 0;
-    
-    p1.SetX(60);
-    p1.SetY(140);
-    p1.SetHP(hp);
+    // --- Walls: outer frame + an inner ring ---
+    static const Wall ringWalls[] = {
+        // outer border
+        { left,             0, width,            t },
+        { left,      height - t, width,            t },
+        { left,             0,            t, height },
+        { left + width - t, 0,            t, height },
 
-    p2.SetX(60);
-    p2.SetY(30);
-    p2.SetHP(hp);
+        // inner ring (a hollow square)
+        { left + 30,  50,  60,            t },  // top
+        { left + 30,  50 + 60 - t, 60,    t },  // bottom
+        { left + 30,  50,            t,   60 }, // left
+        { left + 30 + 60 - t, 50,    t,   60 }, // right
+    };
+    NUM_WALLS = sizeof(ringWalls)/sizeof(ringWalls[0]);
+    for(int i = 0; i < NUM_WALLS; ++i){
+        walls[i] = ringWalls[i];
+    }
+
+    // --- Water: one central pond inside the ring ---
+    static const Water pond[] = {
+        { left + 40, 60, 40, 40 },
+    };
+    NUM_WATERS = sizeof(pond)/sizeof(pond[0]);
+    for(int i = 0; i < NUM_WATERS; ++i){
+        waters[i] = pond[i];
+    }
+
+    // --- Spawn players in opposite corners ---
+    p1.SetX(left + 20);  p1.SetY(140); p1.SetHP(hp);
+    p2.SetX(left + 90);  p2.SetY( 20); p2.SetHP(hp);
 }
 
 
 void generateMap9(uint8_t hp) { //maze 2
-    Wall walls[] = {};
-    int NUM_WALLS = 0;
+const uint32_t t      = 6;               // wall/water thickness
+    const uint32_t left   = 10;              // keep x<10 clear for health
+    const uint32_t width  = 128 - left;
+    const uint32_t height = 160;
 
-    Water waters[] = {};
-    int NUM_WATERS = 0;
-    
-    p1.SetX(60);
-    p1.SetY(140);
-    p1.SetHP(hp);
+    // --- Walls: outer frame + three zig-zag bars ---
+    static const Wall zigzagWalls[] = {
+        // outer border
+        { left,             0, width,            t },
+        { left,      height - t, width,            t },
+        { left,             0,            t, height },
+        { left + width - t, 0,            t, height },
 
-    p2.SetX(60);
-    p2.SetY(30);
-    p2.SetHP(hp);
+        // zig-zag bars
+        { left,   40, 30,            t },
+        { left + 50, 40, width - 50, t },
+
+        { left + 40, 80, 30,            t },
+        { left + 70, 80, width - 70,    t },
+
+        { left, 120, 40,            t },
+        { left + 60, 120, width - 60, t },
+    };
+    NUM_WALLS = sizeof(zigzagWalls)/sizeof(zigzagWalls[0]);
+    for(int i = 0; i < NUM_WALLS; ++i) {
+        walls[i] = zigzagWalls[i];
+    }
+
+    // --- Water: one small central pool ---
+    static const Water pool[] = {
+        { left + 40, 70, 30, 20 },
+    };
+    NUM_WATERS = sizeof(pool)/sizeof(pool[0]);
+    for(int i = 0; i < NUM_WATERS; ++i) {
+        waters[i] = pool[i];
+    }
+
+    // --- Spawn players in opposite corners ---
+    p1.SetX(left + 20);  p1.SetY( 20);  p1.SetHP(hp);
+    p2.SetX(left + 90); p2.SetY(145);  p2.SetHP(hp);
+
 }
 
-void generateMap10(uint8_t hp) { //islands
-    Wall walls[] = {};
-    int NUM_WALLS = 0;
+void generateMap10(uint8_t hp) { // Fortress Break
+    const uint32_t t      = 6;               // wall/water thickness
+    const uint32_t left   = 10;              // leave x<10 clear for health bar
+    const uint32_t width  = 128 - left;
+    const uint32_t height = 160;
 
-    Water waters[] = {};
-    int NUM_WATERS = 0;
-    
-    p1.SetX(60);
-    p1.SetY(140);
-    p1.SetHP(hp);
+    // --- Walls: outer frame + scattered blocks & corridors ---
+    static const Wall layout[] = {
+        // outer border
+        { left,             0, width,            t },
+        { left,      height - t, width,            t },
+        { left,             0,            t, height },
+        { left + width - t, 0,            t, height },
 
-    p2.SetX(60);
-    p2.SetY(30);
-    p2.SetHP(hp);
+        // interior blocks & skinny corridors
+        { left + 30,  30, 10, 10 },  // block
+        { left + 50,  60,  t, 20 },  // vertical corridor
+        { left + 90,  80, 20, 20 },  // block
+        { left + 30, 110, 30,  t },  // horizontal corridor
+    };
+    NUM_WALLS = sizeof(layout)/sizeof(layout[0]);
+    for (int i = 0; i < NUM_WALLS; ++i) {
+        walls[i] = layout[i];
+    }
+
+    // --- Water: three small, varied pools ---
+    static const Water pools[] = {
+        { left + 30,  40, 20, 20 },  // small square pool
+        { left + 80,  50, 20, 15 },  // shallow wide pool
+        { left + 60, 120, 30, 10 },  // rectangular pond
+    };
+    NUM_WATERS = sizeof(pools)/sizeof(pools[0]);
+    for (int i = 0; i < NUM_WATERS; ++i) {
+        waters[i] = pools[i];
+    }
+
+    // --- Spawn players in opposite corners ---
+    p1.SetX(left + 20);  p1.SetY(140);  p1.SetHP(hp);
+    p2.SetX(left + 90);  p2.SetY( 20);  p2.SetHP(hp);
 }
+
 
 
 void initializeRound(uint8_t hp) {
 
   __disable_irq();
 
-  uint8_t pickMap = time % 7; //time %10
+  uint8_t pickMap = time % 10; //time %10
 
   switch (pickMap){
     case 0:
