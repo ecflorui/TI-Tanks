@@ -90,7 +90,7 @@ void TIMG12_IRQHandler(void){uint32_t pos,msg;
     }
 
     if ((time % 200) && (p2.puActive)) {
-      LED_Toggle(1);
+      LED_Toggle(2);
     }
 
       queryTank();
@@ -117,7 +117,7 @@ int main(void){
   player1SP.Init(2); //initalizes SlidePot stuff
   player2SP.Init(1); //initalizes SlidePot stuff
 
-  ST7735_InitPrintf(INITR_BLACKTAB);
+  ST7735_InitPrintf(INITR_REDTAB);
   LED_Init();    // initialize LED
   Sound_Init();  // initialize sound
   TExaS_Init(0,0,&TExaS_LaunchPadLogicPB27PB26);
@@ -142,31 +142,3 @@ while(1){
 }
 
 
-// use main4 to test sound outputs
-int main4(void){ uint32_t last=0,now;
-  __disable_irq();
-  PLL_Init(); // set bus speed
-  LaunchPad_Init();
-  Switch_Init(); // initialize switches
-  LED_Init(); // initialize LED
-  Sound_Init();  // initialize sound
-  TExaS_Init(ADC0,6,0); // ADC1 channel 6 is PB20, TExaS scope
-  __enable_irq();
-  while(1){
-    now = Switch_In1(); // one of your buttons
-    if((last == 0)&&(now == 1)){
-      Sound_Shoot(); // call one of your sounds
-    }
-    if((last == 0)&&(now == 2)){
-      Sound_Killed(); // call one of your sounds
-    }
-    if((last == 0)&&(now == 4)){
-      Sound_Explosion(); // call one of your sounds
-    }
-    if((last == 0)&&(now == 8)){
-      Sound_Fastinvader1(); // call one of your sounds
-    }
-    // modify this to test all your sounds
-  }
-}
-// ALL ST7735 OUTPUT MUST OCCUR IN MAIN

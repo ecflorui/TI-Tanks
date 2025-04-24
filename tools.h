@@ -57,4 +57,3 @@ void generateMap10(uint8_t hp);
 void DrawPowerIcons(bool);
 
 
-

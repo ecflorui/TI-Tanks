@@ -123,6 +123,7 @@ void Bullet::check(Tank& t) {
     // Simple AABB (Axis-Aligned Bounding Box) check
     if ((x >= left && x <= right && y >= top && y <= bottom) && (time < 115))  {
         t.TakeDamage();
+        hit_sound();
         Deactivate();
     }
 }

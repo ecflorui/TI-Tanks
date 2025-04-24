@@ -86,7 +86,7 @@ void Tank::TickPower(uint32_t now) {
 
         // turn on the “ready” LED for this player
         if (playerNum == 0) LED_On(4);  // PA17
-        else                LED_On(1);  // PA15
+        else                LED_On(2);  // PA15
 
     }
 
@@ -98,7 +98,7 @@ void Tank::TickPower(uint32_t now) {
 
         // turn off the LED
         if (playerNum == 0) LED_Off(4);
-        else                LED_Off(1);
+        else                LED_Off(2);
 
 
         // immediately begin loading the next power-up
@@ -121,6 +121,7 @@ void Tank::TryActivatePower(uint32_t now) {
     puActive    = true;
     puEffStart  = now;
     // apply effect immediately
+    power_sound();
     switch(puType) {
       case PU_Shield:
         break;
@@ -329,9 +330,9 @@ void Tank::Shoot(Bullet bullets[], int maxBullets) {
             //300 (10s) life for bullet for testing purposes currently, change this back. customizable for potential powerup?
             if(puActive && puType==PU_Bullet) shotCooldown = 30;
             else shotCooldown = 45; // 1 second cooldown given 30 hz, i may adjust this later
+            shoot_sound();
             break;
         }
     }
 }
-
 

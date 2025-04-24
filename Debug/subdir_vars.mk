@@ -7,7 +7,7 @@ SHELL = cmd.exe
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Clock.cpp \
-C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/DAC5.cpp \
+../DAC.cpp \
 ../LED.cpp \
 ../Lab9HMain.cpp \
 C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/LaunchPad.cpp \
@@ -29,7 +29,7 @@ CMD_SRCS += \
 
 OBJS += \
 ./Clock.o \
-./DAC5.o \
+./DAC.o \
 ./LED.o \
 ./Lab9HMain.o \
 ./LaunchPad.o \
@@ -48,7 +48,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./Clock.d \
-./DAC5.d \
+./DAC.d \
 ./LED.d \
 ./Lab9HMain.d \
 ./LaunchPad.d \
@@ -67,7 +67,7 @@ CPP_DEPS += \
 
 OBJS__QUOTED += \
 "Clock.o" \
-"DAC5.o" \
+"DAC.o" \
 "LED.o" \
 "Lab9HMain.o" \
 "LaunchPad.o" \
@@ -86,7 +86,7 @@ OBJS__QUOTED += \
 
 CPP_DEPS__QUOTED += \
 "Clock.d" \
-"DAC5.d" \
+"DAC.d" \
 "LED.d" \
 "Lab9HMain.d" \
 "LaunchPad.d" \
@@ -105,7 +105,7 @@ CPP_DEPS__QUOTED += \
 
 CPP_SRCS__QUOTED += \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/Clock.cpp" \
-"C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/DAC5.cpp" \
+"../DAC.cpp" \
 "../LED.cpp" \
 "../Lab9HMain.cpp" \
 "C:/Users/singh/Downloads/MSPM0_ValvanoWare/inc/LaunchPad.cpp" \
