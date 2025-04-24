@@ -4,6 +4,9 @@
 // Krish Singh and Connor McDonald
 // TI-Tanks
 
+//VERSION 1 (RELEASED) 11:45 PM 4/23/2025 --- TI TANKS 
+//we've never been more back...
+
 #include <stdio.h>
 #include <stdint.h>
 #include <ti/devices/msp/msp.h>
