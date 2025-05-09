@@ -33,39 +33,40 @@ Then build/flash in CCS.
 
 ## 📂 Project Structure
 
-├───.settings
-├───cjm6842
-│   ├───cjm6842-backups
-│   └───plots
-├───Debug
-│   ├───.clangd
-│   │   └───.cache
-│   │       └───clangd
-│   │           └───index
-│   ├───images
-│   │   ├───pipedreams
-│   │   ├───SpaceInvaders
-│   │   │   └───pipedreams
-│   │   └───TI-Sprites
-│   │       └───Alternative Versions (unused)
-│   ├───sounds
-│   └───ticlang
-├───designdocuments
-├───images
-│   ├───blender
-│   ├───breakout
-│   ├───Connect4
-│   ├───numbers
-│   ├───SpaceInvaders
-│   │   └───pipedreams
-│   ├───spaceship
-│   └───TI-Sprites
-│       └───Alternative Versions (unused)
-├───sounds
-├───targetConfigs
-├───TI-Tanks
-└───ticlang
-
+```text
+.
+├── .settings
+├── cjm6842
+│   ├── cjm6842-backups
+│   └── plots
+├── Debug
+│   ├── .clangd
+│   │   └── .cache
+│   │       └── clangd
+│   │           └── index
+│   ├── images
+│   │   ├── pipedreams
+│   │   ├── SpaceInvaders
+│   │   │   └── pipedreams
+│   │   └── TI-Sprites
+│   │       └── Alternative Versions (unused)
+│   ├── sounds
+│   └── ticlang
+├── designdocuments
+├── images
+│   ├── blender
+│   ├── breakout
+│   ├── Connect4
+│   ├── numbers
+│   ├── SpaceInvaders
+│   │   └── pipedreams
+│   ├── spaceship
+│   └── TI-Sprites
+│       └── Alternative Versions (unused)
+├── sounds
+├── targetConfigs
+├── TI-Tanks
+└── ticlang
 
 All relevant PCB files can be found in the cjm6842 folder. 
 
