@@ -19,7 +19,54 @@ A top-down 2-player game inspired by the classic game "Tank Trouble", where your
 - Ten different maps for variety  
 - Multiple language support  
 - Start and end menus with score/health displays  
-- Two ISRs (TimerG12: shooting & movement, SysTick: sound) 
+- Two ISRs (TimerG12: shooting & movement, SysTick: sound)
+
+### Prerequisites
+- Texas Instruments CCS 20.0.0 IDE 
+
+### Build & Flash
+```bash
+git clone https://github.com/ecflorui/ti-tanks.git
+cd ti-tanks
+```
+Then build/flash in CCS. 
+
+## 📂 Project Structure
+
+├───.settings
+├───cjm6842
+│   ├───cjm6842-backups
+│   └───plots
+├───Debug
+│   ├───.clangd
+│   │   └───.cache
+│   │       └───clangd
+│   │           └───index
+│   ├───images
+│   │   ├───pipedreams
+│   │   ├───SpaceInvaders
+│   │   │   └───pipedreams
+│   │   └───TI-Sprites
+│   │       └───Alternative Versions (unused)
+│   ├───sounds
+│   └───ticlang
+├───designdocuments
+├───images
+│   ├───blender
+│   ├───breakout
+│   ├───Connect4
+│   ├───numbers
+│   ├───SpaceInvaders
+│   │   └───pipedreams
+│   ├───spaceship
+│   └───TI-Sprites
+│       └───Alternative Versions (unused)
+├───sounds
+├───targetConfigs
+├───TI-Tanks
+└───ticlang
 
 
-All PCB files can be found in cjm6842 folder. 
+All relevant PCB files can be found in the cjm6842 folder. 
+
+Thanks to Professor Valavano and the UT ECE department.
